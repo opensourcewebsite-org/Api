@@ -291,7 +291,7 @@ class BotApi
     {
         $json = json_decode($response, true)?: [];
         if (($httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE))
-            && !in_array($httpCode, [self::DEFAULT_STATUS_CODE, self::NOT_MODIFIED_STATUS_CODE, self::FORBIDDEN_STATUS_CODE])
+            && !in_array($httpCode, [self::DEFAULT_STATUS_CODE, self::NOT_MODIFIED_STATUS_CODE,self::BAD_REQUEST_STATUS_CODE, self::FORBIDDEN_STATUS_CODE])
         ) {
             $errorDescription = array_key_exists('description', $json) ? $json['description'] : self::$codes[$httpCode];
             $errorParameters = array_key_exists('parameters', $json) ? $json['parameters'] : [];
