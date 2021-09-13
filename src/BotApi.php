@@ -234,7 +234,8 @@ class BotApi
         if ($this->returnArray) {
             if (!isset($response['ok']) || !$response['ok']) {
 //                throw new Exception($response['description'], $response['error_code']);
-                return "{$response['error_code']}:{$response['description']}";
+//                return "{$response['error_code']}:{$response['description']}";
+                return json_encode(['error_code'=>$response['error_code'],'text'=>$response['description']]);
             }
 
             return $response['result'];
@@ -242,7 +243,8 @@ class BotApi
 
         if (!$response->ok) {
 //            throw new Exception($response->description, $response->error_code);
-            return "{$response->error_code}:{$response->description}";
+//            return "{$response->error_code}:{$response->description}";
+            return json_encode(['error_code'=>$response->error_code,'text'=>$response->description]);
         }
 
         return $response->result;
