@@ -110,6 +110,14 @@ class BotApi
      * Not Modified http status code
      */
     const NOT_MODIFIED_STATUS_CODE = 304;
+    /**
+     * Not Modified http status code
+     */
+    const BAD_REQUEST_STATUS_CODE = 400;
+    /**
+     * Not Modified http status code
+     */
+    const FORBIDDEN_STATUS_CODE = 403;
 
     /**
      * Limits for tracked ids
@@ -231,16 +239,20 @@ class BotApi
 
         $response = self::jsonValidate($this->executeCurl($options), $this->returnArray);
 
-        if ($this->returnArray) {
+        if ($this->returnArray && is_array($response)) {
             if (!isset($response['ok']) || !$response['ok']) {
-                throw new Exception($response['description'], $response['error_code']);
+//                throw new Exception($response['description'], $response['error_code']);
+//                return "{$response['error_code']}:{$response['description']}";
+                return json_encode(['error_code'=>$response['error_code'],'text'=>$response['description']]);
             }
 
             return $response['result'];
         }
 
         if (!$response->ok) {
-            throw new Exception($response->description, $response->error_code);
+//            throw new Exception($response->description, $response->error_code);
+//            return "{$response->error_code}:{$response->description}";
+            return json_encode(['error_code'=>$response->error_code,'text'=>$response->description]);
         }
 
         return $response->result;
@@ -262,7 +274,14 @@ class BotApi
         $result = curl_exec($this->curl);
         self::curlValidate($this->curl, $result);
         if ($result === false) {
-            throw new HttpException(curl_error($this->curl), curl_errno($this->curl));
+            if (($httpCode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE))
+                && in_array($httpCode, [self::FORBIDDEN_STATUS_CODE])
+            ) {
+                return json_encode(['error_code' => self::FORBIDDEN_STATUS_CODE, 'text' => 'Forbidden: bot was kicked from the group chat/channel/supergroup exception
+']);
+            }
+            else
+                throw new HttpException(curl_error($this->curl), curl_errno($this->curl));
         }
 
         return $result;
@@ -279,7 +298,7 @@ class BotApi
     {
         $json = json_decode($response, true)?: [];
         if (($httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE))
-            && !in_array($httpCode, [self::DEFAULT_STATUS_CODE, self::NOT_MODIFIED_STATUS_CODE])
+            && !in_array($httpCode, [self::DEFAULT_STATUS_CODE, self::NOT_MODIFIED_STATUS_CODE,self::BAD_REQUEST_STATUS_CODE, self::FORBIDDEN_STATUS_CODE])
         ) {
             $errorDescription = array_key_exists('description', $json) ? $json['description'] : self::$codes[$httpCode];
             $errorParameters = array_key_exists('parameters', $json) ? $json['parameters'] : [];
