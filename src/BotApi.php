@@ -243,7 +243,7 @@ class BotApi
             if (!isset($response['ok']) || !$response['ok']) {
 //                throw new Exception($response['description'], $response['error_code']);
 //                return "{$response['error_code']}:{$response['description']}";
-                return json_encode(['error_code'=>$response['error_code'],'text'=>$response['description']]);
+                return ['error_code'=>$response['error_code'],'text'=>$response['description'],'id'=>-1,'type'=>-1];
             }
 
             return $response['result'];
@@ -252,7 +252,7 @@ class BotApi
         if (!$response->ok) {
 //            throw new Exception($response->description, $response->error_code);
 //            return "{$response->error_code}:{$response->description}";
-            return json_encode(['error_code'=>$response->error_code,'text'=>$response->description]);
+            return ['error_code'=>$response->error_code,'text'=>$response->description,'id'=>-1,'type'=>-1];
         }
 
         return $response->result;
@@ -263,7 +263,7 @@ class BotApi
      *
      * @param array $options
      *
-     * @return string
+     * @return array | string
      *
      * @throws \TelegramBot\Api\HttpException
      */
@@ -277,8 +277,8 @@ class BotApi
             if (($httpCode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE))
                 && in_array($httpCode, [self::FORBIDDEN_STATUS_CODE])
             ) {
-                return json_encode(['error_code' => self::FORBIDDEN_STATUS_CODE, 'text' => 'Forbidden: bot was kicked from the group chat/channel/supergroup exception
-']);
+                return ['error_code'=>self::FORBIDDEN_STATUS_CODE,'text'=>'Forbidden: bot was kicked from the group chat exception
+','id'=>-1,'type'=>-1];
             }
             else
                 throw new HttpException(curl_error($this->curl), curl_errno($this->curl));
