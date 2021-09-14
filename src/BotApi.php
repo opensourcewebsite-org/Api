@@ -277,10 +277,11 @@ class BotApi
             if (($httpCode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE))
                 && in_array($httpCode, [self::FORBIDDEN_STATUS_CODE])
             ) {
-                return json_encode(['error_code'=>self::FORBIDDEN_STATUS_CODE,'text'=>'Forbidden: bot was kicked from the group chat/channel/supergroup exception
+                return json_encode(['error_code' => self::FORBIDDEN_STATUS_CODE, 'text' => 'Forbidden: bot was kicked from the group chat/channel/supergroup exception
 ']);
             }
-            throw new HttpException(curl_error($this->curl), curl_errno($this->curl));
+            else
+                throw new HttpException(curl_error($this->curl), curl_errno($this->curl));
         }
 
         return $result;
