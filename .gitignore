@@ -1,58 +1,30 @@
-build
-composer.lock
-docs
-vendor
+# phpstorm project files
+.idea
 
-### JetBrains template
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
+# netbeans project files
+nbproject
 
-*.iml
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
 
-## Directory-based project format:
-.idea/
-# if you remove the above rule, at least ignore the following:
+# vscode project files
+.vscode
 
-# User-specific stuff:
-# .idea/workspace.xml
-# .idea/tasks.xml
-# .idea/dictionaries
+# windows thumbnail cache
+Thumbs.db
 
-# Sensitive or high-churn files:
-# .idea/dataSources.ids
-# .idea/dataSources.xml
-# .idea/sqlDataSources.xml
-# .idea/dynamic.xml
-# .idea/uiDesigner.xml
+# Mac DS_Store Files
+.DS_Store
 
-# Gradle:
-# .idea/gradle.xml
-# .idea/libraries
+# composer vendor dir
+/vendor
 
-# Mongo Explorer plugin:
-# .idea/mongoSettings.xml
+# composer itself is not needed
+composer.phar
 
-## File-based project format:
-*.ipr
-*.iws
-
-## Plugin-specific files:
-
-# IntelliJ
-/out/
-
-# mpeltonen/sbt-idea plugin
-.idea_modules/
-
-# JIRA plugin
-atlassian-ide-plugin.xml
-
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-
-
-# Composer
-vendor/
-
-/*.php
+# phpunit itself is not needed
+phpunit.phar
+# local phpunit config
+/phpunit.xml

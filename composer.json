@@ -1,13 +1,17 @@
 {
-    "name": "telegram-bot/api",
+    "name": "opensourcewebsite-org/php-telegram-sdk",
     "description": "PHP Wrapper for Telegram Bot API",
     "keywords": [
         "php",
         "telegram",
+        "telegram-bot",
         "bot",
-        "bot api"
+        "bot-api",
+        "sdk",
+        "api"
     ],
-    "homepage": "https://github.com/TelegramBot/Api",
+    "homepage": "https://github.com/opensourcewebsite-org/php-telegram-sdk",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
@@ -17,15 +21,21 @@
             "role": "Developer"
         }
     ],
+    "support": {
+        "issues": "https://github.com/opensourcewebsite-org/php-telegram-sdk/issues",
+        "source": "https://github.com/opensourcewebsite-org/php-telegram-sdk"
+    },
     "require": {
         "php" : ">=5.5.0",
         "ext-curl": "*",
         "ext-json": "*"
     },
     "require-dev": {
-        "phpunit/phpunit" : "~4.0",
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "phpunit/phpunit": "^9.0",
+        "phpunit/php-code-coverage": "^9.0",
         "squizlabs/php_codesniffer": "2.*",
-        "codeception/codeception": "*"
+        "codeception/codeception": "^4.0"
     },
     "autoload": {
         "psr-4": {
