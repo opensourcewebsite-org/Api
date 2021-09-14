@@ -1,10 +1,11 @@
 {
     "name": "opensourcewebsite-org/php-telegram-sdk",
-    "description": "PHP Wrapper for Telegram Bot API",
+    "description": "Telegram Bot API library for the PHP language",
     "keywords": [
         "php",
         "telegram",
         "telegram-bot",
+        "telegram-bot-api",
         "bot",
         "bot-api",
         "sdk",

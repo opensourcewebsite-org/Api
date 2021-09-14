@@ -1,32 +1,46 @@
-# Contributing
+# Contributing Guidelines
 
-Contributions are **welcome** and will be fully **credited**.
+First off, thanks for taking the time to contribute!
 
-We accept contributions via Pull Requests on [Github](https://github.com/tgbot/api).
+## Getting Started
 
+When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the core team before making a change.
 
-## Pull Requests
+- Make sure you have a [GitHub account](https://github.com/login).
+- Submit a GitHub issue for your issue if one does not already exist.
+  - A issue is not necessary for trivial changes.
+- [Fork](https://help.github.com/en/articles/working-with-forks) the repository on GitHub.
+    - [Configuring a remote for a fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork)
+    - [Syncing a fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork)
+      - `git fetch upstream`
+      - `git checkout master`
+      - `git merge upstream/master`
+    - [Merging an upstream repository into your fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/merging-an-upstream-repository-into-your-fork)
+      - `git checkout master`
+      - `git pull upstream master`
+      - Commit the merge
+      - `git push origin master`
+- When working on an issue, create a new branch from `master` named for issue number or custom name. Name the branch `issue/<issue-number>` or `issue/<custom-name>`. For example `issue/22` for fixing issue #22.
+- Make your changes.
+  - Follow the [Style Guides](#style-guides).
+  - [Avoid platform-dependent code](https://flight-manual.atom.io/hacking-atom/sections/cross-platform-compatibility/).
+  - Add tests if your changes contains new, testable behavior.
+  - Make the tests pass.
+- Create a [pull request](https://help.github.com/en/articles/creating-a-pull-request-from-a-fork) to the repository.
 
-- **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - The easiest way to apply the conventions is to install [PHP Code Sniffer](http://pear.php.net/package/PHP_CodeSniffer).
+### Tips and tricks for using the Git
 
-- **Add tests!** - Your patch won't be accepted if it doesn't have tests.
+- [GitHub Cheat Sheet](https://github.com/tiimgreen/github-cheat-sheet)
+- [git-tips](https://github.com/git-tips/tips)
 
-- **Document any change in behaviour** - Make sure the `README.md` and any other relevant documentation are kept up-to-date.
+### Key branches
 
-- **Consider our release cycle** - We try to follow [SemVer v2.0.0](http://semver.org/). Randomly breaking public APIs is not an option.
+- `master` is the latest, deployed version
 
-- **Create feature branches** - Don't ask us to pull from your master branch.
+### Composer
 
-- **One pull request per feature** - If you want to do more than one thing, send multiple pull requests.
+https://getcomposer.org/doc/04-schema.md
 
-- **Send coherent history** - Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please [squash them](http://www.git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Changing-Multiple-Commit-Messages) before submitting.
+In all cases when `composer.json` file is updated, add ` composer.json` and `composer.lock` files to the same commit.
 
-
-## Running Tests
-
-``` bash
-$ phpunit
-```
-
-
-**Happy coding**!
+Each package must contain specific version. Don't use `*` and `@dev` versions.
