@@ -243,7 +243,7 @@ class BotApi
             if (!isset($response['ok']) || !$response['ok']) {
 //                throw new Exception($response['description'], $response['error_code']);
 //                return "{$response['error_code']}:{$response['description']}";
-                return ['error_code'=>$response['error_code'],'text'=>$response['description']];
+                return ['error_code'=>$response['error_code'],'text'=>$response['description'],'id'=>-1,'type'=>-1];
             }
 
             return $response['result'];
@@ -252,7 +252,7 @@ class BotApi
         if (!$response->ok) {
 //            throw new Exception($response->description, $response->error_code);
 //            return "{$response->error_code}:{$response->description}";
-            return ['error_code'=>$response->error_code,'text'=>$response->description];
+            return ['error_code'=>$response->error_code,'text'=>$response->description,'id'=>-1,'type'=>-1];
         }
 
         return $response->result;
@@ -278,7 +278,7 @@ class BotApi
                 && in_array($httpCode, [self::FORBIDDEN_STATUS_CODE])
             ) {
                 return ['error_code'=>self::FORBIDDEN_STATUS_CODE,'text'=>'Forbidden: bot was kicked from the group chat exception
-'];
+','id'=>-1,'type'=>-1];
             }
             else
                 throw new HttpException(curl_error($this->curl), curl_errno($this->curl));
