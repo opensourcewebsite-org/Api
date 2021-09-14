@@ -239,7 +239,7 @@ class BotApi
 
         $response = self::jsonValidate($this->executeCurl($options), $this->returnArray);
 
-        if ($this->returnArray) {
+        if ($this->returnArray && is_array($response)) {
             if (!isset($response['ok']) || !$response['ok']) {
 //                throw new Exception($response['description'], $response['error_code']);
 //                return "{$response['error_code']}:{$response['description']}";
@@ -274,6 +274,12 @@ class BotApi
         $result = curl_exec($this->curl);
         self::curlValidate($this->curl, $result);
         if ($result === false) {
+            if (($httpCode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE))
+                && in_array($httpCode, [self::FORBIDDEN_STATUS_CODE])
+            ) {
+                return json_encode(['error_code'=>self::FORBIDDEN_STATUS_CODE,'text'=>'Forbidden: bot was kicked from the group chat exception
+']);
+            }
             throw new HttpException(curl_error($this->curl), curl_errno($this->curl));
         }
 
