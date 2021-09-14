@@ -28,8 +28,7 @@
     },
     "require": {
         "php" : ">=5.5.0",
-        "ext-curl": "*",
-        "ext-json": "*"
+        "ext-curl": "*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",
