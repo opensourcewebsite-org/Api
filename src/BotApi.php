@@ -280,7 +280,8 @@ class BotApi
                 return ['error_code'=>self::FORBIDDEN_STATUS_CODE,'text'=>'Forbidden: bot was kicked from the group chat exception
 '];
             }
-            throw new HttpException(curl_error($this->curl), curl_errno($this->curl));
+            else
+                throw new HttpException(curl_error($this->curl), curl_errno($this->curl));
         }
 
         return $result;
