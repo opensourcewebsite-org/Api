@@ -110,14 +110,6 @@ class BotApi
      * Not Modified http status code
      */
     const NOT_MODIFIED_STATUS_CODE = 304;
-    /**
-     * Not Modified http status code
-     */
-    const BAD_REQUEST_STATUS_CODE = 400;
-    /**
-     * Not Modified http status code
-     */
-    const FORBIDDEN_STATUS_CODE = 403;
 
     /**
      * Limits for tracked ids
@@ -239,20 +231,16 @@ class BotApi
 
         $response = self::jsonValidate($this->executeCurl($options), $this->returnArray);
 
-        if ($this->returnArray && is_array($response)) {
+        if ($this->returnArray) {
             if (!isset($response['ok']) || !$response['ok']) {
-//                throw new Exception($response['description'], $response['error_code']);
-//                return "{$response['error_code']}:{$response['description']}";
-                return ['error_code'=>$response['error_code'],'text'=>$response['description'],'id'=>-1,'type'=>-1];
+                throw new Exception($response['description'], $response['error_code']);
             }
 
             return $response['result'];
         }
 
         if (!$response->ok) {
-//            throw new Exception($response->description, $response->error_code);
-//            return "{$response->error_code}:{$response->description}";
-            return ['error_code'=>$response->error_code,'text'=>$response->description,'id'=>-1,'type'=>-1];
+            throw new Exception($response->description, $response->error_code);
         }
 
         return $response->result;
@@ -263,7 +251,7 @@ class BotApi
      *
      * @param array $options
      *
-     * @return array | string
+     * @return string
      *
      * @throws \TelegramBot\Api\HttpException
      */
@@ -274,14 +262,7 @@ class BotApi
         $result = curl_exec($this->curl);
         self::curlValidate($this->curl, $result);
         if ($result === false) {
-            if (($httpCode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE))
-                && in_array($httpCode, [self::FORBIDDEN_STATUS_CODE])
-            ) {
-                return ['error_code'=>self::FORBIDDEN_STATUS_CODE,'text'=>'Forbidden: bot was kicked from the group chat exception
-','id'=>-1,'type'=>-1];
-            }
-            else
-                throw new HttpException(curl_error($this->curl), curl_errno($this->curl));
+            throw new HttpException(curl_error($this->curl), curl_errno($this->curl));
         }
 
         return $result;
@@ -298,7 +279,7 @@ class BotApi
     {
         $json = json_decode($response, true)?: [];
         if (($httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE))
-            && !in_array($httpCode, [self::DEFAULT_STATUS_CODE, self::NOT_MODIFIED_STATUS_CODE,self::BAD_REQUEST_STATUS_CODE, self::FORBIDDEN_STATUS_CODE])
+            && !in_array($httpCode, [self::DEFAULT_STATUS_CODE, self::NOT_MODIFIED_STATUS_CODE])
         ) {
             $errorDescription = array_key_exists('description', $json) ? $json['description'] : self::$codes[$httpCode];
             $errorParameters = array_key_exists('parameters', $json) ? $json['parameters'] : [];
