@@ -1,6 +1,9 @@
-filter:
-    excluded_paths: [tests/*]
-
+tools:
+    php_sim: false
+    php_pdepend: true
+    php_analyzer: true
+    php_code_coverage: true
+    external_code_coverage: false
 checks:
     php:
         remove_extra_empty_lines: true
@@ -17,10 +20,21 @@ checks:
         fix_identation_4spaces: true
         fix_doc_comments: true
 build:
+    environment:
+        mysql: false
+        postgresql: false
+        redis: false
+        php:
+            version: 7.4
+    dependencies:
+        override:
+          - composer install --prefer-dist --no-interaction
     tests:
         override:
-            -
-                command: 'phpunit --coverage-text --coverage-clover=coverage.clover'
-                coverage:
-                    file: 'coverage.clover'
-                    format: 'php-clover'
+            - php-scrutinizer-run
+            - command: ./vendor/bin/phpunit --coverage-text --coverage-clover=output/clover.txt
+              coverage:
+                  file: 'clover.txt'
+                  format: 'php-clover'
+filter:
+    excluded_paths: [vendor/*, tests/*]
