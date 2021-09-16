@@ -1,9 +1,29 @@
-tools:
-  php_sim: false
-  php_pdepend: true
-  php_analyzer: true
-  php_code_coverage: true
-  external_code_coverage: false
+# https://scrutinizer-ci.com/g/opensourcewebsite-org/php-telegram-sdk/
+# https://scrutinizer-ci.com/docs/
+build:
+  image: default-bionic
+  environment:
+    mysql: false
+    postgresql: false
+    redis: false
+    php:
+      version: 7.4
+  dependencies:
+    override:
+      - composer install --prefer-dist --no-interaction
+  tests:
+    override:
+      - php-scrutinizer-run
+      # https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/master/doc/usage.rst
+      - ./vendor/bin/php-cs-fixer fix src --rules=@PSR12 --dry-run --verbose
+      - ./vendor/bin/phpunit --coverage-text
+  cache:
+    directories:
+      - ~/.composer/cache
+      - ~/.composer/vendor
+      - vendor
+filter:
+  excluded_paths: [vendor/*, tests/*]
 checks:
   php:
     remove_extra_empty_lines: true
@@ -19,26 +39,9 @@ checks:
     fix_line_ending: true
     fix_identation_4spaces: true
     fix_doc_comments: true
-build:
-  image: default-bionic
-  environment:
-    mysql: false
-    postgresql: false
-    redis: false
-    php:
-      version: 7.4
-  dependencies:
-    override:
-      - composer install --prefer-dist --no-interaction
-  tests:
-    override:
-      - php-scrutinizer-run
-      - php vendor/bin/php-cs-fixer --standard=PSR12 --encoding=utf-8 src/
-      - ./vendor/bin/phpunit --coverage-text
-  cache:
-    directories:
-      - ~/.composer/cache
-      - ~/.composer/vendor
-      - vendor
-filter:
-  excluded_paths: [vendor/*, tests/*]
+tools:
+  php_sim: false
+  php_pdepend: true
+  php_analyzer: true
+  php_code_coverage: true
+  external_code_coverage: false
