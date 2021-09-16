@@ -15,8 +15,7 @@ before_script:
   - travis_retry composer self-update
   - COMPOSER_MEMORY_LIMIT=-1 travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
 script:
-  # https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/master/doc/usage.rst
-  - ./vendor/bin/php-cs-fixer fix src --rules=@PSR12 --dry-run --verbose
+  - ./vendor/bin/php-cs-fixer fix --verbose --dry-run
   - ./vendor/bin/phpunit --coverage-text
 cache:
   directories:
