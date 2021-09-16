@@ -33,7 +33,8 @@ build:
   tests:
     override:
       - php-scrutinizer-run
-      - ./vendor/bin/phpunit
+      - php vendor/bin/php-cs-fixer --standard=PSR12 --encoding=utf-8 src/
+      - ./vendor/bin/phpunit --coverage-text
   cache:
     directories:
       - ~/.composer/cache

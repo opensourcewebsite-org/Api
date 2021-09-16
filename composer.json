@@ -27,7 +27,7 @@
         "source": "https://github.com/opensourcewebsite-org/php-telegram-sdk"
     },
     "require": {
-        "php" : ">=7.0",
+        "php": ">=7.4",
         "ext-curl": "*"
     },
     "require-dev": {
