@@ -104,27 +104,27 @@ class BotApi
     /**
      * Default http status code
      */
-    const DEFAULT_STATUS_CODE = 200;
+    public const DEFAULT_STATUS_CODE = 200;
 
     /**
      * Not Modified http status code
      */
-    const NOT_MODIFIED_STATUS_CODE = 304;
+    public const NOT_MODIFIED_STATUS_CODE = 304;
 
     /**
      * Limits for tracked ids
      */
-    const MAX_TRACKED_EVENTS = 200;
+    public const MAX_TRACKED_EVENTS = 200;
 
     /**
      * Url prefixes
      */
-    const URL_PREFIX = 'https://api.telegram.org/bot';
+    public const URL_PREFIX = 'https://api.telegram.org/bot';
 
     /**
      * Url prefix for files
      */
-    const FILE_URL_PREFIX = 'https://api.telegram.org/file/bot';
+    public const FILE_URL_PREFIX = 'https://api.telegram.org/file/bot';
 
     /**
      * CURL object
@@ -277,7 +277,7 @@ class BotApi
      */
     public static function curlValidate($curl, $response = null)
     {
-        $json = json_decode($response, true)?: [];
+        $json = json_decode($response, true) ?: [];
         if (($httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE))
             && !in_array($httpCode, [self::DEFAULT_STATUS_CODE, self::NOT_MODIFIED_STATUS_CODE])
         ) {

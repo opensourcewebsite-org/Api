@@ -19,14 +19,14 @@ class PollOption extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['text', 'voter_count'];
+    protected static $requiredParams = ['text', 'voter_count'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'text' => true,
         'voter_count' => true
     ];

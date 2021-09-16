@@ -6,11 +6,10 @@ use TelegramBot\Api\Types\Message;
 
 class Botan
 {
-
     /**
      * @var string Tracker url
      */
-    const BASE_URL = 'https://api.botan.io/track';
+    public const BASE_URL = 'https://api.botan.io/track';
 
     /**
      * CURL object

@@ -19,14 +19,14 @@ class Video extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['file_id', 'width', 'height', 'duration'];
+    protected static $requiredParams = ['file_id', 'width', 'height', 'duration'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'file_id' => true,
         'width' => true,
         'height' => true,

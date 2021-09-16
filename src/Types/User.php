@@ -19,14 +19,14 @@ class User extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['id', 'first_name'];
+    protected static $requiredParams = ['id', 'first_name'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'id' => true,
         'first_name' => true,
         'last_name' => true,
