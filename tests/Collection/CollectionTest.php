@@ -2,12 +2,13 @@
 
 namespace TelegramBot\Api\Test\Types;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Collection\CollectionItemInterface;
 use TelegramBot\Api\Collection\ReachedMaxSizeException;
 use TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
 use TelegramBot\Api\Types\InputMedia\InputMediaPhoto;
 
-class CollectionTest extends \PHPUnit_Framework_TestCase
+class CollectionTest extends TestCase
 {
     protected $itemsOutput = [
         [
@@ -21,7 +22,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     {
         $media = new ArrayOfInputMedia();
         $media->addItem(new InputMediaPhoto('link'));
-
         $this->assertSame(1, $media->count());
     }
 
@@ -30,7 +30,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     {
         $media = new ArrayOfInputMedia();
         $media->addItem(new InputMediaPhoto('link'), 'key');
-
         $this->assertSame(1, $media->count());
     }
 
@@ -39,7 +38,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     {
         $media = new ArrayOfInputMedia();
         $media->addItem(new InputMediaPhoto('link'), 'key');
-
         $this->assertInstanceOf(CollectionItemInterface::class, $media->getItem('key'));
     }
 
@@ -49,12 +47,12 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $media = new ArrayOfInputMedia();
         $media->addItem(new InputMediaPhoto('link'), 'key');
         $media->deleteItem('key');
-
         $this->assertSame(0, $media->count());
     }
 
     /** @test */
-    public function check_count() {
+    public function check_count()
+    {
         $media = new ArrayOfInputMedia();
         for ($i = 0; $i < 5; $i++) {
             $media->addItem(new InputMediaPhoto('link'));
@@ -63,8 +61,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function can_not_add_more_then_max_limit() {
-        $this->setExpectedException(ReachedMaxSizeException::class);
+    public function can_not_add_more_then_max_limit()
+    {
+        $this->expectException(ReachedMaxSizeException::class);
         $media = new ArrayOfInputMedia();
         $media->setMaxCount(2);
         for ($i = 1; $i < 3; $i++) {
@@ -73,18 +72,18 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function can_output_items_as_array() {
+    public function can_output_items_as_array()
+    {
         $media = new ArrayOfInputMedia();
         $media->addItem(new InputMediaPhoto('link'));
-
         $this->assertSame($this->itemsOutput, $media->toJson(true));
     }
 
     /** @test */
-    public function can_output_items_as_json() {
+    public function can_output_items_as_json()
+    {
         $media = new ArrayOfInputMedia();
         $media->addItem(new InputMediaPhoto('link'));
-
         $this->assertSame(json_encode($this->itemsOutput), $media->toJson());
     }
 }

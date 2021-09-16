@@ -2,17 +2,17 @@
 
 namespace TelegramBot\Api\Test;
 
-
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\Document;
 use TelegramBot\Api\Types\PhotoSize;
 
-class DocumentTest extends \PHPUnit_Framework_TestCase
+class DocumentTest extends TestCase
 {
     public function testSetFileId()
     {
         $item = new Document();
         $item->setFileId('testfileId');
-        $this->assertAttributeEquals('testfileId', 'fileId', $item);
+        $this->assertEquals('testfileId', $item->getFileId());
     }
 
     public function testGetFileId()
@@ -32,7 +32,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             'file_size' => 3
         ));
         $item->setThumb($thumb);
-        $this->assertAttributeEquals($thumb, 'thumb', $item);
+        $this->assertEquals($thumb, $item->getThumb());
     }
 
     public function testGetThumb()
@@ -53,7 +53,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Document();
         $item->setFileName('testfileName');
-        $this->assertAttributeEquals('testfileName', 'fileName', $item);
+        $this->assertEquals('testfileName', $item->getFileName());
     }
 
     public function testGetFileName()
@@ -67,7 +67,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Document();
         $item->setFileSize(5);
-        $this->assertAttributeEquals(5, 'fileSize', $item);
+        $this->assertEquals(5, $item->getFileSize());
     }
 
     public function testGetFileSize()
@@ -81,7 +81,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Document();
         $item->setMimeType('audio/mp3');
-        $this->assertAttributeEquals('audio/mp3', 'mimeType', $item);
+        $this->assertEquals('audio/mp3', $item->getMimeType());
     }
 
     public function testGetMimeType()
@@ -96,6 +96,8 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetFileSizeException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new Document();
         $item->setFileSize('s');
     }
@@ -121,19 +123,21 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             'file_size' => 7
         ));
         $this->assertInstanceOf('\TelegramBot\Api\Types\Document', $item);
-        $this->assertAttributeEquals('testFileId1', 'fileId', $item);
-        $this->assertAttributeEquals('testFileName', 'fileName', $item);
-        $this->assertAttributeEquals('audio/mp3', 'mimeType', $item);
-        $this->assertAttributeEquals(3, 'fileSize', $item);
-        $this->assertAttributeEquals($thumb, 'thumb', $item);
+        $this->assertEquals('testFileId1', $item->getFileId());
+        $this->assertEquals('testFileName', $item->getFileName());
+        $this->assertEquals('audio/mp3', $item->getMimeType());
+        $this->assertEquals(3, $item->getFileSize());
+        $this->assertEquals($thumb, $item->getThumb());
         $this->assertInstanceOf('\TelegramBot\Api\Types\PhotoSize', $item->getThumb());
     }
 
     /**
      * @expectedException \TelegramBot\Api\InvalidArgumentException
      */
-    public function testFromResponseException1()
+    public function testFromResponseException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = Document::fromResponse(array(
             'file_name' => 'testFileName',
             'mime_type' => 'audio/mp3',

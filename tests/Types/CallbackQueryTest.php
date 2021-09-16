@@ -2,11 +2,12 @@
 
 namespace TelegramBot\Api\Test\Types;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\CallbackQuery;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\User;
 
-class CallbackQueryTest extends \PHPUnit_Framework_TestCase
+class CallbackQueryTest extends TestCase
 {
     protected $callbackQueryFixture = [
         'id' => 1,
@@ -40,7 +41,10 @@ class CallbackQueryTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \TelegramBot\Api\InvalidArgumentException
      */
-    public function testFromResponseExceptionEmptyId() {
+    public function testFromResponseExceptionEmptyId()
+    {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         unset($this->callbackQueryFixture['id']);
         CallbackQuery::fromResponse($this->callbackQueryFixture);
     }
@@ -48,7 +52,10 @@ class CallbackQueryTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \TelegramBot\Api\InvalidArgumentException
      */
-    public function testFromResponseExceptionEmptyFrom() {
+    public function testFromResponseExceptionEmptyFrom()
+    {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         unset($this->callbackQueryFixture['from']);
         CallbackQuery::fromResponse($this->callbackQueryFixture);
     }
@@ -57,7 +64,7 @@ class CallbackQueryTest extends \PHPUnit_Framework_TestCase
     {
         $item = new CallbackQuery();
         $item->setId($this->callbackQueryFixture['id']);
-        $this->assertAttributeEquals($this->callbackQueryFixture['id'], 'id', $item);
+        $this->assertEquals($this->callbackQueryFixture['id'], $item->getId());
     }
 
     public function testGetId()
@@ -72,10 +79,11 @@ class CallbackQueryTest extends \PHPUnit_Framework_TestCase
         $item = new CallbackQuery();
         $user = User::fromResponse($this->callbackQueryFixture['from']);
         $item->setFrom($user);
-        $this->assertAttributeEquals($user, 'from', $item);
+        $this->assertEquals($user, $item->getFrom());
     }
 
-    public function testGetFrom() {
+    public function testGetFrom()
+    {
         $item = new CallbackQuery();
         $user = User::fromResponse($this->callbackQueryFixture['from']);
         $item->setFrom($user);
@@ -86,10 +94,11 @@ class CallbackQueryTest extends \PHPUnit_Framework_TestCase
     {
         $item = new CallbackQuery();
         $item->setInlineMessageId($this->callbackQueryFixture['inline_message_id']);
-        $this->assertAttributeEquals($this->callbackQueryFixture['inline_message_id'], 'inlineMessageId', $item);
+        $this->assertEquals($this->callbackQueryFixture['inline_message_id'], $item->getInlineMessageId());
     }
 
-    public function testGetInlineMessageId() {
+    public function testGetInlineMessageId()
+    {
         $item = new CallbackQuery();
         $item->setInlineMessageId('testInlineMessageId');
         $this->assertEquals('testInlineMessageId', $item->getInlineMessageId());
@@ -99,10 +108,11 @@ class CallbackQueryTest extends \PHPUnit_Framework_TestCase
     {
         $item = new CallbackQuery();
         $item->setChatInstance($this->callbackQueryFixture['chat_instance']);
-        $this->assertAttributeEquals($this->callbackQueryFixture['chat_instance'], 'chatInstance', $item);
+        $this->assertEquals($this->callbackQueryFixture['chat_instance'], $item->getChatInstance());
     }
 
-    public function testGetChatInstance() {
+    public function testGetChatInstance()
+    {
         $item = new CallbackQuery();
         $item->setChatInstance('testChatInstance');
         $this->assertEquals('testChatInstance', $item->getChatInstance());
@@ -112,10 +122,11 @@ class CallbackQueryTest extends \PHPUnit_Framework_TestCase
     {
         $item = new CallbackQuery();
         $item->setData($this->callbackQueryFixture['data']);
-        $this->assertAttributeEquals($this->callbackQueryFixture['data'], 'data', $item);
+        $this->assertEquals($this->callbackQueryFixture['data'], $item->getData());
     }
 
-    public function testGetData() {
+    public function testGetData()
+    {
         $item = new CallbackQuery();
         $item->setData('testData');
         $this->assertEquals('testData', $item->getData());
@@ -125,13 +136,13 @@ class CallbackQueryTest extends \PHPUnit_Framework_TestCase
     {
         $item = new CallbackQuery();
         $item->setGameShortName($this->callbackQueryFixture['game_short_name']);
-        $this->assertAttributeEquals($this->callbackQueryFixture['game_short_name'], 'gameShortName', $item);
+        $this->assertEquals($this->callbackQueryFixture['game_short_name'], $item->getGameShortName());
     }
 
-    public function testGetGameShortName() {
+    public function testGetGameShortName()
+    {
         $item = new CallbackQuery();
         $item->setGameShortName('testGameShortName');
         $this->assertEquals('testGameShortName', $item->getGameShortName());
     }
-
 }

@@ -1,15 +1,17 @@
 <?php
+
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\File;
 
-class FileTest extends \PHPUnit_Framework_TestCase
+class FileTest extends TestCase
 {
     public function testSetFileId()
     {
         $item = new File();
         $item->setFileId('testfileId');
-        $this->assertAttributeEquals('testfileId', 'fileId', $item);
+        $this->assertEquals('testfileId', $item->getFileId());
     }
 
     public function testGetFileId()
@@ -23,7 +25,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     {
         $item = new File();
         $item->setFileSize(5);
-        $this->assertAttributeEquals(5, 'fileSize', $item);
+        $this->assertEquals(5, $item->getFileSize());
     }
 
     public function testGetFileSize()
@@ -37,7 +39,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     {
         $item = new File();
         $item->setFilePath('testfilepath');
-        $this->assertAttributeEquals('testfilepath', 'filePath', $item);
+        $this->assertEquals('testfilepath', $item->getFilePath());
     }
 
     public function testGetFilePath()
@@ -55,9 +57,9 @@ class FileTest extends \PHPUnit_Framework_TestCase
             'file_path' => 'testfilepath'
         ));
         $this->assertInstanceOf('\TelegramBot\Api\Types\File', $item);
-        $this->assertAttributeEquals('testFileId1', 'fileId', $item);
-        $this->assertAttributeEquals(3, 'fileSize', $item);
-        $this->assertAttributeEquals('testfilepath', 'filePath', $item);
+        $this->assertEquals('testFileId1', $item->getFileId());
+        $this->assertEquals(3, $item->getFileSize());
+        $this->assertEquals('testfilepath', $item->getFilePath());
     }
 
     /**
@@ -65,6 +67,8 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromResponseException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = File::fromResponse(array(
             'file_size' => 3,
             'file_path' => 'testfilepath'
@@ -76,8 +80,9 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetFileSizeException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new File();
         $item->setFileSize('s');
     }
-
 }

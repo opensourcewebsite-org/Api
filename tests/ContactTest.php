@@ -2,15 +2,16 @@
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\Contact;
 
-class ContactTest extends \PHPUnit_Framework_TestCase
+class ContactTest extends TestCase
 {
     public function testSetPhoneNumber()
     {
         $contact = new Contact();
         $contact->setPhoneNumber('123456');
-        $this->assertAttributeEquals('123456', 'phoneNumber', $contact);
+        $this->assertEquals('123456', $contact->getPhoneNumber());
     }
 
     public function testGetPhoneNumber()
@@ -24,7 +25,7 @@ class ContactTest extends \PHPUnit_Framework_TestCase
     {
         $contact = new Contact();
         $contact->setFirstName('Ilya');
-        $this->assertAttributeEquals('Ilya', 'firstName', $contact);
+        $this->assertEquals('Ilya', $contact->getFirstName());
     }
 
     public function testGetFirstName()
@@ -38,7 +39,7 @@ class ContactTest extends \PHPUnit_Framework_TestCase
     {
         $contact = new Contact();
         $contact->setLastName('Gusev');
-        $this->assertAttributeEquals('Gusev', 'lastName', $contact);
+        $this->assertEquals('Gusev', $contact->getLastName());
     }
 
     public function testGetLastName()
@@ -52,7 +53,7 @@ class ContactTest extends \PHPUnit_Framework_TestCase
     {
         $contact = new Contact();
         $contact->setUserId('iGusev');
-        $this->assertAttributeEquals('iGusev', 'userId', $contact);
+        $this->assertEquals('iGusev', $contact->getUserId());
     }
 
     public function testGetUserId()
@@ -66,7 +67,7 @@ class ContactTest extends \PHPUnit_Framework_TestCase
     {
         $contact = new Contact();
         $contact->setVCard('testVCard');
-        $this->assertAttributeEquals('testVCard', 'vCard', $contact);
+        $this->assertEquals('testVCard', $contact->getVCard());
     }
 
     public function testGetVCard()

@@ -1,15 +1,17 @@
 <?php
+
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\Voice;
 
-class VoiceTest extends \PHPUnit_Framework_TestCase
+class VoiceTest extends TestCase
 {
     public function testSetFileId()
     {
         $item = new Voice();
         $item->setFileId('testfileId');
-        $this->assertAttributeEquals('testfileId', 'fileId', $item);
+        $this->assertEquals('testfileId', $item->getFileId());
     }
 
     public function testGetFileId()
@@ -23,7 +25,7 @@ class VoiceTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Voice();
         $item->setFileUniqueId('fileUniqueId');
-        $this->assertAttributeEquals('fileUniqueId', 'fileUniqueId', $item);
+        $this->assertEquals('fileUniqueId', $item->getFileUniqueId());
     }
 
     public function testGetUniqueFileId()
@@ -37,7 +39,7 @@ class VoiceTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Voice();
         $item->setDuration(1);
-        $this->assertAttributeEquals(1, 'duration', $item);
+        $this->assertEquals(1, $item->getDuration());
     }
 
     public function testGetDuration()
@@ -51,7 +53,7 @@ class VoiceTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Voice();
         $item->setFileSize(5);
-        $this->assertAttributeEquals(5, 'fileSize', $item);
+        $this->assertEquals(5, $item->getFileSize());
     }
 
     public function testGetFileSize()
@@ -65,7 +67,7 @@ class VoiceTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Voice();
         $item->setMimeType('audio/mp3');
-        $this->assertAttributeEquals('audio/mp3', 'mimeType', $item);
+        $this->assertEquals('audio/mp3', $item->getMimeType());
     }
 
     public function testGetMimeType()
@@ -85,11 +87,11 @@ class VoiceTest extends \PHPUnit_Framework_TestCase
             'file_size' => 3
         ));
         $this->assertInstanceOf('\TelegramBot\Api\Types\Voice', $item);
-        $this->assertAttributeEquals('testFileId1', 'fileId', $item);
-        $this->assertAttributeEquals('testFileUniqueId1', 'fileUniqueId', $item);
-        $this->assertAttributeEquals(1, 'duration', $item);
-        $this->assertAttributeEquals('audio/mp3', 'mimeType', $item);
-        $this->assertAttributeEquals(3, 'fileSize', $item);
+        $this->assertEquals('testFileId1', $item->getFileId());
+        $this->assertEquals('testFileUniqueId1', $item->getFileUniqueId());
+        $this->assertEquals(1, $item->getDuration());
+        $this->assertEquals('audio/mp3', $item->getMimeType());
+        $this->assertEquals(3, $item->getFileSize());
     }
 
     /**
@@ -97,6 +99,8 @@ class VoiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromResponseException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = Voice::fromResponse(array(
             'duration' => 1,
             'mime_type' => 'audio/mp3',
@@ -108,6 +112,8 @@ class VoiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromResponseException2()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = Voice::fromResponse(array(
             'file_id' => 'testFileId1',
             'mime_type' => 'audio/mp3',
@@ -120,6 +126,8 @@ class VoiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetDurationException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new Voice();
         $item->setDuration('s');
     }
@@ -128,8 +136,9 @@ class VoiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetFileSizeException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new Voice();
         $item->setFileSize('s');
     }
-
 }

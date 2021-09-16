@@ -2,10 +2,11 @@
 
 namespace TelegramBot\Api\Test\Types\Events;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Events\Event;
 use TelegramBot\Api\Types\Update;
 
-class EventTest extends \PHPUnit_Framework_TestCase
+class EventTest extends TestCase
 {
     public function data()
     {
@@ -67,7 +68,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Event($action, $checker);
 
-        $this->assertAttributeInstanceOf('\Closure', 'action', $item);
+        $this->assertInstanceOf('\Closure', $item->getAction());
         $this->assertEquals($action, $item->getAction());
     }
 
@@ -82,7 +83,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Event($action, $checker);
 
-        $this->assertAttributeInstanceOf('\Closure', 'checker', $item);
+        $this->assertInstanceOf('\Closure', $item->getChecker());
         $this->assertEquals($checker, $item->getChecker());
     }
 
@@ -110,7 +111,8 @@ class EventTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider data
      */
-    public function testExecuteActionFalse($action, $checker, $update) {
+    public function testExecuteActionFalse($action, $checker, $update)
+    {
         $item = new Event($action, $checker);
 
         $reflection = new \ReflectionClass($item);
@@ -146,7 +148,8 @@ class EventTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider data
      */
-    public function testExecuteCheckerFalse($action, $checker, $update) {
+    public function testExecuteCheckerFalse($action, $checker, $update)
+    {
         $item = new Event($action, $checker);
 
         $reflection = new \ReflectionClass($item);
@@ -157,5 +160,4 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($item->executeChecker($update));
     }
-
 }

@@ -2,17 +2,17 @@
 
 namespace TelegramBot\Api\Test;
 
-
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\PhotoSize;
 use TelegramBot\Api\Types\UserProfilePhotos;
 
-class UserProfilePhotosTest extends \PHPUnit_Framework_TestCase
+class UserProfilePhotosTest extends TestCase
 {
     public function testSetTotalCount()
     {
         $userProfilePhotos = new UserProfilePhotos();
         $userProfilePhotos->setTotalCount(1);
-        $this->assertAttributeEquals(1, 'totalCount', $userProfilePhotos);
+        $this->assertEquals(1, $userProfilePhotos->getTotalCount());
     }
 
     public function testGetTotalCount()
@@ -38,7 +38,7 @@ class UserProfilePhotosTest extends \PHPUnit_Framework_TestCase
         }
 
         $userProfilePhotos->setPhotos($photos);
-        $this->assertAttributeEquals($photos, 'photos', $userProfilePhotos);
+        $this->assertEquals($photos, $userProfilePhotos->getPhotos());
     }
 
     public function testGetPhotos()
@@ -84,10 +84,10 @@ class UserProfilePhotosTest extends \PHPUnit_Framework_TestCase
             )
         );
         $this->assertInstanceOf('\TelegramBot\Api\Types\UserProfilePhotos', $userProfilePhotos);
-        $this->assertAttributeEquals(1, 'totalCount', $userProfilePhotos);
-        $this->assertAttributeEquals($photos, 'photos', $userProfilePhotos);
+        $this->assertEquals(1, $userProfilePhotos->getTotalCount());
+        $this->assertEquals($photos, $userProfilePhotos->getPhotos());
         foreach ($userProfilePhotos->getPhotos() as $photoArray) {
-            foreach($photoArray as $photo) {
+            foreach ($photoArray as $photo) {
                 $this->assertInstanceOf('\TelegramBot\Api\Types\PhotoSize', $photo);
             }
         }
@@ -98,6 +98,8 @@ class UserProfilePhotosTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetTotalCountException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new UserProfilePhotos();
         $item->setTotalCount('s');
     }

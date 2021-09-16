@@ -2,15 +2,16 @@
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\PhotoSize;
 
-class PhotoSizeTest extends \PHPUnit_Framework_TestCase
+class PhotoSizeTest extends TestCase
 {
     public function testSetFileId()
     {
         $photoSize = new PhotoSize();
         $photoSize->setFileId('testfileId');
-        $this->assertAttributeEquals('testfileId', 'fileId', $photoSize);
+        $this->assertEquals('testfileId', $photoSize->getFileId());
     }
 
     public function testGetFileId()
@@ -24,7 +25,7 @@ class PhotoSizeTest extends \PHPUnit_Framework_TestCase
     {
         $photoSize = new PhotoSize();
         $photoSize->setWidth(1);
-        $this->assertAttributeEquals(1, 'width', $photoSize);
+        $this->assertEquals(1, $photoSize->getWidth());
     }
 
     public function testGetWidth()
@@ -38,7 +39,7 @@ class PhotoSizeTest extends \PHPUnit_Framework_TestCase
     {
         $photoSize = new PhotoSize();
         $photoSize->setHeight(3);
-        $this->assertAttributeEquals(3, 'height', $photoSize);
+        $this->assertEquals(3, $photoSize->getHeight());
     }
 
     public function testGetHeight()
@@ -52,7 +53,7 @@ class PhotoSizeTest extends \PHPUnit_Framework_TestCase
     {
         $photoSize = new PhotoSize();
         $photoSize->setFileSize(5);
-        $this->assertAttributeEquals(5, 'fileSize', $photoSize);
+        $this->assertEquals(5, $photoSize->getFileSize());
     }
 
     public function testGetFileSize()
@@ -71,10 +72,10 @@ class PhotoSizeTest extends \PHPUnit_Framework_TestCase
             'file_size' => 3
         ));
         $this->assertInstanceOf('\TelegramBot\Api\Types\PhotoSize', $photoSize);
-        $this->assertAttributeEquals('testFileId1', 'fileId', $photoSize);
-        $this->assertAttributeEquals(1, 'width', $photoSize);
-        $this->assertAttributeEquals(2, 'height', $photoSize);
-        $this->assertAttributeEquals(3, 'fileSize', $photoSize);
+        $this->assertEquals('testFileId1', $photoSize->getFileId());
+        $this->assertEquals(1, $photoSize->getWidth());
+        $this->assertEquals(2, $photoSize->getHeight());
+        $this->assertEquals(3, $photoSize->getFileSize());
     }
 
     /**
@@ -82,6 +83,8 @@ class PhotoSizeTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetFileSizeException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new PhotoSize();
         $item->setFileSize('s');
     }
@@ -91,6 +94,8 @@ class PhotoSizeTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetHeightException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new PhotoSize();
         $item->setHeight('s');
     }
@@ -100,6 +105,8 @@ class PhotoSizeTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetWidthException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new PhotoSize();
         $item->setWidth('s');
     }

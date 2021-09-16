@@ -1,15 +1,11 @@
 <?php
-/**
- * User: boshurik
- * Date: 10.06.2020
- * Time: 19:54
- */
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\WebhookInfo;
 
-class WebhookInfoTest extends \PHPUnit_Framework_TestCase
+class WebhookInfoTest extends TestCase
 {
     public function testFromResponse()
     {
@@ -24,7 +20,7 @@ class WebhookInfoTest extends \PHPUnit_Framework_TestCase
         ));
         $this->assertInstanceOf('\TelegramBot\Api\Types\WebhookInfo', $webhookInfo);
         $this->assertEquals('', $webhookInfo->getUrl());
-        $this->assertEquals(false, $webhookInfo->hasCustomCertificate());
+        $this->assertFalse($webhookInfo->hasCustomCertificate());
         $this->assertEquals(0, $webhookInfo->getPendingUpdateCount());
         $this->assertEquals(null, $webhookInfo->getLastErrorDate());
         $this->assertEquals(null, $webhookInfo->getLastErrorMessage());

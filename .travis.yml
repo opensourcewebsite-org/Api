@@ -1,3 +1,6 @@
+# https://travis-ci.com/opensourcewebsite-org/php-telegram-sdk
+# https://docs.travis-ci.com
+
 language: php
 dist: trusty
 

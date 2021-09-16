@@ -71,4 +71,14 @@ class EventCollection
             }
         }
     }
+
+    public function getTracker()
+    {
+        return $this->tracker;
+    }
+
+    public function getEvents()
+    {
+        return $this->events;
+    }
 }

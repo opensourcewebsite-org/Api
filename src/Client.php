@@ -17,7 +17,7 @@ class Client
     /**
      * RegExp for bot commands
      */
-    const REGEXP = '/^(?:@\w+\s)?\/([^\s@]+)(@\S+)?\s?(.*)$/';
+    public const REGEXP = '/^(?:@\w+\s)?\/([^\s@]+)(@\S+)?\s?(.*)$/';
 
     /**
      * @var \TelegramBot\Api\BotApi
@@ -405,5 +405,15 @@ class Client
             return call_user_func_array([$this->api, $name], $arguments);
         }
         throw new BadMethodCallException("Method {$name} not exists");
+    }
+
+    public function getApi()
+    {
+        return $this->api;
+    }
+
+    public function getEvents()
+    {
+        return $this->events;
     }
 }

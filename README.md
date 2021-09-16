@@ -8,9 +8,9 @@
 
 ## Bots: An introduction for developers
 >Bots are special Telegram accounts designed to handle messages automatically. Users can interact with bots by sending them command messages in private or group chats.
-
+>
 >You control your bots using HTTPS requests to [Telegram Bot API](https://core.telegram.org/bots/api).
-
+>
 >The Bot API is an HTTP-based interface created for developers keen on building bots for Telegram.
 To learn how to create and set up a bot, please consult [Introduction to Bots](https://core.telegram.org/bots) and [Bot FAQ](https://core.telegram.org/bots/faq).
 
@@ -112,9 +112,6 @@ require_once "vendor/autoload.php";
 
 try {
     $bot = new \TelegramBot\Api\Client('YOUR_BOT_API_TOKEN');
-    // or initialize with botan.io tracker api key
-    // $bot = new \TelegramBot\Api\Client('YOUR_BOT_API_TOKEN', 'YOUR_BOTAN_TRACKER_API_KEY');
-
 
     //Handle /ping command
     $bot->command('ping', function ($message) use ($bot) {
@@ -137,7 +134,7 @@ try {
 }
 ```
 
-### Tests
+## Tests
 
 ``` bash
 $ composer test

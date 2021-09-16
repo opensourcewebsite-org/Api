@@ -2,6 +2,7 @@
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\Chat;
 use TelegramBot\Api\Types\Dice;
 use TelegramBot\Api\Types\Document;
@@ -16,21 +17,20 @@ use TelegramBot\Api\Types\User;
 use TelegramBot\Api\Types\Video;
 use TelegramBot\Api\Types\Voice;
 
-class MessageTest extends \PHPUnit_Framework_TestCase
+class MessageTest extends TestCase
 {
-
     public function testSetMessageId()
     {
         $item = new Message();
         $item->setMessageId(1);
-        $this->assertAttributeEquals(1, 'messageId', $item);
+        $this->assertEquals(1, $item->getMessageId());
     }
 
     public function testSet64bitMessageId()
     {
         $item = new Message();
         $item->setMessageId(2147483648);
-        $this->assertAttributeEquals(2147483648, 'messageId', $item);
+        $this->assertEquals(2147483648, $item->getMessageId());
     }
 
     public function testGetMessageId()
@@ -44,7 +44,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Message();
         $item->setCaption('test');
-        $this->assertAttributeEquals('test', 'caption', $item);
+        $this->assertEquals('test', $item->getCaption());
     }
 
     public function testGetCaption()
@@ -58,7 +58,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Message();
         $item->setDate(1234567);
-        $this->assertAttributeEquals(1234567, 'date', $item);
+        $this->assertEquals(1234567, $item->getDate());
     }
 
     public function testGetDate()
@@ -72,7 +72,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Message();
         $item->setForwardDate(1234567);
-        $this->assertAttributeEquals(1234567, 'forwardDate', $item);
+        $this->assertEquals(1234567, $item->getForwardDate());
     }
 
     public function testGetForwardDate()
@@ -92,7 +92,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'username' => 'iGusev'
         ));
         $item->setFrom($user);
-        $this->assertAttributeEquals($user, 'from', $item);
+        $this->assertEquals($user, $item->getFrom());
     }
 
     public function testGetFrom()
@@ -119,7 +119,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'username' => 'iGusev'
         ));
         $item->setForwardFrom($user);
-        $this->assertAttributeEquals($user, 'forwardFrom', $item);
+        $this->assertEquals($user, $item->getForwardFrom());
     }
 
     public function testGetForwardFrom()
@@ -145,7 +145,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'title' => 'test chat'
         ));
         $item->setChat($chat);
-        $this->assertAttributeEquals($chat, 'chat', $item);
+        $this->assertEquals($chat, $item->getChat());
     }
 
     public function testGetChatGroup()
@@ -172,7 +172,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'username' => 'iGusev'
         ));
         $item->setChat($user);
-        $this->assertAttributeEquals($user, 'chat', $item);
+        $this->assertEquals($user, $item->getChat());
     }
 
     public function testGetChatUser()
@@ -200,7 +200,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'user_id' => 'iGusev'
         ));
         $item->setContact($contact);
-        $this->assertAttributeEquals($contact, 'contact', $item);
+        $this->assertEquals($contact, $item->getContact());
     }
 
     public function testGetContact()
@@ -233,7 +233,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             )
         ));
         $item->setDocument($document);
-        $this->assertAttributeEquals($document, 'document', $item);
+        $this->assertEquals($document, $item->getDocument());
     }
 
     public function testGetDocument()
@@ -261,7 +261,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $item = new Message();
         $location = Location::fromResponse(array('latitude' => 55.585827, 'longitude' => 37.675309));
         $item->setLocation($location);
-        $this->assertAttributeEquals($location, 'location', $item);
+        $this->assertEquals($location, $item->getLocation());
     }
 
     public function testGetLocation()
@@ -283,7 +283,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'file_size' => 3
         ));
         $item->setAudio($audio);
-        $this->assertAttributeEquals($audio, 'audio', $item);
+        $this->assertEquals($audio, $item->getAudio());
     }
 
     public function testGetAudio()
@@ -311,7 +311,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'file_size' => 3
         ));
         $item->setVoice($voice);
-        $this->assertAttributeEquals($voice, 'voice', $item);
+        $this->assertEquals($voice, $item->getVoice());
     }
 
     public function testGetVoice()
@@ -347,7 +347,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             )
         ));
         $item->setVideo($video);
-        $this->assertAttributeEquals($video, 'video', $item);
+        $this->assertEquals($video, $item->getVideo());
     }
 
     public function testGetVideo()
@@ -380,7 +380,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'value' => 3
         ));
         $item->setDice($dice);
-        $this->assertAttributeEquals($dice, 'dice', $item);
+        $this->assertEquals($dice, $item->getDice());
     }
 
     public function testGetDice()
@@ -411,7 +411,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             )
         ));
         $item->setSticker($sticker);
-        $this->assertAttributeEquals($sticker, 'sticker', $item);
+        $this->assertEquals($sticker, $item->getSticker());
     }
 
     public function testGetSticker()
@@ -438,15 +438,13 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Message();
         $item->setGroupChatCreated(true);
-
-        $this->assertAttributeEquals(true, 'groupChatCreated', $item);
+        $this->assertTrue($item->isGroupChatCreated());
     }
 
     public function testIsGroupChatCreated()
     {
         $item = new Message();
         $item->setGroupChatCreated(true);
-
         $this->assertTrue($item->isGroupChatCreated());
     }
 
@@ -454,15 +452,13 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Message();
         $item->setDeleteChatPhoto(true);
-
-        $this->assertAttributeEquals(true, 'deleteChatPhoto', $item);
+        $this->assertTrue($item->isDeleteChatPhoto());
     }
 
     public function testIsDeleteChatPhoto()
     {
         $item = new Message();
         $item->setDeleteChatPhoto(true);
-
         $this->assertTrue($item->isDeleteChatPhoto());
     }
 
@@ -476,9 +472,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'username' => 'iGusev'
         ));
         $item->setLeftChatMember($user);
-
-
-        $this->assertAttributeEquals($user, 'leftChatMember', $item);
+        $this->assertEquals($user, $item->getLeftChatMember());
     }
 
     public function testGetLeftChatParticipant()
@@ -491,7 +485,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'username' => 'iGusev'
         ));
         $item->setLeftChatMember($user);
-
         $this->assertEquals($user, $item->getLeftChatMember());
         $this->assertInstanceOf('\TelegramBot\Api\Types\User', $item->getLeftChatMember());
     }
@@ -506,9 +499,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'username' => 'iGusev'
         ));
         $item->setNewChatMembers([$user]);
-
-
-        $this->assertAttributeEquals([$user], 'newChatMembers', $item);
+        $this->assertEquals([$user], $item->getNewChatMembers());
     }
 
     public function testGetNewChatParticipant()
@@ -521,7 +512,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'username' => 'iGusev'
         ));
         $item->setNewChatMembers([$user]);
-
         $this->assertEquals([$user], $item->getNewChatMembers());
         $this->assertInstanceOf('\TelegramBot\Api\Types\User', $item->getNewChatMembers()[0]);
     }
@@ -530,15 +520,13 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Message();
         $item->setNewChatTitle('testtitle');
-
-        $this->assertAttributeEquals('testtitle', 'newChatTitle', $item);
+        $this->assertEquals('testtitle', $item->getNewChatTitle());
     }
 
     public function testGetNewChatTitle()
     {
         $item = new Message();
         $item->setNewChatTitle('testtitle');
-
         $this->assertEquals('testtitle', $item->getNewChatTitle());
     }
 
@@ -546,15 +534,13 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Message();
         $item->setText('testtitle');
-
-        $this->assertAttributeEquals('testtitle', 'text', $item);
+        $this->assertEquals('testtitle', $item->getText());
     }
 
     public function testGetText()
     {
         $item = new Message();
         $item->setText('testtitle');
-
         $this->assertEquals('testtitle', $item->getText());
     }
 
@@ -577,8 +563,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             )
         ));
         $item->setReplyToMessage($replyMessage);
-
-        $this->assertAttributeEquals($replyMessage, 'replyToMessage', $item);
+        $this->assertEquals($replyMessage, $item->getReplyToMessage());
     }
 
     public function testGetReplyToMessage()
@@ -600,7 +585,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             )
         ));
         $item->setReplyToMessage($replyMessage);
-
         $this->assertEquals($replyMessage, $item->getReplyToMessage());
         $this->assertInstanceOf('\TelegramBot\Api\Types\Message', $item->getReplyToMessage());
     }
@@ -616,7 +600,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             'id' => 654321
         ));
         $item->setViaBot($bot);
-        $this->assertAttributeEquals($bot, 'viaBot', $item);
+        $this->assertEquals($bot, $item->getViaBot());
     }
 
     public function testGetViaBot()
@@ -673,10 +657,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
                 'file_size' => 7
             ))
         );
-
         $item->setPhoto($photo);
-
-        $this->assertAttributeEquals($photo, 'photo', $item);
+        $this->assertEquals($photo, $item->getPhoto());
     }
 
     public function testGetPhoto()
@@ -690,11 +672,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
                 'file_size' => 7
             ))
         );
-
         $item->setPhoto($photo);
-
         $this->assertEquals($photo, $item->getPhoto());
-
         foreach ($item->getPhoto() as $photoItem) {
             $this->assertInstanceOf('\TelegramBot\Api\Types\PhotoSize', $photoItem);
         }
@@ -711,9 +690,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
                 'file_size' => 7
             ))
         );
-
         $item->setNewChatPhoto($photo);
-        $this->assertAttributeEquals($photo, 'newChatPhoto', $item);
+        $this->assertEquals($photo, $item->getNewChatPhoto());
     }
 
     public function testSetNewChatPhoto()
@@ -727,10 +705,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
                 'file_size' => 7
             ))
         );
-
         $item->setNewChatPhoto($photo);
         $this->assertEquals($photo, $item->getNewChatPhoto());
-
         foreach ($item->getNewChatPhoto() as $photoItem) {
             $this->assertInstanceOf('\TelegramBot\Api\Types\PhotoSize', $photoItem);
         }
@@ -741,6 +717,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetMessageIdException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new Message();
         $item->setMessageId('s');
     }
@@ -750,6 +728,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetDateException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new Message();
         $item->setDate('s');
     }
@@ -759,6 +739,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetForwardDateException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new Message();
         $item->setForwardDate('s');
     }
@@ -767,8 +749,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Message();
         $item->setSupergroupChatCreated(true);
-
-        $this->assertAttributeEquals(true, 'supergroupChatCreated', $item);
+        $this->assertTrue($item->isSupergroupChatCreated());
     }
 
     public function testIsSupergroupChatCreated()
@@ -789,7 +770,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             ),
             'supergroup_chat_created' => true
         ));
-
         $this->assertTrue($item->isSupergroupChatCreated());
     }
 
@@ -797,8 +777,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Message();
         $item->setChannelChatCreated(true);
-
-        $this->assertAttributeEquals(true, 'channelChatCreated', $item);
+        $this->assertTrue($item->isChannelChatCreated());
     }
 
     public function testIsChannelChatCreated()
@@ -819,7 +798,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             ),
             'channel_chat_created' => true
         ));
-
         $this->assertTrue($item->isChannelChatCreated());
     }
 
@@ -827,7 +805,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Message();
         $item->setMigrateToChatId(2);
-        $this->assertAttributeEquals(2, 'migrateToChatId', $item);
+        $this->assertEquals(2, $item->getMigrateToChatId());
     }
 
     public function testGetMigrateToChatId()
@@ -848,7 +826,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             ),
             'migrate_to_chat_id' => 2
         ));
-
         $this->assertEquals(2, $item->getMigrateToChatId());
     }
 
@@ -856,7 +833,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Message();
         $item->setMigrateFromChatId(2);
-        $this->assertAttributeEquals(2, 'migrateFromChatId', $item);
+        $this->assertEquals(2, $item->getMigrateFromChatId());
     }
 
     public function testGetMigrateFromChatId()
@@ -877,7 +854,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             ),
             'migrate_from_chat_id' => 3
         ));
-
         $this->assertEquals(3, $item->getMigrateFromChatId());
     }
 
@@ -899,7 +875,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             ),
             'migrate_from_chat_id' => 3
         );
-
         $item = Message::fromResponse($data);
         $this->assertJson(json_encode($data), $item->toJson());
     }
@@ -929,7 +904,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
             ),
             'migrate_from_chat_id' => 3
         );
-
         $item = Message::fromResponse($data);
         $this->assertJson(json_encode($data), $item->toJson());
     }

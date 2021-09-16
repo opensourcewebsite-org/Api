@@ -2,10 +2,11 @@
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\ChatLocation;
 use TelegramBot\Api\Types\Location;
 
-class ChatLocationTest extends \PHPUnit_Framework_TestCase
+class ChatLocationTest extends TestCase
 {
     public function testGetLocation()
     {
@@ -40,6 +41,6 @@ class ChatLocationTest extends \PHPUnit_Framework_TestCase
             ]
         );
         $this->assertInstanceOf('\TelegramBot\Api\Types\ChatLocation', $chatLocation);
-        $this->assertAttributeEquals('Wall St. 123', 'address', $chatLocation);
+        $this->assertEquals('Wall St. 123', $chatLocation->getAddress());
     }
 }

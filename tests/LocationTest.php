@@ -2,15 +2,16 @@
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\Location;
 
-class LocationTest extends \PHPUnit_Framework_TestCase
+class LocationTest extends TestCase
 {
     public function testSetLatitude()
     {
         $location = new Location();
         $location->setLatitude(55.585827);
-        $this->assertAttributeEquals(55.585827, 'latitude', $location);
+        $this->assertEquals(55.585827, $location->getLatitude());
     }
 
     public function testGetLatitude()
@@ -24,7 +25,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
     {
         $location = new Location();
         $location->setLongitude(37.675309);
-        $this->assertAttributeEquals(37.675309, 'longitude', $location);
+        $this->assertEquals(37.675309, $location->getLongitude());
     }
 
     public function testGetLongtitude()
@@ -38,7 +39,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
     {
         $location = new Location();
         $location->setHorizontalAccuracy(20.5);
-        $this->assertAttributeEquals(20.5, 'horizontalAccuracy', $location);
+        $this->assertEquals(20.5, $location->getHorizontalAccuracy());
     }
 
     public function testGetHorizontalAccuracy()
@@ -52,7 +53,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
     {
         $location = new Location();
         $location->setLivePeriod(300);
-        $this->assertAttributeEquals(300, 'livePeriod', $location);
+        $this->assertEquals(300, $location->getLivePeriod());
     }
 
     public function testGetLivePeriod()
@@ -66,7 +67,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
     {
         $location = new Location();
         $location->setHeading(100);
-        $this->assertAttributeEquals(100, 'heading', $location);
+        $this->assertEquals(100, $location->getHeading());
     }
 
     public function testGetHeading()
@@ -80,7 +81,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
     {
         $location = new Location();
         $location->setProximityAlertRadius(15);
-        $this->assertAttributeEquals(15, 'proximityAlertRadius', $location);
+        $this->assertEquals(15, $location->getProximityAlertRadius());
     }
 
     public function testGetProximityAlertRadius()
@@ -103,12 +104,12 @@ class LocationTest extends \PHPUnit_Framework_TestCase
             )
         );
         $this->assertInstanceOf('\TelegramBot\Api\Types\Location', $location);
-        $this->assertAttributeEquals(55.585827, 'latitude', $location);
-        $this->assertAttributeEquals(37.675309, 'longitude', $location);
-        $this->assertAttributeEquals(20.5, 'horizontalAccuracy', $location);
-        $this->assertAttributeEquals(300, 'livePeriod', $location);
-        $this->assertAttributeEquals(100, 'heading', $location);
-        $this->assertAttributeEquals(15, 'proximityAlertRadius', $location);
+        $this->assertEquals(55.585827, $location->getLatitude());
+        $this->assertEquals(37.675309, $location->getLongitude());
+        $this->assertEquals(20.5, $location->getHorizontalAccuracy());
+        $this->assertEquals(300, $location->getLivePeriod());
+        $this->assertEquals(100, $location->getHeading());
+        $this->assertEquals(15, $location->getProximityAlertRadius());
     }
 
     /**
@@ -116,6 +117,8 @@ class LocationTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetHorizontalAccuracyException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new Location();
         $item->setHorizontalAccuracy('s');
     }
@@ -125,6 +128,8 @@ class LocationTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetLatitudeException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new Location();
         $item->setLatitude('s');
     }
@@ -134,8 +139,9 @@ class LocationTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetLongitudeException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new Location();
         $item->setLongitude('s');
     }
-
 }

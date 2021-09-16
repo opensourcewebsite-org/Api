@@ -2,16 +2,17 @@
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\PhotoSize;
 use TelegramBot\Api\Types\Video;
 
-class VideoTest extends \PHPUnit_Framework_TestCase
+class VideoTest extends TestCase
 {
     public function testSetFileId()
     {
         $item = new Video();
         $item->setFileId('testfileId');
-        $this->assertAttributeEquals('testfileId', 'fileId', $item);
+        $this->assertEquals('testfileId', $item->getFileId());
     }
 
     public function testGetFileId()
@@ -25,7 +26,7 @@ class VideoTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Video();
         $item->setDuration(1);
-        $this->assertAttributeEquals(1, 'duration', $item);
+        $this->assertEquals(1, $item->getDuration());
     }
 
     public function testGetDuration()
@@ -39,7 +40,7 @@ class VideoTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Video();
         $item->setFileSize(5);
-        $this->assertAttributeEquals(5, 'fileSize', $item);
+        $this->assertEquals(5, $item->getFileSize());
     }
 
     public function testGetFileSize()
@@ -53,7 +54,7 @@ class VideoTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Video();
         $item->setMimeType('video/mp4');
-        $this->assertAttributeEquals('video/mp4', 'mimeType', $item);
+        $this->assertEquals('video/mp4', $item->getMimeType());
     }
 
     public function testGetMimeType()
@@ -73,7 +74,7 @@ class VideoTest extends \PHPUnit_Framework_TestCase
             'file_size' => 3
         ));
         $item->setThumb($thumb);
-        $this->assertAttributeEquals($thumb, 'thumb', $item);
+        $this->assertEquals($thumb, $item->getThumb());
     }
 
     public function testGetThumb()
@@ -94,7 +95,7 @@ class VideoTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Video();
         $item->setWidth(1);
-        $this->assertAttributeEquals(1, 'width', $item);
+        $this->assertEquals(1, $item->getWidth());
     }
 
     public function testGetWidth()
@@ -108,7 +109,7 @@ class VideoTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Video();
         $item->setHeight(3);
-        $this->assertAttributeEquals(3, 'height', $item);
+        $this->assertEquals(3, $item->getHeight());
     }
 
     public function testGetHeight()
@@ -141,13 +142,13 @@ class VideoTest extends \PHPUnit_Framework_TestCase
             'file_size' => 7
         ));
         $this->assertInstanceOf('\TelegramBot\Api\Types\Video', $item);
-        $this->assertAttributeEquals('testFileId1', 'fileId', $item);
-        $this->assertAttributeEquals(1, 'width', $item);
-        $this->assertAttributeEquals(2, 'height', $item);
-        $this->assertAttributeEquals(3, 'duration', $item);
-        $this->assertAttributeEquals('video/mp4', 'mimeType', $item);
-        $this->assertAttributeEquals(4, 'fileSize', $item);
-        $this->assertAttributeEquals($thumb, 'thumb', $item);
+        $this->assertEquals('testFileId1', $item->getFileId());
+        $this->assertEquals(1, $item->getWidth());
+        $this->assertEquals(2, $item->getHeight());
+        $this->assertEquals(3, $item->getDuration());
+        $this->assertEquals('video/mp4', $item->getMimeType());
+        $this->assertEquals(4, $item->getFileSize());
+        $this->assertEquals($thumb, $item->getThumb());
         $this->assertInstanceOf('\TelegramBot\Api\Types\PhotoSize', $item->getThumb());
     }
 
@@ -156,6 +157,8 @@ class VideoTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetHeightException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new Video();
         $item->setHeight('s');
     }
@@ -165,6 +168,8 @@ class VideoTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetWidthException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new Video();
         $item->setWidth('s');
     }
@@ -174,6 +179,8 @@ class VideoTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetDurationException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new Video();
         $item->setDuration('s');
     }
@@ -182,6 +189,8 @@ class VideoTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetFileSizeException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = new Video();
         $item->setFileSize('s');
     }
@@ -189,8 +198,10 @@ class VideoTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \TelegramBot\Api\InvalidArgumentException
      */
-    public function testFromResponseException1()
+    public function testFromResponseException()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = Video::fromResponse(array(
             'width' => 1,
             'height' => 2,
@@ -210,6 +221,8 @@ class VideoTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromResponseException2()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = Video::fromResponse(array(
             'file_id' => 'testFileId1',
             'height' => 2,
@@ -230,6 +243,8 @@ class VideoTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromResponseException3()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = Video::fromResponse(array(
             'file_id' => 'testFileId1',
             'width' => 1,
@@ -250,6 +265,8 @@ class VideoTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromResponseException4()
     {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $item = Video::fromResponse(array(
             'file_id' => 'testFileId1',
             'width' => 1,

@@ -2,7 +2,7 @@
 
 namespace TelegramBot\Api\Test;
 
-
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Inline;
 use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Client;
@@ -10,7 +10,7 @@ use TelegramBot\Api\Types\Inline\InlineQuery;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;
 
-class ClientTest extends \PHPUnit_Framework_TestCase
+class ClientTest extends TestCase
 {
     public function data()
     {
@@ -134,13 +134,14 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        \TelegramBot\Api\BadMethodCallException
+     * @expectedException \TelegramBot\Api\BadMethodCallException
      * @expectedExceptionMessage Method testMethod not exists
      */
     public function testBadMethodCallException()
     {
-        $item = new Client('testToken');
+        $this->expectException(\TelegramBot\Api\BadMethodCallException::class);
 
+        $item = new Client('testToken');
         $item->testMethod();
     }
 
@@ -149,8 +150,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $item = new Client('testToken');
 
         $this->assertInstanceOf('\TelegramBot\Api\Client', $item);
-        $this->assertAttributeInstanceOf('\TelegramBot\Api\BotApi', 'api', $item);
-        $this->assertAttributeInstanceOf('\TelegramBot\Api\Events\EventCollection', 'events', $item);
+        $this->assertInstanceOf('\TelegramBot\Api\BotApi', $item->getApi());
+        $this->assertInstanceOf('\TelegramBot\Api\Events\EventCollection', $item->getEvents());
     }
 
     public function testOn()
@@ -194,7 +195,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $expected = !empty($matches) && $matches[1] == $command;
 
         $this->assertEquals($expected, call_user_func($result, $update));
-
     }
 
     /**
@@ -219,7 +219,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $reflectionProperty->setAccessible(false);
 
         $item->handle([$update, $update]);
-
     }
 
     /**
@@ -242,7 +241,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             return true;
         };
 
-        if($attr1 && $attr2) {
+        if ($attr1 && $attr2) {
             $action = function (Message $message, $attr1, $attr2) {
                 global $test;
                 $test = 2;

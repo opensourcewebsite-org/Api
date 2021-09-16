@@ -2,10 +2,11 @@
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 
-class BaseTypeTest extends \PHPUnit_Framework_TestCase
+class BaseTypeTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         include_once('tests/_fixtures/TestBaseType.php');
     }
@@ -13,18 +14,21 @@ class BaseTypeTest extends \PHPUnit_Framework_TestCase
     public function testRequiredParams()
     {
         $testItem = new \TestBaseType();
-
-        $this->assertAttributeEquals(array('test1', 'test2'), 'requiredParams', $testItem);
+        $this->assertEquals(array('test1', 'test2'), $testItem::$requiredParams);
     }
 
-    public function testValidate() {
+    public function testValidate()
+    {
         $this->assertTrue(\TestBaseType::validate(array('test1' => 1, 'test2' => 2, 'test3' => 3)));
     }
 
     /**
      * @expectedException \TelegramBot\Api\InvalidArgumentException
      */
-    public function testValidateFail() {
+    public function testValidateException()
+    {
+        $this->expectException(\TelegramBot\Api\InvalidArgumentException::class);
+
         $this->assertTrue(\TestBaseType::validate(array('test1' => 1)));
     }
 }
