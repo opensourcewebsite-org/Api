@@ -2,7 +2,7 @@
 # https://docs.travis-ci.com
 sudo: false
 language: php
-dist: trusty
+dist: bionic
 php:
   - 7.0
   - 7.1
