@@ -5,13 +5,13 @@ namespace TelegramBot\Api;
 use Closure;
 use ReflectionFunction;
 use TelegramBot\Api\Events\EventCollection;
-use TelegramBot\Api\Types\Update;
-use TelegramBot\Api\Types\Message;
-use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
-use TelegramBot\Api\Types\ReplyKeyboardRemove;
 use TelegramBot\Api\Types\ForceReply;
+use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
+use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\ReplyKeyboardHide;
 use TelegramBot\Api\Types\ReplyKeyboardMarkup;
+use TelegramBot\Api\Types\ReplyKeyboardRemove;
+use TelegramBot\Api\Types\Update;
 
 /**
  * Class Client

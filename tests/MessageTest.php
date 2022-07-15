@@ -3,13 +3,13 @@
 namespace TelegramBot\Api\Test;
 
 use PHPUnit\Framework\TestCase;
+use TelegramBot\Api\Types\Audio;
 use TelegramBot\Api\Types\Chat;
+use TelegramBot\Api\Types\Contact;
 use TelegramBot\Api\Types\Dice;
 use TelegramBot\Api\Types\Document;
-use TelegramBot\Api\Types\Location;
-use TelegramBot\Api\Types\Audio;
-use TelegramBot\Api\Types\Contact;
 use TelegramBot\Api\Types\GroupChat;
+use TelegramBot\Api\Types\Location;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\PhotoSize;
 use TelegramBot\Api\Types\Sticker;
