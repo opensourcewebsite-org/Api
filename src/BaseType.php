@@ -45,8 +45,9 @@ abstract class BaseType
     public function map($data)
     {
         foreach (static::$map as $key => $item) {
-            if (isset($data[$key]) && (!is_array($data[$key]) || (is_array($data[$key]) && !empty($data[$key])))) {
+            if (isset($data[$key])) {
                 $method = 'set' . self::toCamelCase($key);
+
                 if ($item === true) {
                     $this->$method($data[$key]);
                 } else {
@@ -67,6 +68,7 @@ abstract class BaseType
 
         foreach (static::$map as $key => $item) {
             $property = lcfirst(self::toCamelCase($key));
+
             if (!is_null($this->$property)) {
                 if (is_array($this->$property)) {
                     $output[$key] = array_map(
