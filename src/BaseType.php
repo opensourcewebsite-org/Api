@@ -35,7 +35,7 @@ abstract class BaseType
      */
     public static function validate($data)
     {
-        if (count(array_intersect_key(array_flip(static::$requiredParams), $data)) === count(static::$requiredParams)) {
+        if (!count(static::$requiredParams) || (count(array_intersect_key(array_flip(static::$requiredParams), $data)) === count(static::$requiredParams))) {
             return true;
         }
 

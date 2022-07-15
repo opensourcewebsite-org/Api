@@ -72,7 +72,6 @@ class Update extends BaseType implements TypeInterface
      */
     protected $poll;
 
-
     /**
      * Optional. New version of a message that is known to the bot and was edited
      *

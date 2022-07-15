@@ -69,6 +69,10 @@ class Message extends BaseType implements TypeInterface
         'invoice' => Invoice::class,
         'successful_payment' => SuccessfulPayment::class,
         'connected_website' => true,
+        'video_chat_scheduled' => VideoChatScheduled::class,
+        'video_chat_started' => VideoChatStarted::class,
+        'video_chat_ended' => VideoChatEnded::class,
+        'video_chat_participants_invited' => VideoChatParticipantsInvited::class,
     ];
 
     /**
@@ -297,11 +301,9 @@ class Message extends BaseType implements TypeInterface
     protected $dice;
 
     /**
-     * Optional. New members that were added to the group or supergroup and information about them
-     * (the bot itself may be one of these members)
-     * array of \TelegramBot\Api\Types\User
+     * Optional. New members that were added to the group or supergroup and information about them (the bot itself may be one of these members)
      *
-     * @var array
+     * @var array Array of \TelegramBot\Api\Types\User
      */
     protected $newChatMembers;
 
@@ -398,6 +400,34 @@ class Message extends BaseType implements TypeInterface
      * @var string
      */
     protected $connectedWebsite;
+
+    /**
+     * Optional. Service message: video chat scheduled.
+     *
+     * @var \TelegramBot\Api\Types\VideoChatScheduled
+     */
+    protected $videoChatScheduled;
+
+    /**
+     * Optional. Service message: video chat started.
+     *
+     * @var string
+     */
+    protected $videoChatStarted;
+
+    /**
+     * Optional. Service message: video chat ended.
+     *
+     * @var \TelegramBot\Api\Types\VideoChatEnded
+     */
+    protected $videoChatEnded;
+
+    /**
+     * Optional. Service message: new participants invited to a video chat.
+     *
+     * @var array Array of \TelegramBot\Api\Types\User
+     */
+    protected $videoChatParticipantsInvited;
 
     /**
      * Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
@@ -1152,6 +1182,70 @@ class Message extends BaseType implements TypeInterface
     public function setConnectedWebsite($connectedWebsite)
     {
         $this->connectedWebsite = $connectedWebsite;
+    }
+
+    /**
+     * @return VideoChatScheduled
+     */
+    public function getVideoChatScheduled()
+    {
+        return $this->videoChatScheduled;
+    }
+
+    /**
+     * @param VideoChatScheduled $videoChatScheduled
+     */
+    public function setVideoChatScheduled($videoChatScheduled)
+    {
+        $this->videoChatScheduled = $videoChatScheduled;
+    }
+
+    /**
+     * @return VideoChatStarted
+     */
+    public function getVideoChatStarted()
+    {
+        return $this->videoChatStarted;
+    }
+
+    /**
+     * @param VideoChatStarted $videoChatStarted
+     */
+    public function setVideoChatStarted($videoChatStarted)
+    {
+        $this->videoChatStarted = $videoChatStarted;
+    }
+
+    /**
+     * @return VideoChatEnded
+     */
+    public function getVideoChatEnded()
+    {
+        return $this->videoChatEnded;
+    }
+
+    /**
+     * @param VideoChatEnded $videoChatEnded
+     */
+    public function setVideoChatEnded($videoChatEnded)
+    {
+        $this->videoChatEnded = $videoChatEnded;
+    }
+
+    /**
+     * @return VideoChatParticipantsInvited
+     */
+    public function getVideoChatParticipantsInvited()
+    {
+        return $this->videoChatParticipantsInvited;
+    }
+
+    /**
+     * @param VideoChatParticipantsInvited $videoChatParticipantsInvited
+     */
+    public function setVideoChatParticipantsInvited($videoChatParticipantsInvited)
+    {
+        $this->videoChatParticipantsInvited = $videoChatParticipantsInvited;
     }
 
     /**

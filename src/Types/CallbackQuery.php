@@ -37,7 +37,7 @@ class CallbackQuery extends BaseType
         'inline_message_id' => true,
         'chat_instance' => true,
         'data' => true,
-        'game_short_name' => true
+        'game_short_name' => true,
     ];
 
     /**
