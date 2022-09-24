@@ -155,7 +155,7 @@ class Update extends BaseType implements TypeInterface
     /**
      * @param Message $message
      */
-    public function setMessage(Message $message)
+    public function setMessage($message)
     {
         $this->message = $message;
     }
