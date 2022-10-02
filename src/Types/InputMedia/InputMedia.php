@@ -4,6 +4,7 @@ namespace TelegramBot\Api\Types\InputMedia;
 
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\Collection\CollectionItemInterface;
+use TelegramBot\Api\Types\ArrayOfMessageEntity;
 
 /**
  * Class InputMedia
@@ -30,6 +31,7 @@ class InputMedia extends BaseType implements CollectionItemInterface
         'media' => true,
         'caption' => true,
         'parse_mode' => true,
+        'caption_entities' => ArrayOfMessageEntity::class,
     ];
 
     /**
@@ -62,6 +64,13 @@ class InputMedia extends BaseType implements CollectionItemInterface
      * @var string
      */
     protected $parseMode;
+
+    /**
+     * Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode.
+     *
+     * @var ArrayOfMessageEntity
+     */
+    protected $captionEntities;
 
     /**
      * @return string
@@ -125,5 +134,21 @@ class InputMedia extends BaseType implements CollectionItemInterface
     public function setParseMode($parseMode)
     {
         $this->parseMode = $parseMode;
+    }
+
+    /**
+     * @return ArrayOfMessageEntity
+     */
+    public function getCaptionEntities()
+    {
+        return $this->captionEntities;
+    }
+
+    /**
+     * @param ArrayOfMessageEntity $captionEntities
+     */
+    public function setCaptionEntities($captionEntities)
+    {
+        $this->captionEntities = $captionEntities;
     }
 }

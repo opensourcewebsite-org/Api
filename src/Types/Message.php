@@ -32,6 +32,7 @@ class Message extends BaseType implements TypeInterface
         'forward_from_chat' => Chat::class,
         'forward_from_message_id' => true,
         'forward_date' => true,
+        'is_automatic_forward' => true,
         'forward_signature' => true,
         'forward_sender_name' => true,
         'reply_to_message' => Message::class,
@@ -147,6 +148,13 @@ class Message extends BaseType implements TypeInterface
      * @var int
      */
     protected $forwardDate;
+
+    /**
+     * Optional. True, if the message is a channel post that was automatically forwarded to the connected discussion group.
+     *
+     * @var bool
+     */
+    protected $isAutomaticForward;
 
     /**
      * Optional. For replies, the original message. Note that the Message object in this field will not contain further
@@ -612,6 +620,22 @@ class Message extends BaseType implements TypeInterface
         } else {
             throw new InvalidArgumentException();
         }
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isAutomaticForward()
+    {
+        return $this->isAutomaticForward;
+    }
+
+    /**
+     * @param boolean $isAutomaticForward
+     */
+    public function SetIsAutomaticForward($isAutomaticForward)
+    {
+        $this->isAutomaticForward = (bool)$isAutomaticForward;
     }
 
     /**
