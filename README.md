@@ -1,6 +1,7 @@
-<h1 align="center">php-telegram-sdk</h1>
+<h1 align="center">PHP Telegram SDK</h1>
 
-[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![License](https://img.shields.io/badge/License-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![PHP Version](https://img.shields.io/badge/PHP-7.4-blue.svg?style=flat-square&logo=php)](https://www.php.net)
 
 ## Bots: An introduction for developers
 >Bots are special Telegram accounts designed to handle messages automatically. Users can interact with bots by sending them command messages in private or group chats.
@@ -135,6 +136,12 @@ try {
 ``` bash
 $ composer test
 ```
+
+## Feedback
+
+To request a new feature, submit a bug report, give us feedback, start a design discussion or have an idea to make this code better feel free to [open an issue](https://github.com/opensourcewebsite-org/php-telegram-sdk/issues), or [create a pull request](https://github.com/opensourcewebsite-org/php-telegram-sdk/pulls).
+
+Please send all security issues to [security@opensourcewebsite.org](mailto:security@opensourcewebsite.org).
 
 ## License
 
