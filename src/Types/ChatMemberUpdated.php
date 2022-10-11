@@ -157,7 +157,7 @@ class ChatMemberUpdated extends BaseType
     }
 
     /**
-     * @param ChamMember $newChatMember
+     * @param ChatMember $newChatMember
      */
     public function setNewChatMember($newChatMember)
     {
