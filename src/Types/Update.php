@@ -4,7 +4,6 @@ namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
-use TelegramBot\Api\Types\ChatMemberUpdated;
 use TelegramBot\Api\Types\Inline\ChosenInlineResult;
 use TelegramBot\Api\Types\Inline\InlineQuery;
 use TelegramBot\Api\Types\Payments\Query\PreCheckoutQuery;

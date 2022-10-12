@@ -3,7 +3,6 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\Types\User;
 
 /**
  * Represents an invite link for a chat.
@@ -19,7 +18,7 @@ class ChatInviteLink extends BaseType
     */
     protected static $requiredParams = [
         'invite_link',
-        'creator'
+        'creator',
     ];
 
     /**
@@ -36,7 +35,7 @@ class ChatInviteLink extends BaseType
         'name' => true,
         'expire_date' => true,
         'member_limit' => true,
-        'pending_join_request_count' => true
+        'pending_join_request_count' => true,
     ];
 
     /**

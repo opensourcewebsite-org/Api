@@ -3,10 +3,6 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
-use TelegramBot\Api\Types\Chat;
-use TelegramBot\Api\Types\ChatInviteLink;
-use TelegramBot\Api\Types\ChatMember;
-use TelegramBot\Api\Types\User;
 
 /**
  * This object represents changes in the status of a chat member.
@@ -25,7 +21,7 @@ class ChatMemberUpdated extends BaseType
         'from',
         'date',
         'old_chat_member',
-        'new_chat_member'
+        'new_chat_member',
     ];
 
     /**
@@ -39,7 +35,7 @@ class ChatMemberUpdated extends BaseType
         'date' => true,
         'old_chat_member' => ChatMember::class,
         'new_chat_member' => ChatMember::class,
-        'invite_link' => ChatInviteLink::class
+        'invite_link' => ChatInviteLink::class,
     ];
 
     /**
