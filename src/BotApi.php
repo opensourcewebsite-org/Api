@@ -484,7 +484,14 @@ class BotApi
      */
     public function setWebhook($url = '', $certificate = null, $allowedUpdates = [])
     {
-        return $this->call('setWebhook', ['url' => $url, 'certificate' => $certificate, 'allowed_updates' => $allowedUpdates]);
+        return $this->call(
+            'setWebhook',
+            [
+                'url' => $url,
+                'certificate' => $certificate,
+                'allowed_updates' => $allowedUpdates,
+            ],
+        );
     }
 
 
@@ -1135,15 +1142,19 @@ class BotApi
      * @param $callbackQueryId
      * @param string|null $text
      * @param bool $showAlert
+     * @param string $url
+     * @param integer $cacheTime
      *
      * @return bool
      */
-    public function answerCallbackQuery($callbackQueryId, $text = null, $showAlert = false)
+    public function answerCallbackQuery($callbackQueryId, $text = null, $showAlert = false, $url = null, $cacheTime = 0)
     {
         return $this->call('answerCallbackQuery', [
             'callback_query_id' => $callbackQueryId,
             'text' => $text,
             'show_alert' => (bool)$showAlert,
+            'url' => $url,
+            'cache_time' => (int)$cacheTime,
         ]);
     }
 
