@@ -261,6 +261,7 @@ class BotApi
 
         $result = curl_exec($this->curl);
         self::curlValidate($this->curl, $result);
+
         if ($result === false) {
             throw new HttpException(curl_error($this->curl), curl_errno($this->curl));
         }
@@ -283,6 +284,7 @@ class BotApi
         ) {
             $errorDescription = array_key_exists('description', $json) ? $json['description'] : self::$codes[$httpCode];
             $errorParameters = array_key_exists('parameters', $json) ? $json['parameters'] : [];
+
             throw new HttpException($errorDescription, $httpCode, null, $errorParameters);
         }
     }
@@ -484,14 +486,11 @@ class BotApi
      */
     public function setWebhook($url = '', $certificate = null, $allowedUpdates = [])
     {
-        return $this->call(
-            'setWebhook',
-            [
-                'url' => $url,
-                'certificate' => $certificate,
-                'allowed_updates' => $allowedUpdates,
-            ],
-        );
+        return $this->call('setWebhook', [
+            'url' => $url,
+            'certificate' => $certificate,
+            'allowed_updates' => $allowedUpdates,
+        ]);
     }
 
 
@@ -591,12 +590,12 @@ class BotApi
         $livePeriod = null
     ) {
         return Message::fromResponse($this->call('sendLocation', [
-            'chat_id'              => $chatId,
-            'latitude'             => $latitude,
-            'longitude'            => $longitude,
-            'live_period'          => $livePeriod,
-            'reply_to_message_id'  => $replyToMessageId,
-            'reply_markup'         => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
+            'chat_id' => $chatId,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'live_period' => $livePeriod,
+            'reply_to_message_id' => $replyToMessageId,
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
         ]));
     }
@@ -622,12 +621,12 @@ class BotApi
         $replyMarkup = null
     ) {
         return Message::fromResponse($this->call('sendLocation', [
-            'chat_id'           => $chatId,
-            'message_id'        => $messageId,
+            'chat_id' => $chatId,
+            'message_id' => $messageId,
             'inline_message_id' => $inlineMessageId,
-            'latitude'          => $latitude,
-            'longitude'         => $longitude,
-            'reply_markup'      => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
         ]));
     }
 
@@ -649,10 +648,10 @@ class BotApi
         $replyMarkup = null
     ) {
         return Message::fromResponse($this->call('sendLocation', [
-            'chat_id'           => $chatId,
-            'message_id'        => $messageId,
+            'chat_id' => $chatId,
+            'message_id' => $messageId,
             'inline_message_id' => $inlineMessageId,
-            'reply_markup'      => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
+            'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
         ]));
     }
 
@@ -767,7 +766,7 @@ class BotApi
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
             'supports_streaming' => (bool)$supportsStreaming,
-            'parse_mode' => $parseMode
+            'parse_mode' => $parseMode,
         ]));
     }
 
@@ -808,7 +807,7 @@ class BotApi
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
-            'parse_mode' => $parseMode
+            'parse_mode' => $parseMode,
         ]));
     }
 
@@ -856,7 +855,7 @@ class BotApi
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
             'allow_sending_without_reply' => $allowSendingWithoutReply,
-            'parse_mode' => $parseMode
+            'parse_mode' => $parseMode,
         ]));
     }
 
@@ -933,7 +932,7 @@ class BotApi
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
-            'parse_mode' => $parseMode
+            'parse_mode' => $parseMode,
         ]));
     }
 
@@ -969,7 +968,7 @@ class BotApi
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
-            'parse_mode' => $parseMode
+            'parse_mode' => $parseMode,
         ]));
     }
 
@@ -1006,7 +1005,7 @@ class BotApi
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
-            'parse_mode' => $parseMode
+            'parse_mode' => $parseMode,
         ]));
     }
 
@@ -1112,7 +1111,7 @@ class BotApi
         return $this->call('kickChatMember', [
             'chat_id' => $chatId,
             'user_id' => $userId,
-            'until_date' => $untilDate
+            'until_date' => $untilDate,
         ]);
     }
 
@@ -1170,12 +1169,9 @@ class BotApi
      */
     public function setMyCommands($commands)
     {
-        return $this->call(
-            'setMyCommands',
-            [
-                'commands' => json_encode($commands)
-            ]
-        );
+        return $this->call('setMyCommands', [
+            'commands' => json_encode($commands)
+        ]);
     }
 
     /**
@@ -1254,7 +1250,7 @@ class BotApi
             'inline_message_id' => $inlineMessageId,
             'caption' => $caption,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-            'parse_mode' => $parseMode
+            'parse_mode' => $parseMode,
         ]));
     }
 
@@ -1474,7 +1470,7 @@ class BotApi
             'disable_notification' => (bool)$disableNotification,
             'provider_data' => $providerData,
             'send_phone_number_to_provider' => (bool)$sendPhoneNumberToProvider,
-            'send_email_to_provider' => (bool)$sendEmailToProvider
+            'send_email_to_provider' => (bool)$sendEmailToProvider,
         ]));
     }
 
@@ -1497,7 +1493,7 @@ class BotApi
             'shipping_query_id' => $shippingQueryId,
             'ok' => (bool)$ok,
             'shipping_options' => json_encode($shipping_options),
-            'error_message' => $errorMessage
+            'error_message' => $errorMessage,
         ]);
     }
 
@@ -1516,7 +1512,7 @@ class BotApi
         return $this->call('answerPreCheckoutQuery', [
             'pre_checkout_query_id' => $preCheckoutQueryId,
             'ok' => (bool)$ok,
-            'error_message' => $errorMessage
+            'error_message' => $errorMessage,
         ]);
     }
 
@@ -1557,7 +1553,7 @@ class BotApi
             'can_send_messages' => $canSendMessages,
             'can_send_media_messages' => $canSendMediaMessages,
             'can_send_other_messages' => $canSendOtherMessages,
-            'can_add_web_page_previews' => $canAddWebPagePreviews
+            'can_add_web_page_previews' => $canAddWebPagePreviews,
         ]);
     }
 
@@ -1604,7 +1600,7 @@ class BotApi
             'can_invite_users' => $canInviteUsers,
             'can_restrict_members' => $canRestrictMembers,
             'can_pin_messages' => $canPinMessages,
-            'can_promote_members' => $canPromoteMembers
+            'can_promote_members' => $canPromoteMembers,
         ]);
     }
 
@@ -1637,7 +1633,7 @@ class BotApi
     {
         return $this->call('setChatPhoto', [
             'chat_id' => $chatId,
-            'photo' => $photo
+            'photo' => $photo,
         ]);
     }
 
@@ -1653,7 +1649,7 @@ class BotApi
     public function deleteChatPhoto($chatId)
     {
         return $this->call('deleteChatPhoto', [
-            'chat_id' => $chatId
+            'chat_id' => $chatId,
         ]);
     }
 
@@ -1671,7 +1667,7 @@ class BotApi
     {
         return $this->call('setChatTitle', [
             'chat_id' => $chatId,
-            'title' => $title
+            'title' => $title,
         ]);
     }
 
@@ -1689,7 +1685,7 @@ class BotApi
     {
         return $this->call('setChatDescription', [
             'chat_id' => $chatId,
-            'title' => $description
+            'title' => $description,
         ]);
     }
 
@@ -1709,7 +1705,7 @@ class BotApi
         return $this->call('pinChatMessage', [
             'chat_id' => $chatId,
             'message_id' => $messageId,
-            'disable_notification' => $disableNotification
+            'disable_notification' => $disableNotification,
         ]);
     }
 
@@ -1725,7 +1721,7 @@ class BotApi
     public function unpinChatMessage($chatId)
     {
         return $this->call('unpinChatMessage', [
-            'chat_id' => $chatId
+            'chat_id' => $chatId,
         ]);
     }
 
@@ -1741,7 +1737,7 @@ class BotApi
     public function getChat($chatId)
     {
         return Chat::fromResponse($this->call('getChat', [
-            'chat_id' => $chatId
+            'chat_id' => $chatId,
         ]));
     }
 
@@ -1758,7 +1754,7 @@ class BotApi
     {
         return ChatMember::fromResponse($this->call('getChatMember', [
             'chat_id' => $chatId,
-            'user_id' => $userId
+            'user_id' => $userId,
         ]));
     }
 
@@ -1773,7 +1769,7 @@ class BotApi
     public function leaveChat($chatId)
     {
         return $this->call('leaveChat', [
-            'chat_id' => $chatId
+            'chat_id' => $chatId,
         ]);
     }
 
@@ -1787,12 +1783,9 @@ class BotApi
      */
     public function getChatMembersCount($chatId)
     {
-        return $this->call(
-            'getChatMembersCount',
-            [
-                'chat_id' => $chatId
-            ]
-        );
+        return $this->call('getChatMembersCount', [
+            'chat_id' => $chatId,
+        ]);
     }
 
     /**
@@ -1805,14 +1798,9 @@ class BotApi
      */
     public function getChatAdministrators($chatId)
     {
-        return ArrayOfChatMemberEntity::fromResponse(
-            $this->call(
-                'getChatAdministrators',
-                [
-                    'chat_id' => $chatId
-                ]
-            )
-        );
+        return ArrayOfChatMemberEntity::fromResponse($this->call('getChatAdministrators', [
+            'chat_id' => $chatId,
+        ]));
     }
 
     /**
@@ -1849,7 +1837,7 @@ class BotApi
             'length' => $length,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-            'disable_notification' => (bool)$disableNotification
+            'disable_notification' => (bool)$disableNotification,
         ]));
     }
 
@@ -1875,7 +1863,7 @@ class BotApi
             'chat_id' => $chatId,
             'media' => $media->toJson(),
             'reply_to_message_id' => (int)$replyToMessageId,
-            'disable_notification' => (bool)$disableNotification
+            'disable_notification' => (bool)$disableNotification,
         ]));
     }
 
@@ -1890,6 +1878,7 @@ class BotApi
     {
         if (empty($proxyString)) {
             $this->proxySettings = [];
+
             return $this;
         }
 
@@ -1901,6 +1890,7 @@ class BotApi
         if ($socks5) {
             $this->proxySettings[CURLOPT_PROXYTYPE] = CURLPROXY_SOCKS5;
         }
+
         return $this;
     }
 

@@ -16,13 +16,7 @@ class ChatMemberUpdated extends BaseType
      *
      * @var array
      */
-    protected static $requiredParams = [
-        'chat',
-        'from',
-        'date',
-        'old_chat_member',
-        'new_chat_member',
-    ];
+    protected static $requiredParams = ['chat', 'from', 'date', 'old_chat_member', 'new_chat_member'];
 
     /**
      * {@inheritdoc}

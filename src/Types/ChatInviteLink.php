@@ -16,10 +16,7 @@ class ChatInviteLink extends BaseType
     *
     * @var array
     */
-    protected static $requiredParams = [
-        'invite_link',
-        'creator',
-    ];
+    protected static $requiredParams = ['invite_link', 'creator'];
 
     /**
      * {@inheritdoc}
