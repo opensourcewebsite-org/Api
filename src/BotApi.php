@@ -476,14 +476,22 @@ class BotApi
      * @param string $url HTTPS url to send updates to. Use an empty string to remove webhook integration
      * @param \CURLFile|string $certificate Upload your public key certificate
      *                                      so that the root certificate in use can be checked
+     * @param array $allowedUpdates A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member (default). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.
      *
      * @return string
      *
      * @throws \TelegramBot\Api\Exception
      */
-    public function setWebhook($url = '', $certificate = null)
+    public function setWebhook($url = '', $certificate = null, $allowedUpdates = [])
     {
-        return $this->call('setWebhook', ['url' => $url, 'certificate' => $certificate]);
+        return $this->call(
+            'setWebhook',
+            [
+                'url' => $url,
+                'certificate' => $certificate,
+                'allowed_updates' => $allowedUpdates,
+            ],
+        );
     }
 
 
@@ -1134,15 +1142,19 @@ class BotApi
      * @param $callbackQueryId
      * @param string|null $text
      * @param bool $showAlert
+     * @param string $url
+     * @param integer $cacheTime
      *
      * @return bool
      */
-    public function answerCallbackQuery($callbackQueryId, $text = null, $showAlert = false)
+    public function answerCallbackQuery($callbackQueryId, $text = null, $showAlert = false, $url = null, $cacheTime = 0)
     {
         return $this->call('answerCallbackQuery', [
             'callback_query_id' => $callbackQueryId,
             'text' => $text,
             'show_alert' => (bool)$showAlert,
+            'url' => $url,
+            'cache_time' => (int)$cacheTime,
         ]);
     }
 
