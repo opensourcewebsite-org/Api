@@ -148,6 +148,90 @@ class ChatTest extends TestCase
         $this->assertEquals('PHP Telegram Bot API', $chat->getBio());
     }
 
+    public function testSetHasPrivateForwards()
+    {
+        $chat = new Chat();
+        $chat->setHasPrivateForwards(true);
+        $this->assertEquals(true, $chat->getHasPrivateForwards());
+    }
+
+    public function testGetHasPrivateForwards()
+    {
+        $chat = new Chat();
+        $chat->setHasPrivateForwards(true);
+        $this->assertEquals(true, $chat->getHasPrivateForwards());
+    }
+
+    public function testSetHasRestrictedVoiceAndVideoMessages()
+    {
+        $chat = new Chat();
+        $chat->setHasRestrictedVoiceAndVideoMessages(true);
+        $this->assertEquals(true, $chat->getHasRestrictedVoiceAndVideoMessages());
+    }
+
+    public function testGetHasRestrictedVoiceAndVideoMessages()
+    {
+        $chat = new Chat();
+        $chat->setHasRestrictedVoiceAndVideoMessages(true);
+        $this->assertEquals(true, $chat->getHasRestrictedVoiceAndVideoMessages());
+    }
+
+    public function testGetJoinToSendMessages()
+    {
+        $chat = new Chat();
+        $chat->setJoinToSendMessages(true);
+        $this->assertEquals(true, $chat->getJoinToSendMessages());
+    }
+
+    public function testSetJoinToSendMessages()
+    {
+        $chat = new Chat();
+        $chat->setJoinToSendMessages(true);
+        $this->assertEquals(true, $chat->getJoinToSendMessages());
+    }
+
+    public function testGetJoinByRequest()
+    {
+        $chat = new Chat();
+        $chat->setJoinByRequest(true);
+        $this->assertEquals(true, $chat->getJoinByRequest());
+    }
+
+    public function testSetJoinByRequest()
+    {
+        $chat = new Chat();
+        $chat->setJoinByRequest(true);
+        $this->assertEquals(true, $chat->getJoinByRequest());
+    }
+
+    public function testSetMessageAutoDeleteTime()
+    {
+        $chat = new Chat();
+        $chat->setMessageAutoDeleteTime(123456);
+        $this->assertEquals(123456, $chat->getMessageAutoDeleteTime());
+    }
+
+    public function testGetMessageAutoDeleteTime()
+    {
+        $chat = new Chat();
+        $chat->setMessageAutoDeleteTime(123456);
+        $this->assertEquals(123456, $chat->getMessageAutoDeleteTime());
+    }
+
+    public function testGetHasProtectedContent()
+    {
+        $chat = new Chat();
+        $chat->setHasProtectedContent(true);
+        $this->assertEquals(true, $chat->getHasProtectedContent());
+    }
+
+    public function testSetHasProtectedContent()
+    {
+        $chat = new Chat();
+        $chat->setHasProtectedContent(true);
+        $this->assertEquals(true, $chat->getHasProtectedContent());
+    }
+
     public function testSetDescriptions()
     {
         $chat = new Chat();

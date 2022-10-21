@@ -29,11 +29,17 @@ class Chat extends BaseType implements TypeInterface
         'last_name' => true,
         'photo' => ChatPhoto::class,
         'bio' => true,
+        'has_private_forwards' => true,
+        'has_restricted_voice_and_video_messages' => true,
+        'join_to_send_messages' => true,
+        'join_by_request' => true,
         'description' => true,
         'invite_link' => true,
         'pinned_message' => Message::class,
         'permissions' => ChatPermissions::class,
         'slow_mode_delay' => true,
+        'message_auto_delete_time' => true,
+        'has_protected_content' => true,
         'sticker_set_name' => true,
         'can_set_sticker_set' => true,
         'linked_chat_id' => true,
@@ -97,6 +103,34 @@ class Chat extends BaseType implements TypeInterface
     protected $bio;
 
     /**
+     * Optional. True, if privacy settings of the other party in the private chat allows to use tg://user?id=<user_id> links only in chats with the user. Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $hasPrivateForwards;
+
+    /**
+     * Optional. True, if the privacy settings of the other party restrict sending voice and video note messages in the private chat. Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $hasRestrictedVoiceAndVideoMessages;
+
+    /**
+     * Optional. True, if users need to join the supergroup before they can send messages. Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $joinToSendMessages;
+
+    /**
+     * Optional. True, if all users directly joining the supergroup need to be approved by supergroup administrators. Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $joinByRequest;
+
+    /**
      * Optional. Description, for supergroups and channel chats. Returned only in getChat.
      *
      * @var string
@@ -131,6 +165,20 @@ class Chat extends BaseType implements TypeInterface
      * @var int
      */
     protected $slowModeDelay;
+
+    /**
+     * Optional. The time after which all messages sent to the chat will be automatically deleted; in seconds. Returned only in getChat.
+     *
+     * @var integer
+     */
+    protected $messageAutoDeleteTime;
+
+    /**
+     * Optional. True, if messages from the chat can't be forwarded to other chats. Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $hasProtectedContent;
 
     /**
      * Optional. For supergroups, name of group sticker set. Returned only in getChat.
@@ -298,6 +346,70 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
+     * @return bool
+     */
+    public function getHasPrivateForwards()
+    {
+        return $this->hasPrivateForwards;
+    }
+
+    /**
+     * @param bool $hasPrivateForwards
+     */
+    public function setHasPrivateForwards($hasPrivateForwards)
+    {
+        $this->hasPrivateForwards = $hasPrivateForwards;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasRestrictedVoiceAndVideoMessages()
+    {
+        return $this->hasRestrictedVoiceAndVideoMessages;
+    }
+
+    /**
+     * @param bool $hasRestrictedVoiceAndVideoMessages
+     */
+    public function setHasRestrictedVoiceAndVideoMessages($hasRestrictedVoiceAndVideoMessages)
+    {
+        $this->hasRestrictedVoiceAndVideoMessages = $hasRestrictedVoiceAndVideoMessages;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getJoinToSendMessages()
+    {
+        return $this->joinToSendMessages;
+    }
+
+    /**
+     * @param bool $joinToSendMessages
+     */
+    public function setJoinToSendMessages($joinToSendMessages)
+    {
+        $this->joinToSendMessages = $joinToSendMessages;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getJoinByRequest()
+    {
+        return $this->joinByRequest;
+    }
+
+    /**
+     * @param bool $joinByRequest
+     */
+    public function setJoinByRequest($joinByRequest)
+    {
+        $this->joinByRequest = $joinByRequest;
+    }
+
+    /**
      * @return string
      */
     public function getDescription()
@@ -375,6 +487,38 @@ class Chat extends BaseType implements TypeInterface
     public function setSlowModeDelay($slowModeDelay)
     {
         $this->slowModeDelay = $slowModeDelay;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getMessageAutoDeleteTime()
+    {
+        return $this->messageAutoDeleteTime;
+    }
+
+    /**
+     * @param integer $messageAutoDeleteTime
+     */
+    public function setMessageAutoDeleteTime($messageAutoDeleteTime)
+    {
+        $this->messageAutoDeleteTime = $messageAutoDeleteTime;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasProtectedContent()
+    {
+        return $this->hasProtectedContent;
+    }
+
+    /**
+     * @param bool $hasProtectedContent
+     */
+    public function setHasProtectedContent($hasProtectedContent)
+    {
+        $this->hasProtectedContent = $hasProtectedContent;
     }
 
     /**
