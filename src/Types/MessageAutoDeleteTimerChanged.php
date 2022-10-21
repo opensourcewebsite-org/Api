@@ -4,9 +4,9 @@ namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
 
-/** 
+/**
  * This object represents a service message about a change in auto-delete timer settings
-*/
+ */
 class MessageAutoDeleteTimerChanged extends BaseType
 {
     /**
@@ -32,11 +32,17 @@ class MessageAutoDeleteTimerChanged extends BaseType
      */
     protected $messageAutoDeleteTime;
 
+    /**
+     * @return integer
+     */
     public function getMessageAutoDeleteTime()
     {
         return $this->messageAutoDeleteTime;
     }
 
+    /**
+     * @param integer $messageAutoDeleteTime
+     */
     public function setMessageAutoDeleteTime($messageAutoDeleteTime)
     {
         $this->messageAutoDeleteTime = $messageAutoDeleteTime;
