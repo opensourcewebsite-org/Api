@@ -907,4 +907,50 @@ class MessageTest extends TestCase
         $item = Message::fromResponse($data);
         $this->assertJson(json_encode($data), $item->toJson());
     }
+
+    public function testGetSenderChat()
+    {
+        $message = Message::fromResponse(array(
+            'message_id' => 255,
+            'date' => 16,
+            'chat' => array(
+                'id' => 255,
+                'type' => 'private',
+            ),
+            'sender_chat' => array(
+                'id' => 255,
+                'type' => 'private',
+            ),
+        ));
+        $this->assertEquals(
+            Chat::fromResponse(array(
+                'id' => 255,
+                'type' => 'private',
+            )),
+            $message->getSenderChat(),
+        );
+    }
+
+    public function testSetSenderChat()
+    {
+        $message = Message::fromResponse(array(
+            'message_id' => 255,
+            'date' => 16,
+            'chat' => array(
+                'id' => 255,
+                'type' => 'private',
+            ),
+        ));
+        $message->setSenderChat(Chat::fromResponse(array(
+            'id' => 255,
+            'type' => 'private',
+        )));
+        $this->assertEquals(
+            Chat::fromResponse(array(
+                'id' => 255,
+                'type' => 'private',
+            )),
+            $message->getSenderChat(),
+        );
+    }
 }

@@ -26,6 +26,7 @@ class Message extends BaseType implements TypeInterface
     protected static $map = [
         'message_id' => true,
         'from' => User::class,
+        'sender_chat' => Chat::class,
         'date' => true,
         'chat' => Chat::class,
         'forward_from' => User::class,
@@ -89,6 +90,13 @@ class Message extends BaseType implements TypeInterface
      * @var \TelegramBot\Api\Types\User
      */
     protected $from;
+
+    /**
+     * Optional. Sender of the message, sent on behalf of a chat. For example, the channel itself for channel posts, the supergroup itself for messages from anonymous group administrators, the linked channel for messages automatically forwarded to the discussion group. For backward compatibility, the field from contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.
+     *
+     * @var Chat
+     */
+    protected $senderChat;
 
     /**
      * Date the message was sent in Unix time
@@ -480,6 +488,22 @@ class Message extends BaseType implements TypeInterface
     public function setFrom(User $from)
     {
         $this->from = $from;
+    }
+
+    /**
+     * @return Chat
+     */
+    public function getSenderChat()
+    {
+        return $this->senderChat;
+    }
+
+    /**
+     * @param Chat $senderChat
+     */
+    public function setSenderChat($senderChat)
+    {
+        $this->senderChat = $senderChat;
     }
 
     /**
