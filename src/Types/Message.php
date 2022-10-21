@@ -66,6 +66,7 @@ class Message extends BaseType implements TypeInterface
         'group_chat_created' => true,
         'supergroup_chat_created' => true,
         'channel_chat_created' => true,
+        'message_auto_delete_timer_changed' => MessageAutoDeleteTimerChanged::class,
         'migrate_to_chat_id' => true,
         'migrate_from_chat_id' => true,
         'pinned_message' => Message::class,
@@ -379,6 +380,11 @@ class Message extends BaseType implements TypeInterface
      * @var bool
      */
     protected $channelChatCreated;
+
+    /**
+     * Optional. Service message: auto-delete timer settings changed in the chat
+     */
+    protected $messageAutoDeleteTimerChanged;
 
     /**
      * Optional. The group has been migrated to a supergroup with the specified identifier,
@@ -1154,6 +1160,22 @@ class Message extends BaseType implements TypeInterface
     public function setChannelChatCreated($channelChatCreated)
     {
         $this->channelChatCreated = $channelChatCreated;
+    }
+
+    /**
+     * @return MessageAutoDeleteTimerChanged
+     */
+    public function getMessageAutoDeleteTimerChanged()
+    {
+        return $this->messageAutoDeleteTimerChanged;
+    }
+
+    /**
+     * @param MessageAutoDeleteTimerChanged $messageAutoDeleteTimerChanged
+     */
+    public function setMessageAutoDeleteTimerChanged($messageAutoDeleteTimerChanged)
+    {
+        $this->messageAutoDeleteTimerChanged = $messageAutoDeleteTimerChanged;
     }
 
     /**
