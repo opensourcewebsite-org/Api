@@ -77,6 +77,7 @@ class Message extends BaseType implements TypeInterface
         'video_chat_started' => VideoChatStarted::class,
         'video_chat_ended' => VideoChatEnded::class,
         'video_chat_participants_invited' => VideoChatParticipantsInvited::class,
+        'reply_markup' => InlineKeyboardMarkup::class,
     ];
 
     /**
