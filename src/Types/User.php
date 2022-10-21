@@ -32,7 +32,8 @@ class User extends BaseType implements TypeInterface
         'last_name' => true,
         'username' => true,
         'language_code' => true,
-        'is_bot' => true
+        'is_bot' => true,
+        'is_premium' => true,
     ];
 
     /**
@@ -76,6 +77,13 @@ class User extends BaseType implements TypeInterface
      * @var bool
      */
     protected $isBot;
+
+    /**
+     * Optional. True, if this user is a Telegram Premium user
+     *
+     * @var boolean
+     */
+    protected $isPremium;
 
     /**
      * @return string
@@ -177,5 +185,21 @@ class User extends BaseType implements TypeInterface
     public function setIsBot($isBot)
     {
         $this->isBot = $isBot;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPremium()
+    {
+        return $this->isPremium;
+    }
+
+    /**
+     * @param bool $isPremium
+     */
+    public function setIsPremium($isPremium)
+    {
+        $this->isPremium = $isPremium;
     }
 }

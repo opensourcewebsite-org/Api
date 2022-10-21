@@ -122,4 +122,18 @@ class UserTest extends TestCase
             'username' => 'iGusev'
         ));
     }
+
+    public function testIsPremium()
+    {
+        $user = new User();
+        $user->setIsPremium(true);
+        $this->assertEquals(true, $user->IsPremium());
+    }
+
+    public function testSetIsPremium()
+    {
+        $user = new User();
+        $user->setIsPremium(true);
+        $this->assertEquals(true, $user->IsPremium());
+    }
 }
