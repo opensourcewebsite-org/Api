@@ -953,4 +953,18 @@ class MessageTest extends TestCase
             $message->getSenderChat(),
         );
     }
+
+    public function testGetHasProtectedContent()
+    {
+        $message = new Message();
+        $message->setHasProtectedContent(true);
+        $this->assertEquals(true, $message->getHasProtectedContent());
+    }
+
+    public function testSetHasProtectedContent()
+    {
+        $message = new Message();
+        $message->setHasProtectedContent(false);
+        $this->assertEquals(false, $message->getHasProtectedContent());
+    }
 }

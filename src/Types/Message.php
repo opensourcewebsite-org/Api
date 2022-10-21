@@ -39,6 +39,7 @@ class Message extends BaseType implements TypeInterface
         'reply_to_message' => Message::class,
         'via_bot' => User::class,
         'edit_date' => true,
+        'has_protected_content' => true,
         'media_group_id' => true,
         'author_signature' => true,
         'text' => true,
@@ -185,6 +186,13 @@ class Message extends BaseType implements TypeInterface
      * @var int
      */
     protected $editDate;
+
+    /**
+     * Optional. True, if the message can't be forwarded
+     *
+     * @var bool
+     */
+    protected $hasProtectedContent;
 
     /**
      * Optional. The unique identifier of a media message group
@@ -714,6 +722,22 @@ class Message extends BaseType implements TypeInterface
         } else {
             throw new InvalidArgumentException();
         }
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasProtectedContent()
+    {
+        return $this->hasProtectedContent;
+    }
+
+    /**
+     * @param bool $hasProtectedContent
+     */
+    public function setHasProtectedContent($hasProtectedContent)
+    {
+        $this->hasProtectedContent = $hasProtectedContent;
     }
 
     /**
