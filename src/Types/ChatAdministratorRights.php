@@ -107,14 +107,14 @@ class ChatAdministratorRights extends BaseType
      *
      * @var bool
      */
-    protected $conPostMessages;
+    protected $canPostMessages;
 
     /**
      * Optional. True, if the administrator can edit messages of other users and can pin messages; channels only
      *
      * @var bool
      */
-    protected $conEditMessages;
+    protected $canEditMessages;
 
     /**
      * Optional. True, if the user is allowed to pin messages; groups and supergroups only
