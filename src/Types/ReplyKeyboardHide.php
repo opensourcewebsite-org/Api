@@ -29,7 +29,7 @@ class ReplyKeyboardHide extends BaseType
      */
     protected static $map = [
         'hide_keyboard' => true,
-        'selective' => true
+        'selective' => true,
     ];
 
     /**

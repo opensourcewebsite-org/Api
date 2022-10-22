@@ -36,7 +36,7 @@ class WebhookInfo extends BaseType implements TypeInterface
         'last_error_date' => true,
         'last_error_message' => true,
         'max_connections' => true,
-        'allowed_updates' => true
+        'allowed_updates' => true,
     ];
 
     /**

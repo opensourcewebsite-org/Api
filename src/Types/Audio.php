@@ -32,7 +32,7 @@ class Audio extends BaseType implements TypeInterface
         'performer' => true,
         'title' => true,
         'mime_type' => true,
-        'file_size' => true
+        'file_size' => true,
     ];
 
     /**

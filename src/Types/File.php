@@ -32,7 +32,7 @@ class File extends BaseType implements TypeInterface
     protected static $map = [
         'file_id' => true,
         'file_size' => true,
-        'file_path' => true
+        'file_path' => true,
     ];
 
     /**

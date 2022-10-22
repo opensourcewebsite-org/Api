@@ -28,7 +28,7 @@ class PollOption extends BaseType implements TypeInterface
      */
     protected static $map = [
         'text' => true,
-        'voter_count' => true
+        'voter_count' => true,
     ];
 
     /**

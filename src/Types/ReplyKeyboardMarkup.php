@@ -28,7 +28,7 @@ class ReplyKeyboardMarkup extends BaseType
         'keyboard' => true,
         'one_time_keyboard' => true,
         'resize_keyboard' => true,
-        'selective' => true
+        'selective' => true,
     ];
 
     /**

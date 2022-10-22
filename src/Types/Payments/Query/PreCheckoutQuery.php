@@ -31,7 +31,7 @@ class PreCheckoutQuery extends BaseType
         'total_amount' => true,
         'invoice_payload' => true,
         'shipping_option_id' => true,
-        'order_info' => OrderInfo::class
+        'order_info' => OrderInfo::class,
     ];
 
     /**

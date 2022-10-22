@@ -29,7 +29,7 @@ class ShippingQuery extends BaseType
         'id' => true,
         'from' => User::class,
         'invoice_payload' => true,
-        'shipping_address' => ShippingAddress::class
+        'shipping_address' => ShippingAddress::class,
     ];
 
     /**

@@ -25,7 +25,7 @@ class Dice extends BaseType implements TypeInterface
      */
     protected static $map = [
         'emoji' => true,
-        'value' => true
+        'value' => true,
     ];
 
     /**

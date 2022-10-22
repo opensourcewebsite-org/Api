@@ -25,7 +25,7 @@ class LoginUrl extends BaseType implements TypeInterface
         'url' => true,
         'forward_text' => true,
         'bot_username' => true,
-        'request_write_access' => true
+        'request_write_access' => true,
     ];
 
     /**

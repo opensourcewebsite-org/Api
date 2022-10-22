@@ -23,7 +23,7 @@ class InputMediaVideo extends InputMedia
         'width' => true,
         'height' => true,
         'duration' => true,
-        'supports_streaming' => true
+        'supports_streaming' => true,
     ];
 
     /**

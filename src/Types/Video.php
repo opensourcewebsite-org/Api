@@ -33,7 +33,7 @@ class Video extends BaseType implements TypeInterface
         'duration' => true,
         'thumb' => PhotoSize::class,
         'mime_type' => true,
-        'file_size' => true
+        'file_size' => true,
     ];
 
     /**

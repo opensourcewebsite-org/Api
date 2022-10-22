@@ -28,7 +28,7 @@ class ForceReply extends BaseType
      */
     protected static $map = [
         'force_reply' => true,
-        'selective' => true
+        'selective' => true,
     ];
 
     /**
