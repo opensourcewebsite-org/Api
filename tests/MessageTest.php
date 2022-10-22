@@ -11,6 +11,7 @@ use TelegramBot\Api\Types\Document;
 use TelegramBot\Api\Types\GroupChat;
 use TelegramBot\Api\Types\Location;
 use TelegramBot\Api\Types\Message;
+use TelegramBot\Api\Types\MessageAutoDeleteTimerChanged;
 use TelegramBot\Api\Types\PhotoSize;
 use TelegramBot\Api\Types\Sticker;
 use TelegramBot\Api\Types\User;
@@ -906,5 +907,93 @@ class MessageTest extends TestCase
         );
         $item = Message::fromResponse($data);
         $this->assertJson(json_encode($data), $item->toJson());
+    }
+
+    public function testGetSenderChat()
+    {
+        $message = Message::fromResponse(array(
+            'message_id' => 255,
+            'date' => 16,
+            'chat' => array(
+                'id' => 255,
+                'type' => 'private',
+            ),
+            'sender_chat' => array(
+                'id' => 255,
+                'type' => 'private',
+            ),
+        ));
+        $this->assertEquals(
+            Chat::fromResponse(array(
+                'id' => 255,
+                'type' => 'private',
+            )),
+            $message->getSenderChat(),
+        );
+    }
+
+    public function testSetSenderChat()
+    {
+        $message = Message::fromResponse(array(
+            'message_id' => 255,
+            'date' => 16,
+            'chat' => array(
+                'id' => 255,
+                'type' => 'private',
+            ),
+        ));
+        $message->setSenderChat(Chat::fromResponse(array(
+            'id' => 255,
+            'type' => 'private',
+        )));
+        $this->assertEquals(
+            Chat::fromResponse(array(
+                'id' => 255,
+                'type' => 'private',
+            )),
+            $message->getSenderChat(),
+        );
+    }
+
+    public function testGetHasProtectedContent()
+    {
+        $message = new Message();
+        $message->setHasProtectedContent(true);
+        $this->assertEquals(true, $message->getHasProtectedContent());
+    }
+
+    public function testSetHasProtectedContent()
+    {
+        $message = new Message();
+        $message->setHasProtectedContent(false);
+        $this->assertEquals(false, $message->getHasProtectedContent());
+    }
+
+    public function testSetMessageAutoDeleteTimerChanged()
+    {
+        $message = new Message();
+        $message->setMessageAutoDeleteTimerChanged(MessageAutoDeleteTimerChanged::fromResponse(array(
+            'message_auto_delete_time' => 255,
+        )));
+        $this->assertEquals(
+            MessageAutoDeleteTimerChanged::fromResponse(array(
+                'message_auto_delete_time' => 255,
+            )),
+            $message->getMessageAutoDeleteTimerChanged(),
+        );
+    }
+
+    public function testeGetMessageAutoDeleteTimerChanged()
+    {
+        $message = new Message();
+        $message->setMessageAutoDeleteTimerChanged(MessageAutoDeleteTimerChanged::fromResponse(array(
+            'message_auto_delete_time' => 255,
+        )));
+        $this->assertEquals(
+            MessageAutoDeleteTimerChanged::fromResponse(array(
+                'message_auto_delete_time' => 255,
+            )),
+            $message->getMessageAutoDeleteTimerChanged(),
+        );
     }
 }

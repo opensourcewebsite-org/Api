@@ -26,6 +26,7 @@ class Message extends BaseType implements TypeInterface
     protected static $map = [
         'message_id' => true,
         'from' => User::class,
+        'sender_chat' => Chat::class,
         'date' => true,
         'chat' => Chat::class,
         'forward_from' => User::class,
@@ -38,6 +39,7 @@ class Message extends BaseType implements TypeInterface
         'reply_to_message' => Message::class,
         'via_bot' => User::class,
         'edit_date' => true,
+        'has_protected_content' => true,
         'media_group_id' => true,
         'author_signature' => true,
         'text' => true,
@@ -64,6 +66,7 @@ class Message extends BaseType implements TypeInterface
         'group_chat_created' => true,
         'supergroup_chat_created' => true,
         'channel_chat_created' => true,
+        'message_auto_delete_timer_changed' => MessageAutoDeleteTimerChanged::class,
         'migrate_to_chat_id' => true,
         'migrate_from_chat_id' => true,
         'pinned_message' => Message::class,
@@ -74,6 +77,7 @@ class Message extends BaseType implements TypeInterface
         'video_chat_started' => VideoChatStarted::class,
         'video_chat_ended' => VideoChatEnded::class,
         'video_chat_participants_invited' => VideoChatParticipantsInvited::class,
+        'reply_markup' => InlineKeyboardMarkup::class,
     ];
 
     /**
@@ -89,6 +93,13 @@ class Message extends BaseType implements TypeInterface
      * @var \TelegramBot\Api\Types\User
      */
     protected $from;
+
+    /**
+     * Optional. Sender of the message, sent on behalf of a chat. For example, the channel itself for channel posts, the supergroup itself for messages from anonymous group administrators, the linked channel for messages automatically forwarded to the discussion group. For backward compatibility, the field from contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.
+     *
+     * @var Chat
+     */
+    protected $senderChat;
 
     /**
      * Date the message was sent in Unix time
@@ -177,6 +188,13 @@ class Message extends BaseType implements TypeInterface
      * @var int
      */
     protected $editDate;
+
+    /**
+     * Optional. True, if the message can't be forwarded
+     *
+     * @var bool
+     */
+    protected $hasProtectedContent;
 
     /**
      * Optional. The unique identifier of a media message group
@@ -365,6 +383,11 @@ class Message extends BaseType implements TypeInterface
     protected $channelChatCreated;
 
     /**
+     * Optional. Service message: auto-delete timer settings changed in the chat
+     */
+    protected $messageAutoDeleteTimerChanged;
+
+    /**
      * Optional. The group has been migrated to a supergroup with the specified identifier,
      * not exceeding 1e13 by absolute value
      *
@@ -480,6 +503,22 @@ class Message extends BaseType implements TypeInterface
     public function setFrom(User $from)
     {
         $this->from = $from;
+    }
+
+    /**
+     * @return Chat
+     */
+    public function getSenderChat()
+    {
+        return $this->senderChat;
+    }
+
+    /**
+     * @param Chat $senderChat
+     */
+    public function setSenderChat($senderChat)
+    {
+        $this->senderChat = $senderChat;
     }
 
     /**
@@ -690,6 +729,22 @@ class Message extends BaseType implements TypeInterface
         } else {
             throw new InvalidArgumentException();
         }
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasProtectedContent()
+    {
+        return $this->hasProtectedContent;
+    }
+
+    /**
+     * @param bool $hasProtectedContent
+     */
+    public function setHasProtectedContent($hasProtectedContent)
+    {
+        $this->hasProtectedContent = $hasProtectedContent;
     }
 
     /**
@@ -1106,6 +1161,22 @@ class Message extends BaseType implements TypeInterface
     public function setChannelChatCreated($channelChatCreated)
     {
         $this->channelChatCreated = $channelChatCreated;
+    }
+
+    /**
+     * @return MessageAutoDeleteTimerChanged
+     */
+    public function getMessageAutoDeleteTimerChanged()
+    {
+        return $this->messageAutoDeleteTimerChanged;
+    }
+
+    /**
+     * @param MessageAutoDeleteTimerChanged $messageAutoDeleteTimerChanged
+     */
+    public function setMessageAutoDeleteTimerChanged($messageAutoDeleteTimerChanged)
+    {
+        $this->messageAutoDeleteTimerChanged = $messageAutoDeleteTimerChanged;
     }
 
     /**
