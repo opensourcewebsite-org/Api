@@ -45,6 +45,7 @@ class Update extends BaseType implements TypeInterface
         'poll' => Poll::class,
         'my_chat_member' => ChatMemberUpdated::class,
         'chat_member' => ChatMemberUpdated::class,
+        'chat_join_request' => ChatJoinRequest::class,
     ];
 
     /**
@@ -143,6 +144,13 @@ class Update extends BaseType implements TypeInterface
      * @var ChatMemberUpdated
      */
     protected $chatMember;
+
+    /**
+     * Optional. A request to join the chat has been sent. The bot must have the can_invite_users administrator right in the chat to receive these updates.
+     *
+     * @var ChatJoinRequest
+     */
+    protected $chatJoinRequest;
 
     /**
      * @return int
@@ -370,5 +378,21 @@ class Update extends BaseType implements TypeInterface
     public function setChatMember($chatMember)
     {
         $this->chatMember = $chatMember;
+    }
+
+    /**
+     * @return ChatJoinRequest
+     */
+    public function getChatJoinRequest()
+    {
+        return $this->chatJoinRequest;
+    }
+
+    /**
+     * @param ChatJoinRequest $chatJoinRequest
+     */
+    public function setChatJoinRequest($chatJoinRequest)
+    {
+        $this->chatJoinRequest = $chatJoinRequest;
     }
 }
