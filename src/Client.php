@@ -101,6 +101,11 @@ class Client
         return $this->on(self::getPreCheckoutQueryEvent($action), self::getPreCheckoutQueryChecker());
     }
 
+    public function chatMemberUpdated(Closure $action)
+    {
+        return $this->on(self::getChatMemberUpdatedEvent($action), self::getChatMemberUpdatedChecker());
+    }
+
     /**
      * Use this method to add an event.
      * If second closure will return true (or if you are passed null instead of closure), first one will be executed.
@@ -287,6 +292,24 @@ class Client
         };
     }
 
+    protected static function getChatMemberUpdatedEvent(Closure $action)
+    {
+        return function (Update $update) use ($action) {
+            $chatMemberUpdated = null;
+            if ($update->getMyChatMember()) {
+                $chatMemberUpdated = $update->getMyChatMember();
+            } elseif ($update->getChatMember()) {
+                $chatMemberUpdated = $update->getChatMember();
+            } else {
+                return false;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$chatMemberUpdated]);
+            return false;
+        };
+    }
+
     /**
      * Returns check function to handling the command.
      *
@@ -403,6 +426,14 @@ class Client
             return !is_null($update->getPreCheckoutQuery());
         };
     }
+
+    protected static function getChatMemberUpdatedChecker()
+    {
+        return function (Update $update) {
+            return ! (is_null($update->getChatMember()) and is_null($update->getMyChatMember()));
+        };
+    }
+
 
     public function __call($name, array $arguments)
     {
