@@ -37,9 +37,9 @@ class InlineKeyboardMarkup extends BaseType
     protected $inlineKeyboard;
 
     /**
-     * @param array $inlineKeyboard
+     * @param array|null $inlineKeyboard
      */
-    public function __construct($inlineKeyboard)
+    public function __construct($inlineKeyboard = null)
     {
         $this->inlineKeyboard = $inlineKeyboard;
     }
