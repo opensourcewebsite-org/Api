@@ -8,6 +8,7 @@ use TelegramBot\Api\Types\ArrayOfMessageEntity;
 use TelegramBot\Api\Types\ArrayOfMessages;
 use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\Chat;
+use TelegramBot\Api\Types\ChatAdministratorRights;
 use TelegramBot\Api\Types\ChatMember;
 use TelegramBot\Api\Types\File;
 use TelegramBot\Api\Types\Inline\QueryResult\AbstractInlineQueryResult;
@@ -1188,6 +1189,38 @@ class BotApi
         return ArrayOfBotCommand::fromResponse($this->call('getMyCommands'));
     }
 
+    /**
+     * Use this method to change the default administrator rights requested by the bot when it's added as an administrator to groups or channels. These rights will be suggested to users, but they are are free to modify the list before adding the bot. Returns True on success.
+     *
+     * @param ChatAdministratorRights $rights Object describing new default administrator rights. If not specified, the default administrator rights will be cleared.
+     * @param bool $forChannels Pass `true` to change the default administrator rights of the bot in channels. Otherwise, the default administrator rights of the bot for groups and supergroups will be changed.
+     * @return bool
+     * @throws Exception
+     * @throws HttpException
+     * @throws InvalidJsonException
+     */
+    public function setMyDefaultAdministratorRights($rights = null, $forChannels = null)
+    {
+        return $this->call('setMyDefaultAdministratorRights', [
+            'rights' => is_null($rights) ? $rights : $rights->toJson(),
+            'for_channels' => $forChannels,
+        ]);
+    }
+
+    /**
+     * Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.
+     *
+     * @return ChatAdministratorRights
+     * @throws Exception
+     * @throws HttpException
+     * @throws InvalidJsonException
+     */
+    public function getMyDefaultAdministratorRights($forChannels)
+    {
+        return ChatAdministratorRights::fromResponse($this->call('getMyDefaultAdministratorRights', [
+            'for_channels' => $forChannels,
+        ]));
+    }
     /**
      * Use this method to edit text messages sent by the bot or via the bot
      *
