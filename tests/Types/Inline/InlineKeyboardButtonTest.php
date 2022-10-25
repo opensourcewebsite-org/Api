@@ -4,6 +4,7 @@ namespace TelegramBot\Api\Test\Types\Inline;
 
 use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\Inline\InlineKeyboardButton;
+use TelegramBot\Api\Types\WebAppInfo;
 
 class InlineKeyboardButtonTest extends TestCase
 {
@@ -47,6 +48,21 @@ class InlineKeyboardButtonTest extends TestCase
         $item = new InlineKeyboardButton();
         $item->setCallbackData("data");
         $this->assertEquals("data", $item->getCallbackData());
+    }
+
+    public function testSetWebApp()
+    {
+        $item = new InlineKeyboardButton();
+        $webApp = WebAppInfo::fromResponse(['url' => 'url.com']);
+        $item->setWebApp($webApp);
+        $this->assertEquals($item->getWebApp(), $webApp);
+    }
+    public function testGetWebApp()
+    {
+        $item = new InlineKeyboardButton();
+        $webApp = WebAppInfo::fromResponse(['url' => 'url.com']);
+        $item->setWebApp($webApp);
+        $this->assertEquals($item->getWebApp(), $webApp);
     }
 
     public function testSetLoginUrl()
