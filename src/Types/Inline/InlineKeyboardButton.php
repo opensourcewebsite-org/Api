@@ -4,6 +4,7 @@ namespace TelegramBot\Api\Types\Inline;
 
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\Types\LoginUrl;
+use TelegramBot\Api\Types\WebAppInfo;
 
 /**
  * This object represents one button of an inline keyboard. You must use exactly one of the optional fields.
@@ -28,6 +29,7 @@ class InlineKeyboardButton extends BaseType
         'text' => true,
         'url' => true,
         'callback_data' => true,
+        'web_app' => WebAppInfo::class,
         'login_url' => LoginUrl::class,
         'switch_inline_query' => true,
         'switch_inline_query_current_chat' => true,
@@ -54,6 +56,13 @@ class InlineKeyboardButton extends BaseType
      * @var string
      */
     protected $callbackData;
+
+    /**
+     * Optional. Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery. Available only in private chats between a user and the bot.
+     *
+     * @var WebAppInfo
+     */
+    protected $webApp;
 
     /**
      * Optional. An HTTPS URL used to automatically authorize the user. Can be used as a replacement for the Telegram Login Widget.
@@ -132,6 +141,22 @@ class InlineKeyboardButton extends BaseType
     public function setCallbackData($callbackData)
     {
         $this->callbackData = $callbackData;
+    }
+
+    /**
+     * @return WebAppInfo
+     */
+    public function getWebApp()
+    {
+        return $this->webApp;
+    }
+
+    /**
+     * @param WebAppInfo $webApp
+     */
+    public function setWebApp($webApp)
+    {
+        $this->webApp = $webApp;
     }
 
     /**
