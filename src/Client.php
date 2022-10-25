@@ -3,6 +3,7 @@
 namespace TelegramBot\Api;
 
 use Closure;
+use Reflection;
 use ReflectionFunction;
 use TelegramBot\Api\Events\EventCollection;
 use TelegramBot\Api\Types\ForceReply;
@@ -104,6 +105,14 @@ class Client
     public function chatMemberUpdated(Closure $action)
     {
         return $this->on(self::getChatMemberUpdatedEvent($action), self::getChatMemberUpdatedChecker());
+    }
+
+    /**
+     * @param Closure $action Event to run when a request to join the chat is received
+     */
+    public function chatJoinRequest(Closure $action)
+    {
+        return $this->on(self::getChatJoinRequestEvent($action), self::getChatJoinRequestChecker());
     }
 
     /**
@@ -310,6 +319,18 @@ class Client
         };
     }
 
+    public function getChatJoinRequestEvent($action)
+    {
+        return function (Update $update) use ($action) {
+            if (!$update->getChatJoinRequest()) {
+                return true;
+            }
+
+            $reflectionAction = new ReflectionFunction($action);
+            $reflectionAction->invokeArgs([$update->getChatJoinRequest()]);
+            return false;
+        };
+    }
     /**
      * Returns check function to handling the command.
      *
@@ -431,6 +452,13 @@ class Client
     {
         return function (Update $update) {
             return ! (is_null($update->getChatMember()) and is_null($update->getMyChatMember()));
+        };
+    }
+
+    protected static function getChatJoinRequestChecker()
+    {
+        return function (Update $update) {
+            return !is_null($update->getChatJoinRequest());
         };
     }
 
