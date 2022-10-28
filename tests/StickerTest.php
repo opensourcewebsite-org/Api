@@ -4,6 +4,7 @@ namespace TelegramBot\Api\Test;
 
 use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\File;
+use TelegramBot\Api\Types\MaskPosition;
 use TelegramBot\Api\Types\PhotoSize;
 use TelegramBot\Api\Types\Sticker;
 
@@ -268,5 +269,31 @@ class StickerTest extends TestCase
         $item = new Sticker();
         $item->setCustomEmojiId('custom_id');
         $this->assertEquals('custom_id', $item->getCustomEmojiId());
+    }
+
+    public function testGetMaskPosition()
+    {
+        $item = new Sticker();
+        $mask = MaskPosition::fromResponse([
+            'point' => 'eyes',
+            'x_shift' => .5,
+            'y_shift' => .5,
+            'scale' => 1,
+        ]);
+        $item->setMaskPosition($mask);
+        $this->assertEquals($mask, $item->getMaskPosition());
+    }
+
+    public function testSetMaskPosition()
+    {
+        $item = new Sticker();
+        $mask = MaskPosition::fromResponse([
+            'point' => 'eyes',
+            'x_shift' => .5,
+            'y_shift' => .5,
+            'scale' => 1,
+        ]);
+        $item->setMaskPosition($mask);
+        $this->assertEquals($mask, $item->getMaskPosition());
     }
 }

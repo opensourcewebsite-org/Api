@@ -46,6 +46,7 @@ class Sticker extends BaseType implements TypeInterface
         'emoji' => true,
         'set_name' => true,
         'premium_animation' => File::class,
+        'mask_position' => MaskPosition::class,
         'custom_emoji_id' => true,
         'file_size' => true,
     ];
@@ -123,6 +124,13 @@ class Sticker extends BaseType implements TypeInterface
      * @var File
      */
     protected $premiumAnimation;
+
+    /**
+     * Optional. For mask stickers, the position where the mask should be placed.
+     *
+     * @var MaskPosition
+     */
+    protected $maskPosition;
 
     /**
      * Optional. For custom emoji stickers, unique identifiers of the custome emoji.
@@ -362,5 +370,21 @@ class Sticker extends BaseType implements TypeInterface
     public function setCustomEmojiId($customEmojiId)
     {
         $this->customEmojiId = $customEmojiId;
+    }
+
+    /**
+     * @return MaskPosition
+     */
+    public function getMaskPosition()
+    {
+        return $this->maskPosition;
+    }
+
+    /**
+     * @param MaskPosition $maskPosition
+     */
+    public function setMaskPosition($maskPosition)
+    {
+        $this->maskPosition = $maskPosition;
     }
 }
