@@ -96,6 +96,13 @@ class Sticker extends BaseType implements TypeInterface
 
     /**
      * True, if the sticker is a video sticker
+     *
+     * @var bool
+     */
+    protected $isVideo;
+
+    /**
+     * True, if the sticker is a video sticker
      */
     /**
      * Document thumbnail as defined by sender
