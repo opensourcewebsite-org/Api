@@ -3,6 +3,7 @@
 namespace TelegramBot\Api\Test;
 
 use PHPUnit\Framework\TestCase;
+use TelegramBot\Api\Types\File;
 use TelegramBot\Api\Types\PhotoSize;
 use TelegramBot\Api\Types\Sticker;
 
@@ -95,8 +96,12 @@ class StickerTest extends TestCase
     {
         $sticker = Sticker::fromResponse(array(
             "file_id" => 'testFileId1',
+            'file_unique_id' => 'unique_id',
+            'type' => 'regular',
             'width' => 1,
             'height' => 2,
+            'is_animated' => false,
+            'is_video' => false,
             'file_size' => 3,
             'thumb' => array(
                 "file_id" => 'testFileId1',
@@ -150,5 +155,118 @@ class StickerTest extends TestCase
 
         $item = new Sticker();
         $item->setWidth('s');
+    }
+
+    public function testGetFileUniqueId()
+    {
+        $item = new Sticker();
+        $item->setFileUniqueId('unique');
+        $this->assertEquals('unique', $item->getFileUniqueId());
+    }
+
+    public function testSetFileUniqueId()
+    {
+        $item = new Sticker();
+        $item->setFileUniqueId('uniqueID');
+        $this->assertEquals('uniqueID', $item->getFileUniqueId());
+    }
+
+    public function testSetType()
+    {
+        $item = new Sticker();
+        $item->setType('regular');
+        $this->assertEquals('regular', $item->getType());
+    }
+
+    public function testGetType()
+    {
+        $item = new Sticker();
+        $item->setType('custom_emoji');
+        $this->assertEquals('custom_emoji', $item->getType());
+    }
+
+    public function testIsAnimated()
+    {
+        $item = new Sticker();
+        $item->setIsAnimated(false);
+        $this->assertEquals(false, $item->isAnimated());
+    }
+
+    public function testSetIsAnimated()
+    {
+        $item = new Sticker();
+        $item->setIsAnimated(true);
+        $this->assertEquals(true, $item->isAnimated());
+    }
+
+    public function testIsVideo()
+    {
+        $item = new Sticker();
+        $item->setIsVideo(false);
+        $this->assertEquals(false, $item->isVideo());
+    }
+
+    public function testSetIsVideo()
+    {
+        $item = new Sticker();
+        $item->SetIsVideo(false);
+        $this->assertEquals(false, $item->isVideo());
+    }
+
+    public function testGetEmoji()
+    {
+        $item = new Sticker();
+        $item->setEmoji('<emoji>');
+        $this->assertEquals('<emoji>', $item->getEmoji());
+    }
+
+    public function testSetEmoji()
+    {
+        $item = new Sticker();
+        $item->setEmoji('<emoji>');
+        $this->assertEquals('<emoji>', $item->getEmoji());
+    }
+
+    public function testGetSetName()
+    {
+        $item = new Sticker();
+        $item->setSetName('set_name');
+        $this->assertEquals('set_name', $item->getSetName());
+    }
+
+    public function testSetSetName()
+    {
+        $item = new Sticker();
+        $item->setSetName('set_name');
+        $this->assertEquals('set_name', $item->getSetName());
+    }
+
+    public function testGetPremiumAnimation()
+    {
+        $item = new Sticker();
+        $premiumAnimation = File::fromResponse([
+            'file_id' => 'id',
+        ]);
+        $item->setPremiumAnimation($premiumAnimation);
+        $this->assertEquals(
+            File::fromResponse([
+                'file_id' => 'id',
+            ]),
+            $item->getPremiumAnimation(),
+        );
+    }
+
+    public function testGetCustomEmojiId()
+    {
+        $item = new Sticker();
+        $item->setCustomEmojiId('custom_id');
+        $this->assertEquals('custom_id', $item->getCustomEmojiId());
+    }
+
+    public function testSetCustomEmojiId()
+    {
+        $item = new Sticker();
+        $item->setCustomEmojiId('custom_id');
+        $this->assertEquals('custom_id', $item->getCustomEmojiId());
     }
 }

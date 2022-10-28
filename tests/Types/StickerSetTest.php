@@ -85,8 +85,12 @@ class StickerSetTest extends TestCase
         $stickers = ArrayOfSticker::fromResponse([
             array(
                 'file_id' => 'id',
+                'file_unique_id' => 'unique_id',
+                'type' => 'regular',
                 'width' => 255,
                 'height' => 512,
+                'is_animated' => true,
+                'is_video' => true,
             ),
         ]);
         $item->setStickers($stickers);
@@ -99,8 +103,12 @@ class StickerSetTest extends TestCase
         $stickers = ArrayOfSticker::fromResponse([
             array(
                 'file_id' => 'id',
+                'file_unique_id' => 'unique_id',
+                'type' => 'regular',
                 'width' => 255,
                 'height' => 512,
+                'is_animated' => false,
+                'is_video' => false,
             ),
         ]);
         $item->setStickers($stickers);
