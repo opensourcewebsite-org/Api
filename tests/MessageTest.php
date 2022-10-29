@@ -401,8 +401,12 @@ class MessageTest extends TestCase
         $item = new Message();
         $sticker = Sticker::fromResponse(array(
             "file_id" => 'testFileId1',
+            'file_unique_id' => 'unique_id',
+            'type' => 'regular',
             'width' => 1,
             'height' => 2,
+            'is_animated' => false,
+            'is_video' => false,
             'file_size' => 3,
             'thumb' => array(
                 "file_id" => 'testFileId1',
@@ -420,8 +424,12 @@ class MessageTest extends TestCase
         $item = new Message();
         $sticker = Sticker::fromResponse(array(
             "file_id" => 'testFileId1',
+            'file_unique_id' => 'unique_id',
+            'type' => 'regular',
             'width' => 1,
             'height' => 2,
+            'is_animated' => false,
+            'is_video' => false,
             'file_size' => 3,
             'thumb' => array(
                 "file_id" => 'testFileId1',
