@@ -16,6 +16,7 @@ use TelegramBot\Api\Types\PhotoSize;
 use TelegramBot\Api\Types\Sticker;
 use TelegramBot\Api\Types\User;
 use TelegramBot\Api\Types\Video;
+use TelegramBot\Api\Types\VideoNote;
 use TelegramBot\Api\Types\Voice;
 
 class MessageTest extends TestCase
@@ -1003,5 +1004,31 @@ class MessageTest extends TestCase
             )),
             $message->getMessageAutoDeleteTimerChanged(),
         );
+    }
+
+    public function testGetVideoNote()
+    {
+        $item = new Message();
+        $videoNote = VideoNote::fromResponse([
+            'file_id' => 'file',
+            'file_unique_id' => 'unique_id',
+            'length' => 256,
+            'duration' => 512,
+        ]);
+        $item->setVideoNote($videoNote);
+        $this->assertEquals($videoNote, $item->getVideoNote());
+    }
+
+    public function testSetVideoNote()
+    {
+        $item = new Message();
+        $videoNote = VideoNote::fromResponse([
+            'file_id' => 'file',
+            'file_unique_id' => 'unique_id',
+            'length' => 256,
+            'duration' => 512,
+        ]);
+        $item->setVideoNote($videoNote);
+        $this->assertEquals($videoNote, $item->getVideoNote());
     }
 }
