@@ -316,6 +316,7 @@ class BotApi
      * @param int|string $chatId
      * @param string $text
      * @param string|null $parseMode
+     * @param ArrayOfMessageEntity $entities
      * @param bool $disablePreview
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
@@ -330,17 +331,23 @@ class BotApi
         $chatId,
         $text,
         $parseMode = null,
+        $entities = null,
         $disablePreview = false,
+        $protectContent = false,
         $replyToMessageId = null,
+        $allowSendingWithoutReply = false,
         $replyMarkup = null,
-        $disableNotification = false
+        $disableNotification = false,
     ) {
         return Message::fromResponse($this->call('sendMessage', [
             'chat_id' => $chatId,
             'text' => $text,
             'parse_mode' => $parseMode,
+            'entities' => $entities,
             'disable_web_page_preview' => $disablePreview,
+            'protect_content' => (bool)$protectContent,
             'reply_to_message_id' => (int)$replyToMessageId,
+            'allow_sending_without_reply' => (bool)$allowSendingWithoutReply,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
         ]));
