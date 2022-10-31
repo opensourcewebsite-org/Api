@@ -39,6 +39,9 @@ class User extends BaseType implements TypeInterface
         'language_code' => true,
         'is_premium' => true,
         'added_to_atachment_menu' => true,
+        'can_join_groups' => true,
+        'can_read_all_group_messages' => true,
+        'support_inline_queries' => true,
     ];
 
     /**
@@ -96,6 +99,23 @@ class User extends BaseType implements TypeInterface
      * @var bool
      */
     protected $addedToAtachmentMenu;
+
+    /**
+     * Optional. True, if the bot can be invited to groups. Returned only in getMe.
+     *
+     * @var bool
+     */
+    protected $canJoinGroups;
+
+    /**
+     * Optional. True, if privacy mode is disabled for the bot. Returned only in getMe.
+     */
+    protected $canReadAllGroupMessages;
+
+    /**
+     * Optional. True, if the bot supports inline queries. Returned only in getMe.
+     */
+    protected $supportInlineQueries;
 
     /**
      * @return string
@@ -229,5 +249,53 @@ class User extends BaseType implements TypeInterface
     public function setAddedToAtachmentMenu($addedToAtachmentMenu)
     {
         $this->addedToAtachmentMenu = $addedToAtachmentMenu;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canJoinGroups()
+    {
+        return $this->canJoinGroups;
+    }
+
+    /**
+     * @param bool $canJoinGroups
+     */
+    public function setCanJoinGroups($canJoinGroups)
+    {
+        $this->canJoinGroups = $canJoinGroups;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canReadAllGroupMessages()
+    {
+        return $this->canReadAllGroupMessages;
+    }
+
+    /**
+     * @param bool $canReadAllGroupMessages
+     */
+    public function setCanReadAllGroupMessages($canReadAllGroupMessages)
+    {
+        $this->canReadAllGroupMessages = $canReadAllGroupMessages;
+    }
+
+    /**
+     * @return bool
+     */
+    public function supportInlineQueries()
+    {
+        return $this->supportInlineQueries;
+    }
+
+    /**
+     * @param bool $supportInlineQueries
+     */
+    public function setSupportInlineQueries($supportInlineQueries)
+    {
+        $this->supportInlineQueries = $supportInlineQueries;
     }
 }

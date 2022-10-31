@@ -152,4 +152,46 @@ class UserTest extends TestCase
         $item->setAddedToAtachmentMenu(true);
         $this->assertEquals(true, $item->addedToAtachmentMenu());
     }
+
+    public function testCanJoinGroups()
+    {
+        $item = new User();
+        $item->setCanJoinGroups(false);
+        $this->assertEquals(false, $item->canJoinGroups());
+    }
+
+    public function testSetCanJoinGroups()
+    {
+        $item = new User();
+        $item->setCanJoinGroups(true);
+        $this->assertEquals(true, $item->canJoinGroups());
+    }
+
+    public function testCanReadAllGroupMessages()
+    {
+        $item = new User();
+        $item->setCanReadAllGroupMessages(false);
+        $this->assertEquals(false, $item->canReadAllGroupMessages());
+    }
+
+    public function testSetCanReadAllGroupMessages()
+    {
+        $item = new User();
+        $item->setCanReadAllGroupMessages(true);
+        $this->assertEquals(true, $item->canReadAllGroupMessages());
+    }
+
+    public function testSupportInlineQueries()
+    {
+        $item = new User();
+        $item->setSupportInlineQueries(false);
+        $this->assertEquals(false, $item->supportInlineQueries());
+    }
+
+    public function testSetSupportInlineQueries()
+    {
+        $item = new User();
+        $item->setSupportInlineQueries(true);
+        $this->assertEquals(true, $item->supportInlineQueries());
+    }
 }
