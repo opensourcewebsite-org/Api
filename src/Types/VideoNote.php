@@ -13,10 +13,10 @@ class VideoNote extends BaseType
      * @var array
      */
     protected static $requiredParams = [
-        'file_id' => true,
-        'file_unique_id' => true,
-        'lenght' => true,
-        'duration' => true,
+        'file_id',
+        'file_unique_id',
+        'length',
+        'duration',
     ];
 
     /**
@@ -27,7 +27,7 @@ class VideoNote extends BaseType
     protected static $map = [
         'file_id' => true,
         'file_unique_id' => true,
-        'lenght' => true,
+        'length' => true,
         'duration' => true,
         'thumb' => PhotoSize::class,
         'file_size' => true,

@@ -101,4 +101,20 @@ class VideoNoteTest extends TestCase
         $item->setFileSize(256);
         $this->assertEquals(256, $item->getFileSize());
     }
+
+    public function testFromResponse()
+    {
+        $expected = VideoNote::fromResponse(array(
+            'file_id' => 'file',
+            'file_unique_id' => 'unique_id',
+            'length' => 256,
+            'duration' => 512,
+        ));
+        $actual = new VideoNote();
+        $actual->setFileId('file');
+        $actual->setFileUniqueId('unique_id');
+        $actual->setLength(256);
+        $actual->setDuration(512);
+        $this->assertEquals($expected, $actual);
+    }
 }
