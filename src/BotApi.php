@@ -956,6 +956,9 @@ class BotApi
      *        Types\ReplyKeyboardRemove|null $replyMarkup
      * @param bool $disableNotification
      * @param string|null $parseMode
+     * @param bool $protectContent
+     * @param bool $allowSendingWithoutReply
+     * @param ArrayOfMessageEntities $captionEntities
      *
      * @return \TelegramBot\Api\Types\Message
      * @throws \TelegramBot\Api\InvalidArgumentException
@@ -968,7 +971,10 @@ class BotApi
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false,
-        $parseMode = null
+        $parseMode = null,
+        $protectContent = false,
+        $allowSendingWithoutReply = false,
+        $captionEntities = null,
     ) {
         return Message::fromResponse($this->call('sendPhoto', [
             'chat_id' => $chatId,
@@ -978,6 +984,9 @@ class BotApi
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
             'parse_mode' => $parseMode,
+            'protect_content' => (bool)$protectContent,
+            'allow_sending_without_reply' => (bool)$allowSendingWithoutReply,
+            'caption_entities' => $captionEntities,
         ]));
     }
 
