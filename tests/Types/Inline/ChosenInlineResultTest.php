@@ -15,6 +15,7 @@ class ChosenInlineResultTest extends TestCase
             'last_name' => 'Gusev',
             'id' => 123456,
             'username' => 'iGusev',
+            'is_bot' => false,
         ],
         'query' => 'test_query'
     ];

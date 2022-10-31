@@ -88,6 +88,7 @@ class MessageTest extends TestCase
         $item = new Message();
         $user = User::fromResponse(array(
             'id' => 1,
+            'is_bot' => false,
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'username' => 'iGusev'
@@ -101,6 +102,7 @@ class MessageTest extends TestCase
         $item = new Message();
         $user = User::fromResponse(array(
             'id' => 1,
+            'is_bot' => false,
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'username' => 'iGusev'
@@ -115,6 +117,7 @@ class MessageTest extends TestCase
         $item = new Message();
         $user = User::fromResponse(array(
             'id' => 1,
+            'is_bot' => false,
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'username' => 'iGusev'
@@ -128,6 +131,7 @@ class MessageTest extends TestCase
         $item = new Message();
         $user = User::fromResponse(array(
             'id' => 1,
+            'is_bot' => false,
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'username' => 'iGusev'
@@ -476,6 +480,7 @@ class MessageTest extends TestCase
         $item = new Message();
         $user = User::fromResponse(array(
             'id' => 1,
+            'is_bot' => false,
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'username' => 'iGusev'
@@ -489,6 +494,7 @@ class MessageTest extends TestCase
         $item = new Message();
         $user = User::fromResponse(array(
             'id' => 1,
+            'is_bot' => false,
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'username' => 'iGusev'
@@ -503,6 +509,7 @@ class MessageTest extends TestCase
         $item = new Message();
         $user = User::fromResponse(array(
             'id' => 1,
+            'is_bot' => false,
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'username' => 'iGusev'
@@ -516,6 +523,7 @@ class MessageTest extends TestCase
         $item = new Message();
         $user = User::fromResponse(array(
             'id' => 1,
+            'is_bot' => false,
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'username' => 'iGusev'
@@ -560,6 +568,7 @@ class MessageTest extends TestCase
             'message_id' => 1,
             'from' => array(
                 'first_name' => 'Ilya',
+                'is_bot' => false,
                 'last_name' => 'Gusev',
                 'id' => 123456,
                 'username' => 'iGusev'
@@ -582,6 +591,7 @@ class MessageTest extends TestCase
             'message_id' => 1,
             'from' => array(
                 'first_name' => 'Ilya',
+                'is_bot' => false,
                 'last_name' => 'Gusev',
                 'id' => 123456,
                 'username' => 'iGusev'
@@ -604,6 +614,7 @@ class MessageTest extends TestCase
         $bot = User::fromResponse(array(
             'first_name' => 'Test',
             'last_name' => 'Bot',
+            'is_bot' => true,
             'username' => 'TestingBot',
             'is_bot' => 'true',
             'id' => 654321
@@ -620,7 +631,8 @@ class MessageTest extends TestCase
             'last_name' => 'Bot',
             'username' => 'TestingBot',
             'is_bot' => 'true',
-            'id' => 654321
+            'id' => 654321,
+            'is_bot' => true,
         ));
         $item->setViaBot($bot);
         $this->assertEquals($bot, $item->getViaBot());
@@ -636,7 +648,8 @@ class MessageTest extends TestCase
                 'first_name' => 'Ilya',
                 'last_name' => 'Gusev',
                 'id' => 123456,
-                'username' => 'iGusev'
+                'username' => 'iGusev',
+                'is_bot' => false,
             ),
             'date' => 2,
             'chat' => array(
@@ -649,7 +662,8 @@ class MessageTest extends TestCase
                 'last_name' => 'Bot',
                 'username' => 'TestingBot',
                 'is_bot' => 'true',
-                'id' => 654321
+                'id' => 654321,
+                'is_bot' => true,
             )
         ));
         $this->assertEquals(654321, $item->getViaBot()->getId());
@@ -769,7 +783,8 @@ class MessageTest extends TestCase
                 'first_name' => 'Ilya',
                 'last_name' => 'Gusev',
                 'id' => 123456,
-                'username' => 'iGusev'
+                'username' => 'iGusev',
+                'is_bot' => false,
             ),
             'date' => 2,
             'chat' => array(
@@ -797,7 +812,8 @@ class MessageTest extends TestCase
                 'first_name' => 'Ilya',
                 'last_name' => 'Gusev',
                 'id' => 123456,
-                'username' => 'iGusev'
+                'username' => 'iGusev',
+                'is_bot' => false,
             ),
             'date' => 2,
             'chat' => array(
@@ -825,7 +841,8 @@ class MessageTest extends TestCase
                 'first_name' => 'Ilya',
                 'last_name' => 'Gusev',
                 'id' => 123456,
-                'username' => 'iGusev'
+                'username' => 'iGusev',
+                'is_bot' => false,
             ),
             'date' => 2,
             'chat' => array(
@@ -853,7 +870,8 @@ class MessageTest extends TestCase
                 'first_name' => 'Ilya',
                 'last_name' => 'Gusev',
                 'id' => 123456,
-                'username' => 'iGusev'
+                'username' => 'iGusev',
+                'is_bot' => false,
             ),
             'date' => 2,
             'chat' => array(
@@ -874,7 +892,8 @@ class MessageTest extends TestCase
                 'first_name' => 'Ilya',
                 'last_name' => 'Gusev',
                 'id' => 123456,
-                'username' => 'iGusev'
+                'username' => 'iGusev',
+                'is_bot' => false,
             ),
             'date' => 2,
             'chat' => array(
@@ -896,7 +915,8 @@ class MessageTest extends TestCase
                 'first_name' => 'Ilya',
                 'last_name' => 'Gusev',
                 'id' => 123456,
-                'username' => 'iGusev'
+                'username' => 'iGusev',
+                'is_bot' => false,
             ),
             'date' => 2,
             'chat' => array(

@@ -87,7 +87,8 @@ class UserTest extends TestCase
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'id' => 123456,
-            'username' => 'iGusev'
+            'username' => 'iGusev',
+            'is_bot' => false,
         ));
         $this->assertInstanceOf('\TelegramBot\Api\Types\User', $user);
         $this->assertEquals(123456, $user->getId());
@@ -105,6 +106,7 @@ class UserTest extends TestCase
 
         $user = User::fromResponse(array(
             'last_name' => 'Gusev',
+
             'id' => 123456,
             'username' => 'iGusev'
         ));
@@ -135,5 +137,19 @@ class UserTest extends TestCase
         $user = new User();
         $user->setIsPremium(true);
         $this->assertEquals(true, $user->IsPremium());
+    }
+
+    public function testAddedToAtachmentMenu()
+    {
+        $item = new User();
+        $item->setAddedToAtachmentMenu(false);
+        $this->assertEquals(false, $item->addedToAtachmentMenu());
+    }
+
+    public function testSetAddedToAtachmentMenu()
+    {
+        $item = new User();
+        $item->setAddedToAtachmentMenu(true);
+        $this->assertEquals(true, $item->addedToAtachmentMenu());
     }
 }

@@ -19,7 +19,11 @@ class User extends BaseType implements TypeInterface
      *
      * @var array
      */
-    protected static $requiredParams = ['id', 'first_name'];
+    protected static $requiredParams = [
+        'id',
+        'is_bot',
+        'first_name',
+    ];
 
     /**
      * {@inheritdoc}
@@ -28,12 +32,13 @@ class User extends BaseType implements TypeInterface
      */
     protected static $map = [
         'id' => true,
+        'is_bot' => true,
         'first_name' => true,
         'last_name' => true,
         'username' => true,
         'language_code' => true,
-        'is_bot' => true,
         'is_premium' => true,
+        'added_to_atachment_menu' => true,
     ];
 
     /**
@@ -84,6 +89,13 @@ class User extends BaseType implements TypeInterface
      * @var boolean
      */
     protected $isPremium;
+
+    /**
+     * Optional. True, if this user added the bot to the attachment menu
+     *
+     * @var bool
+     */
+    protected $addedToAtachmentMenu;
 
     /**
      * @return string
@@ -201,5 +213,21 @@ class User extends BaseType implements TypeInterface
     public function setIsPremium($isPremium)
     {
         $this->isPremium = $isPremium;
+    }
+
+    /**
+     * @return bool
+     */
+    public function addedToAtachmentMenu()
+    {
+        return $this->addedToAtachmentMenu;
+    }
+
+    /**
+     * @param bool $addedToAtachmentMenu
+     */
+    public function setAddedToAtachmentMenu($addedToAtachmentMenu)
+    {
+        $this->addedToAtachmentMenu = $addedToAtachmentMenu;
     }
 }

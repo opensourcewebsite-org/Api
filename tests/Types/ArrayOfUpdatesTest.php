@@ -19,6 +19,7 @@ class ArrayOfUpdatesTest extends TestCase
                             'message_id' => 13948,
                             'from' => [
                                 'id' => 123,
+                                'is_bot' => false,
                                 'first_name' => 'Ilya',
                                 'last_name' => 'Gusev',
                                 'username' => 'iGusev',
