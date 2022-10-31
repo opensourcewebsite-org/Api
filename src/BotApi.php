@@ -877,13 +877,14 @@ class BotApi
      * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
      */
-    public function forwardMessage($chatId, $fromChatId, $messageId, $disableNotification = false)
+    public function forwardMessage($chatId, $fromChatId, $messageId, $disableNotification = false, $protectContent = false)
     {
         return Message::fromResponse($this->call('forwardMessage', [
             'chat_id' => $chatId,
             'from_chat_id' => $fromChatId,
             'message_id' => (int)$messageId,
             'disable_notification' => (bool)$disableNotification,
+            'protect_content' => (bool)$protectContent,
         ]));
     }
 
