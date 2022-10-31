@@ -379,6 +379,7 @@ class BotApi
         $parseMode = null,
         $captionEntities = null,
         $disableNotification = false,
+        $protectContent = false,
         $replyToMessageId = null,
         $allowSendingWithoutReply = false,
         $replyMarkup = null
@@ -391,6 +392,7 @@ class BotApi
             'parse_mode' => $parseMode,
             'caption_entities' => $captionEntities,
             'disable_notification' => (bool)$disableNotification,
+            'protect_content' => (bool)$protectContent,
             'reply_to_message_id' => (int)$replyToMessageId,
             'allow_sending_without_reply' => (bool)$allowSendingWithoutReply,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
