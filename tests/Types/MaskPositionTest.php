@@ -1,6 +1,6 @@
 <?php
 
-namespace TelegramBot\Api\Types;
+namespace TelegramBot\Api\Test;
 
 use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\MaskPosition;
