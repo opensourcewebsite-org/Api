@@ -139,18 +139,18 @@ class UserTest extends TestCase
         $this->assertEquals(true, $user->IsPremium());
     }
 
-    public function testAddedToAtachmentMenu()
+    public function testAddedToAttachmentMenu()
     {
         $item = new User();
-        $item->setAddedToAtachmentMenu(false);
-        $this->assertEquals(false, $item->addedToAtachmentMenu());
+        $item->setAddedToAttachmentMenu(false);
+        $this->assertEquals(false, $item->addedToAttachmentMenu());
     }
 
-    public function testSetAddedToAtachmentMenu()
+    public function testSetAddedToAttachmentMenu()
     {
         $item = new User();
-        $item->setAddedToAtachmentMenu(true);
-        $this->assertEquals(true, $item->addedToAtachmentMenu());
+        $item->setAddedToAttachmentMenu(true);
+        $this->assertEquals(true, $item->addedToAttachmentMenu());
     }
 
     public function testCanJoinGroups()

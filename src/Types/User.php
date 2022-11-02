@@ -38,7 +38,7 @@ class User extends BaseType implements TypeInterface
         'username' => true,
         'language_code' => true,
         'is_premium' => true,
-        'added_to_atachment_menu' => true,
+        'added_to_attachment_menu' => true,
         'can_join_groups' => true,
         'can_read_all_group_messages' => true,
         'support_inline_queries' => true,
@@ -98,7 +98,7 @@ class User extends BaseType implements TypeInterface
      *
      * @var bool
      */
-    protected $addedToAtachmentMenu;
+    protected $addedToAttachmentMenu;
 
     /**
      * Optional. True, if the bot can be invited to groups. Returned only in getMe.
@@ -238,17 +238,17 @@ class User extends BaseType implements TypeInterface
     /**
      * @return bool
      */
-    public function addedToAtachmentMenu()
+    public function addedToAttachmentMenu()
     {
-        return $this->addedToAtachmentMenu;
+        return $this->addedToAttachmentMenu;
     }
 
     /**
-     * @param bool $addedToAtachmentMenu
+     * @param bool $addedToAttachmentMenu
      */
-    public function setAddedToAtachmentMenu($addedToAtachmentMenu)
+    public function setAddedToAttachmentMenu($addedToAttachmentMenu)
     {
-        $this->addedToAtachmentMenu = $addedToAtachmentMenu;
+        $this->addedToAttachmentMenu = $addedToAttachmentMenu;
     }
 
     /**
