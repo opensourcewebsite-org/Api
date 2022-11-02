@@ -90,7 +90,6 @@ class ChatMemberTest extends TestCase
         $chatMemberAdministrator = ChatMemberAdministrator::fromResponse($data);
         $this->assertInstanceOf('TelegramBot\Api\Types\ChatMemberAdministrator', $chatMember);
         $this->assertEquals($chatMember, $chatMemberAdministrator);
-
     }
 
     public function testFromResponseMember()
@@ -109,5 +108,4 @@ class ChatMemberTest extends TestCase
         $this->assertInstanceOf('TelegramBot\Api\Types\ChatMemberMember', $chatMember);
         $this->assertEquals($chatMemberMember, $chatMember);
     }
-
 }

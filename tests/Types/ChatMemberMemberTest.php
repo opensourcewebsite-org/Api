@@ -28,7 +28,7 @@ class ChatMemberMemberTest extends TestCase
                 'id' => 512,
                 'is_bot' => false,
                 'first_name' => 'bakteria',
-            ]), 
+            ]),
             $item->getUser(),
         );
     }
@@ -37,11 +37,11 @@ class ChatMemberMemberTest extends TestCase
     {
         $actual = ChatMemberMember::fromResponse([
             'status' => 'member',
-            'user' => [
+            'user' => array(
                 'id' => 512,
                 'is_bot' => false,
                 'first_name' => 'bakteria',
-            ],
+            ),
         ]);
         $expected = new ChatMemberMember();
         $expected->setStatus('member');
@@ -50,6 +50,6 @@ class ChatMemberMemberTest extends TestCase
             'is_bot' => false,
             'first_name' => 'bakteria',
         ]));
-        $this->assertEquals($actual, $expected);
+        $this->assertEquals($expected, $actual);
     }
 }

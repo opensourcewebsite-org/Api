@@ -71,4 +71,4 @@ class ChatMemberMember extends BaseType
     {
         $this->user = $user;
     }
-}   
+}
