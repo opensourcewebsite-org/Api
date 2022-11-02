@@ -16,6 +16,7 @@ class CallbackQueryTest extends TestCase
             'last_name' => 'Gusev',
             'id' => 123456,
             'username' => 'iGusev',
+            'is_bot' => false,
         ],
         'inline_message_id' => 1234,
         'chat_instance' => 123,

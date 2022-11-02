@@ -48,11 +48,13 @@ class ChatjoinRequestTest extends TestCase
         $item = new ChatJoinRequest();
         $item->setFrom(User::fromResponse([
             'id' => 512,
+            'is_bot' => false,
             'first_name' => 'bakteria',
         ]));
         $this->assertEquals(
             User::fromResponse([
                 'id' => 512,
+                'is_bot' => false,
                 'first_name' => 'bakteria',
             ]),
             $item->getFrom(),
@@ -64,12 +66,14 @@ class ChatjoinRequestTest extends TestCase
         $item = new ChatJoinRequest();
         $user = User::fromResponse([
             'id' => 255,
+            'is_bot' => false,
             'first_name' => 'bakteria',
         ]);
         $item->setFrom($user);
         $this->assertEquals(
             User::fromResponse([
                 'id' => 255,
+                'is_bot' => false,
                 'first_name' => 'bakteria'
             ]),
             $item->getFrom(),
@@ -117,6 +121,7 @@ class ChatjoinRequestTest extends TestCase
             'invite_link' => 'http://url.com',
             'creator' =>  [
                 'id' => 512,
+                'is_bot' => false,
                 'first_name' => 'bakteria',
             ],
         ]);
@@ -126,6 +131,7 @@ class ChatjoinRequestTest extends TestCase
                 'invite_link' => 'http://url.com',
                 'creator' => [
                     'id' => 512,
+                    'is_bot' => false,
                     'first_name' => 'bakteria',
                 ],
             ]),
@@ -140,6 +146,7 @@ class ChatjoinRequestTest extends TestCase
             'invite_link' => 'http://url.com',
             'creator' =>  [
                 'id' => 512,
+                'is_bot' => false,
                 'first_name' => 'bakteria',
             ],
         ]);
@@ -149,6 +156,7 @@ class ChatjoinRequestTest extends TestCase
                 'invite_link' => 'http://url.com',
                 'creator' => [
                     'id' => 512,
+                    'is_bot' => false,
                     'first_name' => 'bakteria',
                 ],
             ]),
