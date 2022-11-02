@@ -28,6 +28,7 @@ class EventCollectionTest extends TestCase
                             'first_name' => 'Ilya',
                             'last_name' => 'Gusev',
                             'username' => 'iGusev',
+                            'is_bot' => false,
                         ],
                         'chat' => [
                             'id' => 123,

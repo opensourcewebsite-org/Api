@@ -87,7 +87,8 @@ class UserTest extends TestCase
             'first_name' => 'Ilya',
             'last_name' => 'Gusev',
             'id' => 123456,
-            'username' => 'iGusev'
+            'username' => 'iGusev',
+            'is_bot' => false,
         ));
         $this->assertInstanceOf('\TelegramBot\Api\Types\User', $user);
         $this->assertEquals(123456, $user->getId());
@@ -105,6 +106,7 @@ class UserTest extends TestCase
 
         $user = User::fromResponse(array(
             'last_name' => 'Gusev',
+
             'id' => 123456,
             'username' => 'iGusev'
         ));
@@ -135,5 +137,61 @@ class UserTest extends TestCase
         $user = new User();
         $user->setIsPremium(true);
         $this->assertEquals(true, $user->IsPremium());
+    }
+
+    public function testAddedToAttachmentMenu()
+    {
+        $item = new User();
+        $item->setAddedToAttachmentMenu(false);
+        $this->assertEquals(false, $item->addedToAttachmentMenu());
+    }
+
+    public function testSetAddedToAttachmentMenu()
+    {
+        $item = new User();
+        $item->setAddedToAttachmentMenu(true);
+        $this->assertEquals(true, $item->addedToAttachmentMenu());
+    }
+
+    public function testCanJoinGroups()
+    {
+        $item = new User();
+        $item->setCanJoinGroups(false);
+        $this->assertEquals(false, $item->canJoinGroups());
+    }
+
+    public function testSetCanJoinGroups()
+    {
+        $item = new User();
+        $item->setCanJoinGroups(true);
+        $this->assertEquals(true, $item->canJoinGroups());
+    }
+
+    public function testCanReadAllGroupMessages()
+    {
+        $item = new User();
+        $item->setCanReadAllGroupMessages(false);
+        $this->assertEquals(false, $item->canReadAllGroupMessages());
+    }
+
+    public function testSetCanReadAllGroupMessages()
+    {
+        $item = new User();
+        $item->setCanReadAllGroupMessages(true);
+        $this->assertEquals(true, $item->canReadAllGroupMessages());
+    }
+
+    public function testSupportInlineQueries()
+    {
+        $item = new User();
+        $item->setSupportInlineQueries(false);
+        $this->assertEquals(false, $item->supportInlineQueries());
+    }
+
+    public function testSetSupportInlineQueries()
+    {
+        $item = new User();
+        $item->setSupportInlineQueries(true);
+        $this->assertEquals(true, $item->supportInlineQueries());
     }
 }
