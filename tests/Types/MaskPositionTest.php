@@ -62,4 +62,20 @@ class MaskPositionTest extends TestCase
         $item->setScale(1.0);
         $this->assertEquals(1.0, $item->getScale());
     }
+
+    public function testFromResponse()
+    {
+        $actual = MaskPosition::fromResponse([
+            'point' => 'eyes',
+            'x_shift' => .5,
+            'y_shift' => .5,
+            'scale' => 1,
+        ]);
+        $expected = new MaskPosition();
+        $expected->setPoint('eyes');
+        $expected->setXShift(.5);
+        $expected->setYShift(.5);
+        $expected->setScale(1);
+        $this->assertEquals($expected, $actual);
+    }
 }
