@@ -87,6 +87,9 @@ class ChatMember extends BaseType
             return ChatMemberAdministrator::fromResponse($data);
         }
 
+        if ($instance->getStatus() == 'member') {
+            return ChatMemberMember::fromResponse($data);
+        }
 
         return $instance;
     }

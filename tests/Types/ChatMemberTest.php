@@ -5,6 +5,7 @@ namespace TelegramBot\Api\Test;
 use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\ChatMember;
 use TelegramBot\Api\Types\ChatMemberAdministrator;
+use TelegramBot\Api\Types\ChatMemberMember;
 use TelegramBot\Api\Types\ChatMemberOwner;
 use TelegramBot\Api\Types\User;
 
@@ -48,7 +49,7 @@ class ChatMemberTest extends TestCase
         $this->assertEquals('member', $item->getStatus());
     }
 
-    public function testFromResponse()
+    public function testFromResponseOwner()
     {
         $data = [
             'status' => 'creator',
@@ -64,7 +65,10 @@ class ChatMemberTest extends TestCase
         $this->assertInstanceOf('TelegramBot\Api\Types\ChatMemberOwner', $chatMember);
         $chatMemberOwner = ChatMemberOwner::fromResponse($data);
         $this->assertEquals($chatMember, $chatMemberOwner);
+    }
 
+    public function testFromResponseAdministrator()
+    {
         $data = [
             'status' => 'administrator',
             'user' => array(
@@ -86,5 +90,24 @@ class ChatMemberTest extends TestCase
         $chatMemberAdministrator = ChatMemberAdministrator::fromResponse($data);
         $this->assertInstanceOf('TelegramBot\Api\Types\ChatMemberAdministrator', $chatMember);
         $this->assertEquals($chatMember, $chatMemberAdministrator);
+
     }
+
+    public function testFromResponseMember()
+    {
+        $data = [
+            'status' => 'member',
+            'user' => [
+                'id' => 512,
+                'is_bot' => false,
+                'first_name' => 'bakteria',
+            ],
+        ];
+
+        $chatMember = ChatMember::fromResponse($data);
+        $chatMemberMember = ChatMemberMember::fromResponse($data);
+        $this->assertInstanceOf('TelegramBot\Api\Types\ChatMemberMember', $chatMember);
+        $this->assertEquals($chatMemberMember, $chatMember);
+    }
+
 }
