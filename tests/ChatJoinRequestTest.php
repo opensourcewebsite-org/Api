@@ -163,4 +163,27 @@ class ChatjoinRequestTest extends TestCase
             $item->getInviteLink(),
         );
     }
+
+    public function testFromResponse()
+    {
+        $chat = [
+            'id' => 512,
+            'type' => 'private',
+        ];
+        $from = [
+            'id' => 256,
+            'is_bot' => false,
+            'first_name' => 'bakteria',
+        ];
+        $actual = ChatJoinRequest::fromResponse([
+            'chat' => $chat,
+            'from' => $from,
+            'date' => 256,
+        ]);
+        $expected = new ChatJoinRequest();
+        $expected->setChat(Chat::fromResponse($chat));
+        $expected->setFrom(User::fromResponse($from));
+        $expected->setDate(256);
+        $this->assertEquals($actual, $expected);
+    }
 }
