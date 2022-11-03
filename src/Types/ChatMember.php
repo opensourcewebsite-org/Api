@@ -99,6 +99,10 @@ class ChatMember extends BaseType
             return ChatMemberLeft::fromResponse($data);
         }
 
+        if ($instance->getStatus() == 'kicked') {
+            return ChatMemberBanned::fromResponse($data);
+        }
+
         return $instance;
     }
 }

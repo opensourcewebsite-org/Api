@@ -5,6 +5,7 @@ namespace TelegramBot\Api\Test;
 use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\ChatMember;
 use TelegramBot\Api\Types\ChatMemberAdministrator;
+use TelegramBot\Api\Types\ChatMemberBanned;
 use TelegramBot\Api\Types\ChatMemberLeft;
 use TelegramBot\Api\Types\ChatMemberMember;
 use TelegramBot\Api\Types\ChatMemberOwner;
@@ -153,5 +154,22 @@ class ChatMemberTest extends TestCase
         $chatMemberLeft = ChatMemberLeft::fromResponse($data);
         $this->assertInstanceOf('TelegramBot\Api\Types\ChatMemberLeft', $chatMember);
         $this->assertEquals($chatMember, $chatMemberLeft);
+    }
+
+    public function testFromResponseKicked()
+    {
+        $data = [
+            'status' => 'kicked',
+            'user' => array(
+                'id' => 512,
+                'is_bot' => false,
+                'first_name' => 'bakteria',
+            ),
+            'until_date' => 512,
+        ];
+        $chatMember = ChatMember::fromResponse($data);
+        $chatMemberBanned = ChatMemberBanned::fromResponse($data);
+        $this->assertInstanceOf('TelegramBot\Api\Types\ChatMemberBanned', $chatMember);
+        $this->assertEquals($chatMember, $chatMemberBanned);
     }
 }
