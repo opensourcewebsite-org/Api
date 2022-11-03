@@ -320,5 +320,4 @@ class ChatMemberRestricted extends BaseType
     {
         $this->untilDate = $untilDate;
     }
-
 }
