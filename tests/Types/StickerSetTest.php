@@ -138,4 +138,44 @@ class StickerSetTest extends TestCase
         $item->setThumb($photo);
         $this->assertEquals($photo, $item->getThumb());
     }
+
+    public function testFromResponse()
+    {
+        $actual = StickerSet::fromResponse(array(
+            'name' => 'stickerSet',
+            'title' => 'stickerTitle',
+            'sticker_type' => 'regular',
+            'is_animated' => false,
+            'is_video' => false,
+            'stickers' => array(
+                array(
+                    'file_id' => 'id',
+                    'file_unique_id' => 'unique_id',
+                    'type' => 'regular',
+                    'width' => 256,
+                    'height' => 512,
+                    'is_animated' => false,
+                    'is_video' => false,
+                ),
+            ),
+        ));
+        $expected = new StickerSet();
+        $expected->setName('stickerSet');
+        $expected->setTitle('stickerTitle');
+        $expected->setStickerType('regular');
+        $expected->setIsAnimated(false);
+        $expected->setIsVideo(false);
+        $expected->setStickers(ArrayOfSticker::fromResponse([
+            array(
+               'file_id' => 'id',
+               'file_unique_id' => 'unique_id',
+               'type' => 'regular',
+               'width' => 256,
+               'height' => 512,
+               'is_animated' => false,
+               'is_video' => false,
+            ),
+        ]));
+        $this->assertEquals($actual, $expected);
+    }
 }
