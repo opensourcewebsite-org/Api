@@ -91,6 +91,10 @@ class ChatMember extends BaseType
             return ChatMemberMember::fromResponse($data);
         }
 
+        if ($instance->getStatus() == 'restricted') {
+            return ChatMemberRestricted::fromResponse($data);
+        }
+
         return $instance;
     }
 }

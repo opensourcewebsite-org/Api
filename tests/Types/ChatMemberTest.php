@@ -7,6 +7,7 @@ use TelegramBot\Api\Types\ChatMember;
 use TelegramBot\Api\Types\ChatMemberAdministrator;
 use TelegramBot\Api\Types\ChatMemberMember;
 use TelegramBot\Api\Types\ChatMemberOwner;
+use TelegramBot\Api\Types\ChatMemberRestricted;
 use TelegramBot\Api\Types\User;
 
 class ChatMemberTest extends TestCase
@@ -107,5 +108,33 @@ class ChatMemberTest extends TestCase
         $chatMemberMember = ChatMemberMember::fromResponse($data);
         $this->assertInstanceOf('TelegramBot\Api\Types\ChatMemberMember', $chatMember);
         $this->assertEquals($chatMemberMember, $chatMember);
+    }
+
+    public function testFromResponseRestricted()
+    {
+        $data = [
+            'status' => 'restricted',
+            'user' => array(
+                'id' => 512,
+                'is_bot' => false,
+                'first_name' => 'bakteria',
+            ),
+            'is_member' => false,
+            'can_change_info' => false,
+            'can_invite_users' => false,
+            'can_pin_messages' => false,
+            'can_send_messages' => false,
+            'can_send_media_messages' => false,
+            'can_send_polls' => false,
+            'can_send_other_messages' => false,
+            'can_add_web_page_preview' => false,
+            'until_date' => 512
+        ];
+
+        $chatMember = ChatMember::fromResponse($data);
+        $chatMemberRestricted = ChatMemberRestricted::fromResponse($data);
+
+        $this->assertInstanceOf('TelegramBot\Api\Types\ChatMemberRestricted', $chatMember);
+        $this->assertEquals($chatMember, $chatMemberRestricted);
     }
 }
