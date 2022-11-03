@@ -95,6 +95,10 @@ class ChatMember extends BaseType
             return ChatMemberRestricted::fromResponse($data);
         }
 
+        if ($instance->getStatus() == 'left') {
+            return ChatMemberLeft::fromResponse($data);
+        }
+
         return $instance;
     }
 }
