@@ -286,7 +286,7 @@ class ChatMemberRestricted extends BaseType
      */
     public function setCanSendOtherMessages($canSendOtherMessages)
     {
-       $this->canSendOtherMessages = $canSendOtherMessages;
+        $this->canSendOtherMessages = $canSendOtherMessages;
     }
 
     /**
