@@ -29,6 +29,7 @@ class Chat extends BaseType implements TypeInterface
         'last_name' => true,
         'is_forum' => true,
         'photo' => ChatPhoto::class,
+        'active_usernames' => true,
         'bio' => true,
         'has_private_forwards' => true,
         'has_restricted_voice_and_video_messages' => true,
@@ -102,6 +103,13 @@ class Chat extends BaseType implements TypeInterface
      * @var ChatPhoto
      */
     protected $photo;
+
+    /**
+     * Optional. If non-empty, the list of all active chat usernames; for private chats, supergroups and channels. Returned only in getChat.
+     *
+     * @var array
+     */
+    protected $activeUsernames;
 
     /**
      * Optional. Bio of the other party in a private chat. Returned only in getChat
@@ -352,6 +360,22 @@ class Chat extends BaseType implements TypeInterface
     {
         $this->photo = $photo;
     }
+
+    /**
+     * @return array
+     */
+    public function getActiveUsernames()
+    {
+        return $this->activeUsernames;
+    }
+
+    /**
+     * @param array $activeUsernames
+     */
+    public function setActiveUsernames($activeUsernames)
+    {
+        $this->activeUsernames = $activeUsernames;
+    }   
 
     /**
      * @return string

@@ -317,4 +317,21 @@ class ChatTest extends TestCase
         $item->setIsForum(false);
         $this->assertEquals(false, $item->isForum());
     }
+
+    public function testActiveUsernames()
+    {
+        $item = new Chat();
+        $item->setActiveUsernames(['username1','username2']);
+        $this->assertEquals(['username1','username2'], $item->getActiveUsernames());
+    }
+
+    public function testFromResponseActiveUsernames()
+    {
+        $item = Chat::fromResponse([
+            'id' => 512,
+            'type' => 'private',
+            'active_usernames' => ['username1','username2'],
+        ]);
+        $this->assertEquals(['username1','username2'], $item->getActiveUsernames());
+    }
 }
