@@ -1802,12 +1802,12 @@ class BotApi
      */
     public function createForumTopic($chatId, $name, $iconColor = null, $iconCustomEmojiId = null)
     {
-        return ForumTopic::fromResponse($this->call('createForumTopic'), [
+        return ForumTopic::fromResponse($this->call('createForumTopic', [
             'chat_id' => $chatId,
             'name' => $name,
             'icon_color' => $iconColor,
             'icon_custom_emoji_id' => $iconCustomEmojiId,
-        ]);
+        ]));
     }
 
     /**
