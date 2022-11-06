@@ -11,6 +11,7 @@ use TelegramBot\Api\Types\Chat;
 use TelegramBot\Api\Types\ChatAdministratorRights;
 use TelegramBot\Api\Types\ChatMember;
 use TelegramBot\Api\Types\File;
+use TelegramBot\Api\Types\ForumTopic;
 use TelegramBot\Api\Types\Inline\QueryResult\AbstractInlineQueryResult;
 use TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
 use TelegramBot\Api\Types\InputMedia\InputMedia;
@@ -1787,6 +1788,26 @@ class BotApi
             'chat_id' => $chatId,
             'user_id' => $userId,
         ]));
+    }
+
+    /**
+     * Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns information about the created topic as a ForumTopic object.
+     *
+     * @param integer|string $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param string $name Topic name, 1-128 characters
+     * @param integer $iconColor Optional. Color of the topic icon in RGB format. Currently, must be one of 0x6FB9F0, 0xFFD67E, 0xCB86DB, 0x8EEE98, 0xFF93B2, or 0xFB6F5F
+     * @param string $iconCustomEmojiId Optional. Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers.
+     *
+     * @return ForumTopic
+     */
+    public function createForumTopic($chatId, $name, $iconColor = null, $iconCustomEmojiId = null)
+    {
+        return ForumTopic::fromResponse($this->call('createForumTopic'), [
+            'chat_id' => $chatId,
+            'name' => $name,
+            'icon_color' => $iconColor,
+            'icon_custom_emoji_id' => $iconCustomEmojiId,
+        ]);
     }
 
     /**
