@@ -334,4 +334,11 @@ class ChatTest extends TestCase
         ]);
         $this->assertEquals(['username1','username2'], $item->getActiveUsernames());
     }
+
+    public function testEmojiStatusCustomEmojiId()
+    {
+        $item = new Chat();
+        $item->setEmojiStatusCustomEmojiId('custom_emoji_id');
+        $this->assertEquals('custom_emoji_id', $item->getEmojiStatusCustomEmojiId());
+    }
 }
