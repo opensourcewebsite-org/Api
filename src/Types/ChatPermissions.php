@@ -28,6 +28,7 @@ class ChatPermissions extends BaseType implements TypeInterface
         'can_change_info' => true,
         'can_invite_users' => true,
         'can_pin_messages' => true,
+        'can_manage_topics' => true,
     ];
 
     /**
@@ -89,6 +90,13 @@ class ChatPermissions extends BaseType implements TypeInterface
      * @var bool
      */
     protected $canPinMessages;
+
+    /**
+     * Optional. True, if the user is allowed to create forum topics. If ommited defaults to the value of can_pin_messages
+     *
+     * @var bool
+     */
+    protected $canManageTopics;
 
     /**
      * @return bool
@@ -216,5 +224,21 @@ class ChatPermissions extends BaseType implements TypeInterface
     public function setCanPinMessages($canPinMessages)
     {
         $this->canPinMessages = $canPinMessages;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canManageTopics()
+    {
+        return $this->canManageTopics;
+    }
+
+    /**
+     * @param bool $canManageTopics
+     */
+    public function setCanManageTopics($canManageTopics)
+    {
+        $this->canManageTopics = $canManageTopics;
     }
 }
