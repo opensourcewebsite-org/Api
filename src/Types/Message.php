@@ -76,6 +76,9 @@ class Message extends BaseType implements TypeInterface
         'invoice' => Invoice::class,
         'successful_payment' => SuccessfulPayment::class,
         'connected_website' => true,
+        'forum_topic_created' => ForumTopicCreated::class,
+        'forum_topic_closed' => ForumTopicClosed::class,
+        'forum_topic_reopened' => ForumTopicReopened::class,
         'video_chat_scheduled' => VideoChatScheduled::class,
         'video_chat_started' => VideoChatStarted::class,
         'video_chat_ended' => VideoChatEnded::class,
@@ -455,6 +458,27 @@ class Message extends BaseType implements TypeInterface
      * @var string
      */
     protected $connectedWebsite;
+
+    /**
+     * Optional. Service message: forum topic created
+     *
+     * @var ForumTopicCreated
+     */
+    protected $forumTopicCreated;
+
+    /**
+     * Optional. Service message: forum topic closed.
+     *
+     * @var ForumTopicClosed
+     */
+    protected $forumTopicClosed;
+
+    /**
+     * Optional. Service message: forum topic reopened.
+     *
+     * @var ForumTopicReopened
+     */
+    protected $forumTopicReopened;
 
     /**
      * Optional. Service message: video chat scheduled.
@@ -1349,6 +1373,54 @@ class Message extends BaseType implements TypeInterface
     public function setConnectedWebsite($connectedWebsite)
     {
         $this->connectedWebsite = $connectedWebsite;
+    }
+
+    /**
+     * @return  ForumTopicCreated
+     */
+    public function getForumTopicCreated()
+    {
+        return $this->forumTopicCreated;
+    }
+
+    /**
+     * @param ForumTopicCreated $forumTopicCreated
+     */
+    public function setForumTopicCreated($forumTopicCreated)
+    {
+        $this->forumTopicCreated = $forumTopicCreated;
+    }
+
+    /**
+     * @return ForumTopicClosed
+     */
+    public function getForumTopicClosed()
+    {
+        return $this->forumTopicClosed;
+    }
+
+    /**
+     * @param ForumTopicClosed $forumTopicClosed
+     */
+    public function setForumTopicClosed($forumTopicClosed)
+    {
+        $this->forumTopicClosed = $forumTopicClosed;
+    }
+
+    /**
+     * @return ForumTopicReopened
+     */
+    public function getForumTopicReopened()
+    {
+        return $this->forumTopicReopened;
+    }
+
+    /**
+     * @param ForumTopicReopened $forumTopicReopened
+     */
+    public function setForumTopicReopened($forumTopicReopened)
+    {
+        $this->forumTopicReopened = $forumTopicReopened;
     }
 
     /**

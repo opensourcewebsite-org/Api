@@ -8,6 +8,9 @@ use TelegramBot\Api\Types\Chat;
 use TelegramBot\Api\Types\Contact;
 use TelegramBot\Api\Types\Dice;
 use TelegramBot\Api\Types\Document;
+use TelegramBot\Api\Types\ForumTopicClosed;
+use TelegramBot\Api\Types\ForumTopicCreated;
+use TelegramBot\Api\Types\ForumTopicReopened;
 use TelegramBot\Api\Types\GroupChat;
 use TelegramBot\Api\Types\Location;
 use TelegramBot\Api\Types\Message;
@@ -1064,5 +1067,32 @@ class MessageTest extends TestCase
         $item = new Message();
         $item->setMessageThreadId(512);
         $this->assertEquals(512, $item->getMessageThreadId());
+    }
+
+    public function testForumTopicCreated()
+    {
+        $item = new Message();
+        $forumTopicCreated = ForumTopicCreated::fromResponse([
+            'name' => 'forum topic',
+            'icon_color' => 512,
+        ]);
+        $item->setForumTopicCreated($forumTopicCreated);
+        $this->assertEquals($forumTopicCreated, $item->getForumTopicCreated());
+    }
+
+    public function testForumTopicClosed()
+    {
+        $item = new Message();
+        $forumTopicClosed = new ForumTopicClosed();
+        $item->setForumTopicClosed($forumTopicClosed);
+        $this->assertEquals($forumTopicClosed, $item->getForumTopicClosed());
+    }
+
+    public function testForumTopicReopened()
+    {
+        $item = new Message();
+        $forumTopicReopened = new ForumTopicReopened();
+        $item->setForumTopicReopened($forumTopicReopened);
+        $this->assertEquals($forumTopicReopened, $item->getForumTopicReopened());
     }
 }
