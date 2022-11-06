@@ -310,4 +310,11 @@ class ChatTest extends TestCase
             'type' => 'private'
         ));
     }
+
+    public function testIsForum()
+    {
+        $item = new Chat();
+        $item->setIsForum(false);
+        $this->assertEquals(false, $item->isForum());
+    }
 }

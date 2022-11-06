@@ -27,6 +27,7 @@ class Chat extends BaseType implements TypeInterface
         'username' => true,
         'first_name' => true,
         'last_name' => true,
+        'is_forum' => true,
         'photo' => ChatPhoto::class,
         'bio' => true,
         'has_private_forwards' => true,
@@ -87,6 +88,13 @@ class Chat extends BaseType implements TypeInterface
      * @var string
      */
     protected $lastName;
+
+    /**
+     * Optionl. True if the supergroup chat is a forum (has topics enabled)
+     *
+     * @var bool
+     */
+    protected $isForum;
 
     /**
      * Optional. Chat photo. Returned only in getChat.
@@ -311,6 +319,22 @@ class Chat extends BaseType implements TypeInterface
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isForum()
+    {
+        return $this->isForum;
+    }
+
+    /**
+     * @param bool $isForum
+     */
+    public function setIsForum($isForum)
+    {
+        $this->isForum = $isForum;
     }
 
     /**
