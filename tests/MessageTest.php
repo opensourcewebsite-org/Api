@@ -1051,4 +1051,11 @@ class MessageTest extends TestCase
         $item->setVideoNote($videoNote);
         $this->assertEquals($videoNote, $item->getVideoNote());
     }
+
+    public function testIsTopicMessage()
+    {
+        $item = new Message();
+        $item->setIsTopicMessage(false);
+        $this->assertEquals(false, $item->isTopicMessage());
+    }
 }
