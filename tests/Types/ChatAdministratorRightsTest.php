@@ -160,4 +160,11 @@ class ChatAdministratorRightsTest extends TestCase
         $item->setCanPinMessages(true);
         $this->assertEquals(true, $item->canPinMessages());
     }
+
+    public function testCanManageTopics()
+    {
+        $item = new ChatAdministratorRights();
+        $item->setCanManageTopics(false);
+        $this->assertEquals(false, $item->canManageTopics());
+    }
 }
