@@ -1058,4 +1058,11 @@ class MessageTest extends TestCase
         $item->setIsTopicMessage(false);
         $this->assertEquals(false, $item->isTopicMessage());
     }
+
+    public function testMessageThreadId()
+    {
+        $item = new Message();
+        $item->setMessageThreadId(512);
+        $this->assertEquals(512, $item->getMessageThreadId());
+    }
 }

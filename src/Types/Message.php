@@ -25,6 +25,7 @@ class Message extends BaseType implements TypeInterface
      */
     protected static $map = [
         'message_id' => true,
+        'message_thread_id' => true,
         'from' => User::class,
         'sender_chat' => Chat::class,
         'date' => true,
@@ -88,6 +89,13 @@ class Message extends BaseType implements TypeInterface
      * @var int
      */
     protected $messageId;
+
+    /**
+     * Optional. Unique identifier of a message thread to which the message belongs; for supergroups only
+     *
+     * @var integer
+     */
+    protected $messageThreadId;
 
     /**
      * Optional. Sender name. Can be empty for messages sent to channels
@@ -503,6 +511,22 @@ class Message extends BaseType implements TypeInterface
         } else {
             throw new InvalidArgumentException();
         }
+    }
+
+    /**
+     * @return integer
+     */
+    public function getMessageThreadId()
+    {
+        return $this->messageThreadId;
+    }
+
+    /**
+     * @param integer $messageThreadId
+     */
+    public function setMessageThreadid($messageThreadId)
+    {
+        $this->messageThreadId = $messageThreadId;
     }
 
     /**
