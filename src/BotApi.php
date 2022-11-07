@@ -784,6 +784,7 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $animation
+     * @param int|null $messageThreadId
      * @param int|null $duration
      * @param string|null $caption
      * @param int|null $replyToMessageId
@@ -799,6 +800,7 @@ class BotApi
     public function sendAnimation(
         $chatId,
         $animation,
+        $messageThreadId = null,
         $duration = null,
         $caption = null,
         $replyToMessageId = null,
@@ -809,6 +811,7 @@ class BotApi
         return Message::fromResponse($this->call('sendAnimation', [
             'chat_id' => $chatId,
             'animation' => $animation,
+            'message_thread_id' => $messageThreadId,
             'duration' => $duration,
             'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
