@@ -1831,6 +1831,38 @@ class BotApi
     }
 
     /**
+     * Use this method to close an open topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+     *
+     * @param integer|string $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param integer $messageThredaId Unique identifier for the target message thread of the forum topic
+     *
+     * @return bool
+     */
+    public function closeForumTopic($chatId, $messageThreadId)
+    {
+        return $this->call('closeForumTopic', [
+            'chat_id' => $chatId,
+            'message_thread_id' => $messageThreadId,
+        ]);
+    }
+
+    /**
+     * Use this method to reopen a closed topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+     *
+     * @param integer $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param integer $messageThreadId Unique identifier for the target message thread of the forum topic
+     *
+     * @return bool
+     */
+    public function reopenForumTopic($chatId, $messageThreadId)
+    {
+        return $this->call('reopenForumTopic', [
+            'chat_id' => $chatId,
+            'message_thread_id' => $messageThreadId,
+        ]);
+    }
+
+    /**
      * Use this method for your bot to leave a group, supergroup or channel.
      *
      * @param string|int $chatId Unique identifier for the target chat or username of the target channel
