@@ -670,6 +670,7 @@ class BotApi
      * @param float $longitude
      * @param string $title
      * @param string $address
+     * @param int|null $messageThreadId
      * @param string|null $foursquareId
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
@@ -685,6 +686,7 @@ class BotApi
         $longitude,
         $title,
         $address,
+        $messageThreadId = null,
         $foursquareId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
@@ -694,6 +696,7 @@ class BotApi
             'chat_id' => $chatId,
             'latitude' => $latitude,
             'longitude' => $longitude,
+            'message_thread_id' => $messageThreadId,
             'title' => $title,
             'address' => $address,
             'foursquare_id' => $foursquareId,
