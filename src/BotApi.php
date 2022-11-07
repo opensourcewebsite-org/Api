@@ -6,6 +6,7 @@ use TelegramBot\Api\Types\ArrayOfBotCommand;
 use TelegramBot\Api\Types\ArrayOfChatMemberEntity;
 use TelegramBot\Api\Types\ArrayOfMessageEntity;
 use TelegramBot\Api\Types\ArrayOfMessages;
+use TelegramBot\Api\Types\ArrayOfStickers;
 use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\Chat;
 use TelegramBot\Api\Types\ChatAdministratorRights;
@@ -1860,6 +1861,49 @@ class BotApi
             'chat_id' => $chatId,
             'message_thread_id' => $messageThreadId,
         ]);
+    }
+
+    /**
+     * Use this method to delete a forum topic along with all its messages in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_delete_messages administrator rights. Returns True on success.
+     *
+     * @param integer $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param integer $messageThreadId Unique identifier for the target message thread of the forum topic
+     *
+     * @return bool
+     */
+    public function deleteForumTopic($chatId, $messageThreadId)
+    {
+        return $this->call('deleteForumTopic', [
+            'chat_id' => $chatId,
+            'message_thread_id' => $messageThreadId,
+        ]);
+    }
+
+    /**
+     * Use this method to clear the list of pinned messages in a forum topic. The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup. Returns True on success.
+     *
+     * @param integer $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param integer $messageThreadId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     *
+     * @return bool
+     */
+    public function unpinAllForumTopicMessages($chatId, $messageThreadId)
+    {
+        return $this->call('unpinAllForumTopicMessages', [
+            'chat_id' => $chatId,
+            'message_thread_id' => $messageThreadId,
+        ]);
+    }
+
+
+    /**
+     * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
+     *
+     * @return ArrayOfStickers
+     */
+    public function getForumTopicIconStickers()
+    {
+        return ArrayOfStickers::fromResponse($this->call('getForumTopicIconStickers'));
     }
 
     /**
