@@ -1979,6 +1979,7 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $videoNote
+     * @param int|null $messageThreadId
      * @param int|null $duration
      * @param int|null $length
      * @param int|null $replyToMessageId
@@ -1993,6 +1994,7 @@ class BotApi
     public function sendVideoNote(
         $chatId,
         $videoNote,
+        $messageThreadId = null,
         $duration = null,
         $length = null,
         $replyToMessageId = null,
@@ -2002,6 +2004,7 @@ class BotApi
         return Message::fromResponse($this->call('sendVideoNote', [
             'chat_id' => $chatId,
             'video_note' => $videoNote,
+            'message_thread_id' => $messageThreadId,
             'duration' => $duration,
             'length' => $length,
             'reply_to_message_id' => $replyToMessageId,
