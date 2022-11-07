@@ -834,6 +834,7 @@ class BotApi
      *
      * @param int|string       $chatId chat_id or @channel_name
      * @param \CURLFile|string $voice
+     * @param int|null $messageThreadId
      * @param string           $caption Voice message caption, 0-1024 characters after entities parsing
      * @param int|null         $duration
      * @param int|null         $replyToMessageId
@@ -851,6 +852,7 @@ class BotApi
     public function sendVoice(
         $chatId,
         $voice,
+        $messageThreadId = null,
         $caption = null,
         $duration = null,
         $replyToMessageId = null,
@@ -862,6 +864,7 @@ class BotApi
         return Message::fromResponse($this->call('sendVoice', [
             'chat_id' => $chatId,
             'voice' => $voice,
+            'message_thread_id' => null,
             'caption' => $caption,
             'duration' => $duration,
             'reply_to_message_id' => $replyToMessageId,
