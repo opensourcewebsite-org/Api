@@ -1469,6 +1469,7 @@ class BotApi
      * @param string $startParameter
      * @param string $currency
      * @param array $prices
+     * @param int|null $messageThreadId
      * @param string|null $photoUrl
      * @param int|null $photoSize
      * @param int|null $photoWidth
@@ -1497,6 +1498,7 @@ class BotApi
         $startParameter,
         $currency,
         $prices,
+        $messageThreadId = null,
         $isFlexible = false,
         $photoUrl = null,
         $photoSize = null,
@@ -1522,6 +1524,7 @@ class BotApi
             'start_parameter' => $startParameter,
             'currency' => $currency,
             'prices' => json_encode($prices),
+            'message_thread_id' => $messageThreadId,
             'is_flexible' => $isFlexible,
             'photo_url' => $photoUrl,
             'photo_size' => $photoSize,
@@ -2144,6 +2147,7 @@ class BotApi
      * @param      $emoji string Emoji on which the dice throw animation is based. Currently, must be one of “🎲”,
      *     “🎯”, “🏀”, “⚽”, or “🎰”. Dice can have values 1-6 for “🎲” and “🎯”, values 1-5 for “🏀” and “⚽”, and
      *     values 1-64 for “🎰”. Defaults to “🎲
+     * @param int|null $messageThreadId
      * @param bool $disableNotification Sends the message silently. Users will receive a notification with no sound.
      * @param string|null $replyToMessageId If the message is a reply, ID of the original message
      * @param bool $$allowSendingWithoutReply Pass True, if the message should be sent even if the specified replied-to
@@ -2160,6 +2164,7 @@ class BotApi
     public function sendDice(
         $chatId,
         $emoji,
+        $messageThreadId = null,
         $disableNotification = false,
         $replyToMessageId = null,
         $allowSendingWithoutReply = false,
@@ -2168,6 +2173,7 @@ class BotApi
         return Message::fromResponse($this->call('sendDice', [
             'chat_id' => $chatId,
             'emoji' => $emoji,
+            'message_thread_id' => $messageThreadId,
             'disable_notification' => (bool) $disableNotification,
             'reply_to_message_id' => (int) $replyToMessageId,
             'allow_sending_without_reply' => (bool) $allowSendingWithoutReply,
