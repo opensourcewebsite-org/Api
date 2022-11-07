@@ -909,6 +909,7 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $audio
+     * @param int|null $messageThreadId
      * @param int|null $duration
      * @param string|null $performer
      * @param string|null $title
@@ -925,6 +926,7 @@ class BotApi
     public function sendAudio(
         $chatId,
         $audio,
+        $messageThreadId = null,
         $duration = null,
         $performer = null,
         $title = null,
@@ -936,6 +938,7 @@ class BotApi
         return Message::fromResponse($this->call('sendAudio', [
             'chat_id' => $chatId,
             'audio' => $audio,
+            'message_thread_id' => $messageThreadId,
             'duration' => $duration,
             'performer' => $performer,
             'title' => $title,
