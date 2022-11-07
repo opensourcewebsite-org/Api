@@ -994,6 +994,7 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $document
+     * @param int|null $messageThreadId
      * @param string|null $caption
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
@@ -1008,6 +1009,7 @@ class BotApi
     public function sendDocument(
         $chatId,
         $document,
+        $messageThreadId = null,
         $caption = null,
         $replyToMessageId = null,
         $replyMarkup = null,
@@ -1017,6 +1019,7 @@ class BotApi
         return Message::fromResponse($this->call('sendDocument', [
             'chat_id' => $chatId,
             'document' => $document,
+            'message_thread_id' => $messageThreadId,
             'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
