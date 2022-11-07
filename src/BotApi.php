@@ -401,6 +401,7 @@ class BotApi
      * @param int|string $chatId chat_id or @channel_name
      * @param string $phoneNumber
      * @param string $firstName
+     * @param int|null $messageThreadId
      * @param string $lastName
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
@@ -414,6 +415,7 @@ class BotApi
         $chatId,
         $phoneNumber,
         $firstName,
+        $messageThreadId = null,
         $lastName = null,
         $replyToMessageId = null,
         $replyMarkup = null,
@@ -423,6 +425,7 @@ class BotApi
             'chat_id' => $chatId,
             'phone_number' => $phoneNumber,
             'first_name' => $firstName,
+            'message_thread_id' => $messageThreadId,
             'last_name' => $lastName,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
