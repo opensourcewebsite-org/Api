@@ -2087,6 +2087,7 @@ class BotApi
      *                (in the format @channelusername)
      * @param string $question Poll question, 1-255 characters
      * @param array $options A JSON-serialized list of answer options, 2-10 strings 1-100 characters each
+     * @param int|null $messageThreadId
      * @param bool $isAnonymous True, if the poll needs to be anonymous, defaults to True
      * @param string|null $type Poll type, “quiz” or “regular”, defaults to “regular”
      * @param bool $allowsMultipleAnswers True, if the poll allows multiple answers,
@@ -2107,6 +2108,7 @@ class BotApi
         $chatId,
         $question,
         $options,
+        $messageThreadId = null,
         $isAnonymous = false,
         $type = null,
         $allowsMultipleAnswers = false,
@@ -2120,6 +2122,7 @@ class BotApi
             'chat_id' => $chatId,
             'question' => $question,
             'options' => json_encode($options),
+            'message_thread_id' => $messageThreadId,
             'is_anonymous' => (bool) $isAnonymous,
             'type' => (string) $type,
             'allows_multiple_answers' => (bool) $allowsMultipleAnswers,
