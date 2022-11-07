@@ -6,7 +6,7 @@ use TelegramBot\Api\Types\ArrayOfBotCommand;
 use TelegramBot\Api\Types\ArrayOfChatMemberEntity;
 use TelegramBot\Api\Types\ArrayOfMessageEntity;
 use TelegramBot\Api\Types\ArrayOfMessages;
-use TelegramBot\Api\Types\ArrayOfStickers;
+use TelegramBot\Api\Types\ArrayOfSticker;
 use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\Chat;
 use TelegramBot\Api\Types\ChatAdministratorRights;
@@ -1899,11 +1899,11 @@ class BotApi
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      *
-     * @return ArrayOfStickers
+     * @return ArrayOfSticker
      */
     public function getForumTopicIconStickers()
     {
-        return ArrayOfStickers::fromResponse($this->call('getForumTopicIconStickers'));
+        return ArrayOfSticker::fromResponse($this->call('getForumTopicIconStickers'));
     }
 
     /**
