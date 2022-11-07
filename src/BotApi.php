@@ -355,6 +355,7 @@ class BotApi
      * @param int|string $chatId
      * @param int|string $fromChatId
      * @param int $messageId
+     * @param int|null $messageThreadId
      * @param string|null $caption
      * @param string|null $parseMode
      * @param ArrayOfMessageEntity|null $captionEntities
@@ -373,6 +374,7 @@ class BotApi
         $chatId,
         $fromChatId,
         $messageId,
+        $messageThreadId = null,
         $caption = null,
         $parseMode = null,
         $captionEntities = null,
@@ -385,6 +387,7 @@ class BotApi
             'chat_id' => $chatId,
             'from_chat_id' => $fromChatId,
             'message_id' => (int)$messageId,
+            'message_thread_id' => $messageThreadId,
             'caption' => $caption,
             'parse_mode' => $parseMode,
             'caption_entities' => $captionEntities,
@@ -890,18 +893,20 @@ class BotApi
      * @param int|string $chatId chat_id or @channel_name
      * @param int $fromChatId
      * @param int $messageId
+     * @param int|null $messageThreadId
      * @param bool $disableNotification
      *
      * @return \TelegramBot\Api\Types\Message
      * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
      */
-    public function forwardMessage($chatId, $fromChatId, $messageId, $disableNotification = false)
+    public function forwardMessage($chatId, $fromChatId, $messageId, $messageThreadId = null, $disableNotification = false)
     {
         return Message::fromResponse($this->call('forwardMessage', [
             'chat_id' => $chatId,
             'from_chat_id' => $fromChatId,
             'message_id' => (int)$messageId,
+            'message_thread_id' => $messageThreadId,
             'disable_notification' => (bool)$disableNotification,
         ]));
     }
