@@ -317,6 +317,7 @@ class BotApi
      *
      * @param int|string $chatId
      * @param string $text
+     * @param int|null $messageThreadId
      * @param string|null $parseMode
      * @param bool $disablePreview
      * @param int|null $replyToMessageId
@@ -331,6 +332,7 @@ class BotApi
     public function sendMessage(
         $chatId,
         $text,
+        $messageThreadId = null,
         $parseMode = null,
         $disablePreview = false,
         $replyToMessageId = null,
@@ -340,6 +342,7 @@ class BotApi
         return Message::fromResponse($this->call('sendMessage', [
             'chat_id' => $chatId,
             'text' => $text,
+            'message_thread_id' => $messageThreadId,
             'parse_mode' => $parseMode,
             'disable_web_page_preview' => $disablePreview,
             'reply_to_message_id' => (int)$replyToMessageId,
