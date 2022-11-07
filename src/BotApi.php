@@ -737,6 +737,7 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $video
+     * @param int|null $messageThreadId
      * @param int|null $duration
      * @param string|null $caption
      * @param int|null $replyToMessageId
@@ -753,6 +754,7 @@ class BotApi
     public function sendVideo(
         $chatId,
         $video,
+        $messageThreadId = null,
         $duration = null,
         $caption = null,
         $replyToMessageId = null,
@@ -764,6 +766,7 @@ class BotApi
         return Message::fromResponse($this->call('sendVideo', [
             'chat_id' => $chatId,
             'video' => $video,
+            'message_thread_id' => $messageThreadId,
             'duration' => $duration,
             'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
