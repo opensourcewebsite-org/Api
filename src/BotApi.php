@@ -2034,6 +2034,7 @@ class BotApi
      *
      * @param int|string $chatId
      * @param ArrayOfInputMedia $media
+     * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param bool $disableNotification
      *
@@ -2043,12 +2044,14 @@ class BotApi
     public function sendMediaGroup(
         $chatId,
         $media,
+        $messageThreadId = null,
         $disableNotification = false,
         $replyToMessageId = null
     ) {
         return ArrayOfMessages::fromResponse($this->call('sendMediaGroup', [
             'chat_id' => $chatId,
             'media' => $media->toJson(),
+            'message_thread_id' => $messageThreadId,
             'reply_to_message_id' => (int)$replyToMessageId,
             'disable_notification' => (bool)$disableNotification,
         ]));
