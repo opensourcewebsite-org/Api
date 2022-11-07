@@ -576,6 +576,7 @@ class BotApi
      * @param int|string                                                              $chatId
      * @param float                                                                   $latitude
      * @param float                                                                   $longitude
+     * @param int|null $messageThreadId
      * @param int|null                                                                $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
      *        Types\ReplyKeyboardRemove|null $replyMarkup
@@ -588,6 +589,7 @@ class BotApi
         $chatId,
         $latitude,
         $longitude,
+        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false,
@@ -597,6 +599,7 @@ class BotApi
             'chat_id' => $chatId,
             'latitude' => $latitude,
             'longitude' => $longitude,
+            'message_thread_id' => $messageThreadId,
             'live_period' => $livePeriod,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
