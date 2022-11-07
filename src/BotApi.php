@@ -705,6 +705,7 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $sticker
+     * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
      *        Types\ReplyKeyboardRemove|null $replyMarkup
@@ -717,6 +718,7 @@ class BotApi
     public function sendSticker(
         $chatId,
         $sticker,
+        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false
@@ -724,6 +726,7 @@ class BotApi
         return Message::fromResponse($this->call('sendSticker', [
             'chat_id' => $chatId,
             'sticker' => $sticker,
+            'message_thread_id' => $messageThreadId,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
