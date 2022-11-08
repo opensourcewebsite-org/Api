@@ -27,7 +27,10 @@ class Chat extends BaseType implements TypeInterface
         'username' => true,
         'first_name' => true,
         'last_name' => true,
+        'is_forum' => true,
         'photo' => ChatPhoto::class,
+        'active_usernames' => true,
+        'emoji_status_custom_emoji_id' => true,
         'bio' => true,
         'has_private_forwards' => true,
         'has_restricted_voice_and_video_messages' => true,
@@ -89,11 +92,32 @@ class Chat extends BaseType implements TypeInterface
     protected $lastName;
 
     /**
+     * Optionl. True if the supergroup chat is a forum (has topics enabled)
+     *
+     * @var bool
+     */
+    protected $isForum;
+
+    /**
      * Optional. Chat photo. Returned only in getChat.
      *
      * @var ChatPhoto
      */
     protected $photo;
+
+    /**
+     * Optional. If non-empty, the list of all active chat usernames; for private chats, supergroups and channels. Returned only in getChat.
+     *
+     * @var array
+     */
+    protected $activeUsernames;
+
+    /**
+     *  	Optional. If non-empty, the list of all active chat usernames; for private chats, supergroups and channels. Returned only in getChat.
+     *
+     * @val string
+     */
+    protected $emojiStatusCustomEmojiId;
 
     /**
      * Optional. Bio of the other party in a private chat. Returned only in getChat
@@ -314,6 +338,22 @@ class Chat extends BaseType implements TypeInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isForum()
+    {
+        return $this->isForum;
+    }
+
+    /**
+     * @param bool $isForum
+     */
+    public function setIsForum($isForum)
+    {
+        $this->isForum = $isForum;
+    }
+
+    /**
      * @return ChatPhoto
      */
     public function getPhoto()
@@ -327,6 +367,38 @@ class Chat extends BaseType implements TypeInterface
     public function setPhoto($photo)
     {
         $this->photo = $photo;
+    }
+
+    /**
+     * @return array
+     */
+    public function getActiveUsernames()
+    {
+        return $this->activeUsernames;
+    }
+
+    /**
+     * @param array $activeUsernames
+     */
+    public function setActiveUsernames($activeUsernames)
+    {
+        $this->activeUsernames = $activeUsernames;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmojiStatusCustomEmojiId()
+    {
+        return $this->emojiStatusCustomEmojiId;
+    }
+
+    /**
+     * @param string
+     */
+    public function setEmojiStatusCustomEmojiId($emojiStatusCustomEmojiId)
+    {
+        $this->emojiStatusCustomEmojiId = $emojiStatusCustomEmojiId;
     }
 
     /**

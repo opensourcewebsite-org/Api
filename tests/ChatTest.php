@@ -310,4 +310,35 @@ class ChatTest extends TestCase
             'type' => 'private'
         ));
     }
+
+    public function testIsForum()
+    {
+        $item = new Chat();
+        $item->setIsForum(false);
+        $this->assertEquals(false, $item->isForum());
+    }
+
+    public function testActiveUsernames()
+    {
+        $item = new Chat();
+        $item->setActiveUsernames(['username1','username2']);
+        $this->assertEquals(['username1','username2'], $item->getActiveUsernames());
+    }
+
+    public function testFromResponseActiveUsernames()
+    {
+        $item = Chat::fromResponse([
+            'id' => 512,
+            'type' => 'private',
+            'active_usernames' => ['username1','username2'],
+        ]);
+        $this->assertEquals(['username1','username2'], $item->getActiveUsernames());
+    }
+
+    public function testEmojiStatusCustomEmojiId()
+    {
+        $item = new Chat();
+        $item->setEmojiStatusCustomEmojiId('custom_emoji_id');
+        $this->assertEquals('custom_emoji_id', $item->getEmojiStatusCustomEmojiId());
+    }
 }

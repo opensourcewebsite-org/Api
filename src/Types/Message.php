@@ -25,6 +25,7 @@ class Message extends BaseType implements TypeInterface
      */
     protected static $map = [
         'message_id' => true,
+        'message_thread_id' => true,
         'from' => User::class,
         'sender_chat' => Chat::class,
         'date' => true,
@@ -33,6 +34,7 @@ class Message extends BaseType implements TypeInterface
         'forward_from_chat' => Chat::class,
         'forward_from_message_id' => true,
         'forward_date' => true,
+        'is_topic_message' => true,
         'is_automatic_forward' => true,
         'forward_signature' => true,
         'forward_sender_name' => true,
@@ -74,6 +76,9 @@ class Message extends BaseType implements TypeInterface
         'invoice' => Invoice::class,
         'successful_payment' => SuccessfulPayment::class,
         'connected_website' => true,
+        'forum_topic_created' => ForumTopicCreated::class,
+        'forum_topic_closed' => ForumTopicClosed::class,
+        'forum_topic_reopened' => ForumTopicReopened::class,
         'video_chat_scheduled' => VideoChatScheduled::class,
         'video_chat_started' => VideoChatStarted::class,
         'video_chat_ended' => VideoChatEnded::class,
@@ -87,6 +92,13 @@ class Message extends BaseType implements TypeInterface
      * @var int
      */
     protected $messageId;
+
+    /**
+     * Optional. Unique identifier of a message thread to which the message belongs; for supergroups only
+     *
+     * @var integer
+     */
+    protected $messageThreadId;
 
     /**
      * Optional. Sender name. Can be empty for messages sent to channels
@@ -160,6 +172,13 @@ class Message extends BaseType implements TypeInterface
      * @var int
      */
     protected $forwardDate;
+
+    /**
+     * Optional. True, if the message is sent to a forum topic.
+     *
+     * @var bool
+     */
+    protected $isTopicMessage;
 
     /**
      * Optional. True, if the message is a channel post that was automatically forwarded to the connected discussion group.
@@ -441,6 +460,27 @@ class Message extends BaseType implements TypeInterface
     protected $connectedWebsite;
 
     /**
+     * Optional. Service message: forum topic created
+     *
+     * @var ForumTopicCreated
+     */
+    protected $forumTopicCreated;
+
+    /**
+     * Optional. Service message: forum topic closed.
+     *
+     * @var ForumTopicClosed
+     */
+    protected $forumTopicClosed;
+
+    /**
+     * Optional. Service message: forum topic reopened.
+     *
+     * @var ForumTopicReopened
+     */
+    protected $forumTopicReopened;
+
+    /**
      * Optional. Service message: video chat scheduled.
      *
      * @var \TelegramBot\Api\Types\VideoChatScheduled
@@ -495,6 +535,22 @@ class Message extends BaseType implements TypeInterface
         } else {
             throw new InvalidArgumentException();
         }
+    }
+
+    /**
+     * @return integer
+     */
+    public function getMessageThreadId()
+    {
+        return $this->messageThreadId;
+    }
+
+    /**
+     * @param integer $messageThreadId
+     */
+    public function setMessageThreadid($messageThreadId)
+    {
+        $this->messageThreadId = $messageThreadId;
     }
 
     /**
@@ -667,6 +723,22 @@ class Message extends BaseType implements TypeInterface
         } else {
             throw new InvalidArgumentException();
         }
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTopicMessage()
+    {
+        return $this->isTopicMessage;
+    }
+
+    /**
+     * @param bool $isTopicMessage
+     */
+    public function setIsTopicMessage($isTopicMessage)
+    {
+        $this->isTopicMessage = $isTopicMessage;
     }
 
     /**
@@ -1301,6 +1373,54 @@ class Message extends BaseType implements TypeInterface
     public function setConnectedWebsite($connectedWebsite)
     {
         $this->connectedWebsite = $connectedWebsite;
+    }
+
+    /**
+     * @return  ForumTopicCreated
+     */
+    public function getForumTopicCreated()
+    {
+        return $this->forumTopicCreated;
+    }
+
+    /**
+     * @param ForumTopicCreated $forumTopicCreated
+     */
+    public function setForumTopicCreated($forumTopicCreated)
+    {
+        $this->forumTopicCreated = $forumTopicCreated;
+    }
+
+    /**
+     * @return ForumTopicClosed
+     */
+    public function getForumTopicClosed()
+    {
+        return $this->forumTopicClosed;
+    }
+
+    /**
+     * @param ForumTopicClosed $forumTopicClosed
+     */
+    public function setForumTopicClosed($forumTopicClosed)
+    {
+        $this->forumTopicClosed = $forumTopicClosed;
+    }
+
+    /**
+     * @return ForumTopicReopened
+     */
+    public function getForumTopicReopened()
+    {
+        return $this->forumTopicReopened;
+    }
+
+    /**
+     * @param ForumTopicReopened $forumTopicReopened
+     */
+    public function setForumTopicReopened($forumTopicReopened)
+    {
+        $this->forumTopicReopened = $forumTopicReopened;
     }
 
     /**

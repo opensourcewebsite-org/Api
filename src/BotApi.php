@@ -6,11 +6,13 @@ use TelegramBot\Api\Types\ArrayOfBotCommand;
 use TelegramBot\Api\Types\ArrayOfChatMemberEntity;
 use TelegramBot\Api\Types\ArrayOfMessageEntity;
 use TelegramBot\Api\Types\ArrayOfMessages;
+use TelegramBot\Api\Types\ArrayOfSticker;
 use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\Chat;
 use TelegramBot\Api\Types\ChatAdministratorRights;
 use TelegramBot\Api\Types\ChatMember;
 use TelegramBot\Api\Types\File;
+use TelegramBot\Api\Types\ForumTopic;
 use TelegramBot\Api\Types\Inline\QueryResult\AbstractInlineQueryResult;
 use TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
 use TelegramBot\Api\Types\InputMedia\InputMedia;
@@ -315,6 +317,7 @@ class BotApi
      *
      * @param int|string $chatId
      * @param string $text
+     * @param int|null $messageThreadId
      * @param string|null $parseMode
      * @param bool $disablePreview
      * @param int|null $replyToMessageId
@@ -329,6 +332,7 @@ class BotApi
     public function sendMessage(
         $chatId,
         $text,
+        $messageThreadId = null,
         $parseMode = null,
         $disablePreview = false,
         $replyToMessageId = null,
@@ -338,6 +342,7 @@ class BotApi
         return Message::fromResponse($this->call('sendMessage', [
             'chat_id' => $chatId,
             'text' => $text,
+            'message_thread_id' => $messageThreadId,
             'parse_mode' => $parseMode,
             'disable_web_page_preview' => $disablePreview,
             'reply_to_message_id' => (int)$replyToMessageId,
@@ -350,6 +355,7 @@ class BotApi
      * @param int|string $chatId
      * @param int|string $fromChatId
      * @param int $messageId
+     * @param int|null $messageThreadId
      * @param string|null $caption
      * @param string|null $parseMode
      * @param ArrayOfMessageEntity|null $captionEntities
@@ -368,6 +374,7 @@ class BotApi
         $chatId,
         $fromChatId,
         $messageId,
+        $messageThreadId = null,
         $caption = null,
         $parseMode = null,
         $captionEntities = null,
@@ -380,6 +387,7 @@ class BotApi
             'chat_id' => $chatId,
             'from_chat_id' => $fromChatId,
             'message_id' => (int)$messageId,
+            'message_thread_id' => $messageThreadId,
             'caption' => $caption,
             'parse_mode' => $parseMode,
             'caption_entities' => $captionEntities,
@@ -396,6 +404,7 @@ class BotApi
      * @param int|string $chatId chat_id or @channel_name
      * @param string $phoneNumber
      * @param string $firstName
+     * @param int|null $messageThreadId
      * @param string $lastName
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
@@ -409,6 +418,7 @@ class BotApi
         $chatId,
         $phoneNumber,
         $firstName,
+        $messageThreadId = null,
         $lastName = null,
         $replyToMessageId = null,
         $replyMarkup = null,
@@ -418,6 +428,7 @@ class BotApi
             'chat_id' => $chatId,
             'phone_number' => $phoneNumber,
             'first_name' => $firstName,
+            'message_thread_id' => $messageThreadId,
             'last_name' => $lastName,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
@@ -571,6 +582,7 @@ class BotApi
      * @param int|string                                                              $chatId
      * @param float                                                                   $latitude
      * @param float                                                                   $longitude
+     * @param int|null $messageThreadId
      * @param int|null                                                                $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
      *        Types\ReplyKeyboardRemove|null $replyMarkup
@@ -583,6 +595,7 @@ class BotApi
         $chatId,
         $latitude,
         $longitude,
+        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false,
@@ -592,6 +605,7 @@ class BotApi
             'chat_id' => $chatId,
             'latitude' => $latitude,
             'longitude' => $longitude,
+            'message_thread_id' => $messageThreadId,
             'live_period' => $livePeriod,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
@@ -662,6 +676,7 @@ class BotApi
      * @param float $longitude
      * @param string $title
      * @param string $address
+     * @param int|null $messageThreadId
      * @param string|null $foursquareId
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
@@ -677,6 +692,7 @@ class BotApi
         $longitude,
         $title,
         $address,
+        $messageThreadId = null,
         $foursquareId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
@@ -686,6 +702,7 @@ class BotApi
             'chat_id' => $chatId,
             'latitude' => $latitude,
             'longitude' => $longitude,
+            'message_thread_id' => $messageThreadId,
             'title' => $title,
             'address' => $address,
             'foursquare_id' => $foursquareId,
@@ -700,6 +717,7 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $sticker
+     * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
      *        Types\ReplyKeyboardRemove|null $replyMarkup
@@ -712,6 +730,7 @@ class BotApi
     public function sendSticker(
         $chatId,
         $sticker,
+        $messageThreadId = null,
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false
@@ -719,6 +738,7 @@ class BotApi
         return Message::fromResponse($this->call('sendSticker', [
             'chat_id' => $chatId,
             'sticker' => $sticker,
+            'message_thread_id' => $messageThreadId,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
@@ -732,6 +752,7 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $video
+     * @param int|null $messageThreadId
      * @param int|null $duration
      * @param string|null $caption
      * @param int|null $replyToMessageId
@@ -748,6 +769,7 @@ class BotApi
     public function sendVideo(
         $chatId,
         $video,
+        $messageThreadId = null,
         $duration = null,
         $caption = null,
         $replyToMessageId = null,
@@ -759,6 +781,7 @@ class BotApi
         return Message::fromResponse($this->call('sendVideo', [
             'chat_id' => $chatId,
             'video' => $video,
+            'message_thread_id' => $messageThreadId,
             'duration' => $duration,
             'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
@@ -776,6 +799,7 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $animation
+     * @param int|null $messageThreadId
      * @param int|null $duration
      * @param string|null $caption
      * @param int|null $replyToMessageId
@@ -791,6 +815,7 @@ class BotApi
     public function sendAnimation(
         $chatId,
         $animation,
+        $messageThreadId = null,
         $duration = null,
         $caption = null,
         $replyToMessageId = null,
@@ -801,6 +826,7 @@ class BotApi
         return Message::fromResponse($this->call('sendAnimation', [
             'chat_id' => $chatId,
             'animation' => $animation,
+            'message_thread_id' => $messageThreadId,
             'duration' => $duration,
             'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
@@ -820,6 +846,7 @@ class BotApi
      *
      * @param int|string       $chatId chat_id or @channel_name
      * @param \CURLFile|string $voice
+     * @param int|null $messageThreadId
      * @param string           $caption Voice message caption, 0-1024 characters after entities parsing
      * @param int|null         $duration
      * @param int|null         $replyToMessageId
@@ -837,6 +864,7 @@ class BotApi
     public function sendVoice(
         $chatId,
         $voice,
+        $messageThreadId = null,
         $caption = null,
         $duration = null,
         $replyToMessageId = null,
@@ -848,6 +876,7 @@ class BotApi
         return Message::fromResponse($this->call('sendVoice', [
             'chat_id' => $chatId,
             'voice' => $voice,
+            'message_thread_id' => null,
             'caption' => $caption,
             'duration' => $duration,
             'reply_to_message_id' => $replyToMessageId,
@@ -864,18 +893,20 @@ class BotApi
      * @param int|string $chatId chat_id or @channel_name
      * @param int $fromChatId
      * @param int $messageId
+     * @param int|null $messageThreadId
      * @param bool $disableNotification
      *
      * @return \TelegramBot\Api\Types\Message
      * @throws \TelegramBot\Api\InvalidArgumentException
      * @throws \TelegramBot\Api\Exception
      */
-    public function forwardMessage($chatId, $fromChatId, $messageId, $disableNotification = false)
+    public function forwardMessage($chatId, $fromChatId, $messageId, $messageThreadId = null, $disableNotification = false)
     {
         return Message::fromResponse($this->call('forwardMessage', [
             'chat_id' => $chatId,
             'from_chat_id' => $fromChatId,
             'message_id' => (int)$messageId,
+            'message_thread_id' => $messageThreadId,
             'disable_notification' => (bool)$disableNotification,
         ]));
     }
@@ -898,6 +929,7 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $audio
+     * @param int|null $messageThreadId
      * @param int|null $duration
      * @param string|null $performer
      * @param string|null $title
@@ -914,6 +946,7 @@ class BotApi
     public function sendAudio(
         $chatId,
         $audio,
+        $messageThreadId = null,
         $duration = null,
         $performer = null,
         $title = null,
@@ -925,6 +958,7 @@ class BotApi
         return Message::fromResponse($this->call('sendAudio', [
             'chat_id' => $chatId,
             'audio' => $audio,
+            'message_thread_id' => $messageThreadId,
             'duration' => $duration,
             'performer' => $performer,
             'title' => $title,
@@ -940,6 +974,7 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $photo
+     * @param int|null $messageThreadId
      * @param string|null $caption
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
@@ -954,6 +989,7 @@ class BotApi
     public function sendPhoto(
         $chatId,
         $photo,
+        $messageThreadId = null,
         $caption = null,
         $replyToMessageId = null,
         $replyMarkup = null,
@@ -963,6 +999,7 @@ class BotApi
         return Message::fromResponse($this->call('sendPhoto', [
             'chat_id' => $chatId,
             'photo' => $photo,
+            'message_thread_id' => $messageThreadId,
             'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
@@ -977,6 +1014,7 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $document
+     * @param int|null $messageThreadId
      * @param string|null $caption
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
@@ -991,6 +1029,7 @@ class BotApi
     public function sendDocument(
         $chatId,
         $document,
+        $messageThreadId = null,
         $caption = null,
         $replyToMessageId = null,
         $replyMarkup = null,
@@ -1000,6 +1039,7 @@ class BotApi
         return Message::fromResponse($this->call('sendDocument', [
             'chat_id' => $chatId,
             'document' => $document,
+            'message_thread_id' => $messageThreadId,
             'caption' => $caption,
             'reply_to_message_id' => $replyToMessageId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
@@ -1434,6 +1474,7 @@ class BotApi
      * @param string $startParameter
      * @param string $currency
      * @param array $prices
+     * @param int|null $messageThreadId
      * @param string|null $photoUrl
      * @param int|null $photoSize
      * @param int|null $photoWidth
@@ -1462,6 +1503,7 @@ class BotApi
         $startParameter,
         $currency,
         $prices,
+        $messageThreadId = null,
         $isFlexible = false,
         $photoUrl = null,
         $photoSize = null,
@@ -1487,6 +1529,7 @@ class BotApi
             'start_parameter' => $startParameter,
             'currency' => $currency,
             'prices' => json_encode($prices),
+            'message_thread_id' => $messageThreadId,
             'is_flexible' => $isFlexible,
             'photo_url' => $photoUrl,
             'photo_size' => $photoSize,
@@ -1790,6 +1833,121 @@ class BotApi
     }
 
     /**
+     * Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns information about the created topic as a ForumTopic object.
+     *
+     * @param integer|string $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param string $name Topic name, 1-128 characters
+     * @param integer $iconColor Optional. Color of the topic icon in RGB format. Currently, must be one of 0x6FB9F0, 0xFFD67E, 0xCB86DB, 0x8EEE98, 0xFF93B2, or 0xFB6F5F
+     * @param string $iconCustomEmojiId Optional. Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers.
+     *
+     * @return ForumTopic
+     */
+    public function createForumTopic($chatId, $name, $iconColor = null, $iconCustomEmojiId = null)
+    {
+        return ForumTopic::fromResponse($this->call('createForumTopic', [
+            'chat_id' => $chatId,
+            'name' => $name,
+            'icon_color' => $iconColor,
+            'icon_custom_emoji_id' => $iconCustomEmojiId,
+        ]));
+    }
+
+    /**
+     * Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success
+     *
+     * @param integer|string $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param integer $messageThreadId Unique identifier for the target message thread of the forum topic
+     * @param string $name New topic name, 1-128 characters
+     * @param string $iconCustomEmojiId New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicStickers to get all allowed custom emoji identifiers.
+     *
+     * @return bool
+     */
+    public function editForumTopic($chatId, $messageThreadId, $name, $iconCustomEmojiId)
+    {
+        return $this->call('editForumTopic', [
+            'chat_id' => $chatId,
+            'name' => $name,
+            'message_thread_id' => $messageThreadId,
+            'icon_custom_custom_emoji_id' => $iconCustomEmojiId,
+        ]);
+    }
+
+    /**
+     * Use this method to close an open topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+     *
+     * @param integer|string $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param integer $messageThredaId Unique identifier for the target message thread of the forum topic
+     *
+     * @return bool
+     */
+    public function closeForumTopic($chatId, $messageThreadId)
+    {
+        return $this->call('closeForumTopic', [
+            'chat_id' => $chatId,
+            'message_thread_id' => $messageThreadId,
+        ]);
+    }
+
+    /**
+     * Use this method to reopen a closed topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.
+     *
+     * @param integer $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param integer $messageThreadId Unique identifier for the target message thread of the forum topic
+     *
+     * @return bool
+     */
+    public function reopenForumTopic($chatId, $messageThreadId)
+    {
+        return $this->call('reopenForumTopic', [
+            'chat_id' => $chatId,
+            'message_thread_id' => $messageThreadId,
+        ]);
+    }
+
+    /**
+     * Use this method to delete a forum topic along with all its messages in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_delete_messages administrator rights. Returns True on success.
+     *
+     * @param integer $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param integer $messageThreadId Unique identifier for the target message thread of the forum topic
+     *
+     * @return bool
+     */
+    public function deleteForumTopic($chatId, $messageThreadId)
+    {
+        return $this->call('deleteForumTopic', [
+            'chat_id' => $chatId,
+            'message_thread_id' => $messageThreadId,
+        ]);
+    }
+
+    /**
+     * Use this method to clear the list of pinned messages in a forum topic. The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup. Returns True on success.
+     *
+     * @param integer $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param integer $messageThreadId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     *
+     * @return bool
+     */
+    public function unpinAllForumTopicMessages($chatId, $messageThreadId)
+    {
+        return $this->call('unpinAllForumTopicMessages', [
+            'chat_id' => $chatId,
+            'message_thread_id' => $messageThreadId,
+        ]);
+    }
+
+
+    /**
+     * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
+     *
+     * @return ArrayOfSticker
+     */
+    public function getForumTopicIconStickers()
+    {
+        return ArrayOfSticker::fromResponse($this->call('getForumTopicIconStickers'));
+    }
+
+    /**
      * Use this method for your bot to leave a group, supergroup or channel.
      *
      * @param string|int $chatId Unique identifier for the target chat or username of the target channel
@@ -1841,6 +1999,7 @@ class BotApi
      *
      * @param int|string $chatId chat_id or @channel_name
      * @param \CURLFile|string $videoNote
+     * @param int|null $messageThreadId
      * @param int|null $duration
      * @param int|null $length
      * @param int|null $replyToMessageId
@@ -1855,6 +2014,7 @@ class BotApi
     public function sendVideoNote(
         $chatId,
         $videoNote,
+        $messageThreadId = null,
         $duration = null,
         $length = null,
         $replyToMessageId = null,
@@ -1864,6 +2024,7 @@ class BotApi
         return Message::fromResponse($this->call('sendVideoNote', [
             'chat_id' => $chatId,
             'video_note' => $videoNote,
+            'message_thread_id' => $messageThreadId,
             'duration' => $duration,
             'length' => $length,
             'reply_to_message_id' => $replyToMessageId,
@@ -1878,6 +2039,7 @@ class BotApi
      *
      * @param int|string $chatId
      * @param ArrayOfInputMedia $media
+     * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param bool $disableNotification
      *
@@ -1887,12 +2049,14 @@ class BotApi
     public function sendMediaGroup(
         $chatId,
         $media,
+        $messageThreadId = null,
         $disableNotification = false,
         $replyToMessageId = null
     ) {
         return ArrayOfMessages::fromResponse($this->call('sendMediaGroup', [
             'chat_id' => $chatId,
             'media' => $media->toJson(),
+            'message_thread_id' => $messageThreadId,
             'reply_to_message_id' => (int)$replyToMessageId,
             'disable_notification' => (bool)$disableNotification,
         ]));
@@ -1934,6 +2098,7 @@ class BotApi
      *                (in the format @channelusername)
      * @param string $question Poll question, 1-255 characters
      * @param array $options A JSON-serialized list of answer options, 2-10 strings 1-100 characters each
+     * @param int|null $messageThreadId
      * @param bool $isAnonymous True, if the poll needs to be anonymous, defaults to True
      * @param string|null $type Poll type, “quiz” or “regular”, defaults to “regular”
      * @param bool $allowsMultipleAnswers True, if the poll allows multiple answers,
@@ -1954,6 +2119,7 @@ class BotApi
         $chatId,
         $question,
         $options,
+        $messageThreadId = null,
         $isAnonymous = false,
         $type = null,
         $allowsMultipleAnswers = false,
@@ -1967,6 +2133,7 @@ class BotApi
             'chat_id' => $chatId,
             'question' => $question,
             'options' => json_encode($options),
+            'message_thread_id' => $messageThreadId,
             'is_anonymous' => (bool) $isAnonymous,
             'type' => (string) $type,
             'allows_multiple_answers' => (bool) $allowsMultipleAnswers,
@@ -1988,6 +2155,7 @@ class BotApi
      * @param      $emoji string Emoji on which the dice throw animation is based. Currently, must be one of “🎲”,
      *     “🎯”, “🏀”, “⚽”, or “🎰”. Dice can have values 1-6 for “🎲” and “🎯”, values 1-5 for “🏀” and “⚽”, and
      *     values 1-64 for “🎰”. Defaults to “🎲
+     * @param int|null $messageThreadId
      * @param bool $disableNotification Sends the message silently. Users will receive a notification with no sound.
      * @param string|null $replyToMessageId If the message is a reply, ID of the original message
      * @param bool $$allowSendingWithoutReply Pass True, if the message should be sent even if the specified replied-to
@@ -2004,6 +2172,7 @@ class BotApi
     public function sendDice(
         $chatId,
         $emoji,
+        $messageThreadId = null,
         $disableNotification = false,
         $replyToMessageId = null,
         $allowSendingWithoutReply = false,
@@ -2012,6 +2181,7 @@ class BotApi
         return Message::fromResponse($this->call('sendDice', [
             'chat_id' => $chatId,
             'emoji' => $emoji,
+            'message_thread_id' => $messageThreadId,
             'disable_notification' => (bool) $disableNotification,
             'reply_to_message_id' => (int) $replyToMessageId,
             'allow_sending_without_reply' => (bool) $allowSendingWithoutReply,
