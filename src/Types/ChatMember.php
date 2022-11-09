@@ -79,30 +79,28 @@ class ChatMember extends BaseType
         $instance = new static();
         $instance->map($data);
 
-        if ($instance->getStatus() == 'creator') {
-            return ChatMemberOwner::fromResponse($data);
+        switch ($instance->getStatus()) {
+            case 'creator':
+                return ChatMemberOwner::fromResponse($data);
+                break;
+            case 'administrator':
+                return ChatMemberAdministrator::fromResponse($data);
+                break;
+            case 'member':
+                return ChatMemberMember::fromResponse($data);
+                break;
+            case 'restricted':
+                return ChatMemberRestricted::fromResponse($data);
+                break;
+            case 'left':
+                return ChatMemberLeft::fromResponse($data);
+                break;
+            case 'kicked':
+                return ChatMemberBanned::fromResponse($data);
+                break;
+            default:
+                return $instance;
+                break;
         }
-
-        if ($instance->getStatus() == 'administrator') {
-            return ChatMemberAdministrator::fromResponse($data);
-        }
-
-        if ($instance->getStatus() == 'member') {
-            return ChatMemberMember::fromResponse($data);
-        }
-
-        if ($instance->getStatus() == 'restricted') {
-            return ChatMemberRestricted::fromResponse($data);
-        }
-
-        if ($instance->getStatus() == 'left') {
-            return ChatMemberLeft::fromResponse($data);
-        }
-
-        if ($instance->getStatus() == 'kicked') {
-            return ChatMemberBanned::fromResponse($data);
-        }
-
-        return $instance;
     }
 }
