@@ -320,4 +320,12 @@ class ChatMemberRestricted extends BaseType
     {
         $this->untilDate = $untilDate;
     }
+
+    /**
+     * @return bool
+     */
+    public function isActiveChatMember()
+    {
+        return true;
+    }
 }

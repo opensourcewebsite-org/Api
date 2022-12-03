@@ -71,4 +71,12 @@ class ChatMemberMember extends BaseType
     {
         $this->user = $user;
     }
+
+    /**
+     * @return bool
+     */
+    public function isActiveChatMember()
+    {
+        return true;
+    }
 }

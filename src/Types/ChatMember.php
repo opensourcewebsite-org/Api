@@ -82,24 +82,31 @@ class ChatMember extends BaseType
         switch ($instance->getStatus()) {
             case 'creator':
                 return ChatMemberOwner::fromResponse($data);
+
                 break;
             case 'administrator':
                 return ChatMemberAdministrator::fromResponse($data);
+
                 break;
             case 'member':
                 return ChatMemberMember::fromResponse($data);
+
                 break;
             case 'restricted':
                 return ChatMemberRestricted::fromResponse($data);
+
                 break;
             case 'left':
                 return ChatMemberLeft::fromResponse($data);
+
                 break;
             case 'kicked':
                 return ChatMemberBanned::fromResponse($data);
+
                 break;
             default:
                 return $instance;
+
                 break;
         }
     }

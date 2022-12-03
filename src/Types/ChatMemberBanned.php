@@ -96,4 +96,12 @@ class ChatMemberBanned extends BaseType
     {
         $this->untilDate = $untilDate;
     }
+
+    /**
+     * @return bool
+     */
+    public function isActiveChatMember()
+    {
+        return false;
+    }
 }

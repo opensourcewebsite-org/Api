@@ -125,4 +125,12 @@ class ChatMemberOwner extends BaseType
     {
         $this->customTitle = $customTitle;
     }
+
+    /**
+     * @return bool
+     */
+    public function isActiveChatMember()
+    {
+        return true;
+    }
 }
