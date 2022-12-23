@@ -218,4 +218,28 @@ class BotApiTest extends TestCase
 
         $result = $botapi->createNewStickerSet(256, 'stickerSetName', 'stickerSetTitle', 'emoji');
     }
+
+    public function testAddStickerToSet()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('addStickerToSet', [
+                   'user_id' => 256,
+                   'name' => 'stickerSetName',
+                   'emojis' => 'emojis',
+                   'png_sticker' => null,
+                   'tgs_sticker' => null,
+                   'webm_sticker' => null,
+                   'mask_position' => null,
+               ])
+               ->willReturn(true);
+
+        $botapi->addStickerToSet(256,'stickerSetName', 'emojis');
+    }
 }

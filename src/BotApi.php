@@ -812,6 +812,36 @@ class BotApi
     }
 
     /**
+     * Use this method to add a new sticker to a set created by the bot. You must exactly use one of the fields png_sticker, tgs_sticker, or webm_sticker. Animated stickers can be added to animated sticker sets and only to them. Returns True on success
+     * @param integer $userId User identifier of sticker set owner
+     * @param string $name Sticker set name
+     * @param string emojis One or more emoji corresponding to the sticker
+     * @param \CURLFile|string $pngSticker PNG image with the sticker
+     * @param \CURLFile $tgsSticker TGS animation with the sticker
+     * @param \CURLFILE $webmSticker WEBM video with the sticker
+     * @param \MaskPosition $maskPosition A JSON-Serialized object for position where the mask should be placed on faces
+     */
+    public function addStickerToSet(
+        $userId,
+        $name,
+        $emojis,
+        $pngSticker = null,
+        $tgsSticker = null,
+        $webmSticker = null,
+        $maskPosition = null
+    ) {
+        return $this->call('addStickerToSet', [
+            'user_id' => $userId,
+            'name' => $name,
+            'emojis' => $emojis,
+            'png_sticker' => $pngSticker,
+            'tgs_sticker' => $tgsSticker,
+            'webm_sticker' => $webmSticker,
+            'mask_position' => $maskPosition,
+        ]);
+    }
+
+    /**
      * Use this method to send video files,
      * Telegram clients support mp4 videos (other formats may be sent as Document).
      * On success, the sent Message is returned.
