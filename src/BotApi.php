@@ -776,6 +776,42 @@ class BotApi
     }
 
     /**
+     * Use this method to create a new sticker set owned by a user. The bot will be able to edit a sticker set thus created. You must use exactly one of the fields png_sticker, tgs_sticker or webm_sticker. Returns True on success
+     * @param integer $userId User identifier of created sticker set owner
+     * @param string $name Short name og sticker set
+     * @param string $title Sticker set title, 1-64 characters
+     * @param \CURLFile|string $pngSticker PNG image with the sticker
+     * @param \CURLFile $tgsSticker TGS animation with the sticker
+     * @param \CURLFile $webmSticker WEBM video with the sticker
+     * @param string $stickerType Type of stickers in the set, pass 'regular' or 'mask'. Custom emoji sticker sets can't be created via the Bot API at the moment. By default a regular sticker set is created
+     * @param string $emojis One or more emoji corresponding to the sticker
+     * @param \MaskPosition A JSON-Serialized object for position where the mask should be placed on faces
+     */
+    public function createNewStickerSet(
+        $userId,
+        $name,
+        $title,
+        $emojis,
+        $pngSticker = null,
+        $tgsSticker = null,
+        $webmSticker = null,
+        $stickerType = null,
+        $maskPosition = null
+    ) {
+        return $this->call('createNewStickerSet', [
+            'user_id' => $userId,
+            'name' => $name,
+            'title' => $title,
+            'emojis' => $emojis,
+            'png_sticker' => $pngSticker,
+            'tgs_sticker' => $tgsSticker,
+            'webm_sticker' => $webmSticker,
+            'sticker_type' => $stickerType,
+            'mask_position' => $maskPosition,
+        ]);
+    }
+
+    /**
      * Use this method to send video files,
      * Telegram clients support mp4 videos (other formats may be sent as Document).
      * On success, the sent Message is returned.

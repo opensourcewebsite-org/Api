@@ -191,4 +191,31 @@ class BotApiTest extends TestCase
 
         $result = $botapi->uploadStickerFile(564, 'CURLFile');
     }
+
+    public function testCreateNewStickerSet()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('createNewStickerSet', [
+                   'user_id' => 256,
+                   'name' => 'stickerSetName',
+                   'title' => 'stickerSetTitle',
+                   'emojis' => 'emoji',
+                   'png_sticker' => null,
+                   'tgs_sticker' => null,
+                   'webm_sticker' => null,
+                   'sticker_type' => null,
+                   'mask_position' => null,
+               ])
+               ->willReturn(true);
+
+
+        $result = $botapi->createNewStickerSet(256, 'stickerSetName', 'stickerSetTitle', 'emoji');
+    }
 }
