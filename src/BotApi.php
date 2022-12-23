@@ -855,6 +855,16 @@ class BotApi
     }
 
     /**
+     * Use this method to delet a sticker from set created by the bot. Returns True on success
+     *
+     * @param string $sticker File identifier of the sticker
+     */
+    public function deleteStickerFromSet($sticker)
+    {
+        return $this->call('deleteStickerFromSet', ['sticker' => $sticker]);
+    }
+
+    /**
      * Use this method to send video files,
      * Telegram clients support mp4 videos (other formats may be sent as Document).
      * On success, the sent Message is returned.

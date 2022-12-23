@@ -261,4 +261,20 @@ class BotApiTest extends TestCase
 
         $botapi->setStickerPositionInSet('sticker_id', 256);
     }
+
+    public function testDeleteStickerFromSet()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('deleteStickerFromSet', ['sticker' => 'sticker-identifier'])
+               ->willReturn(true);
+
+        $botapi->deleteStickerFromSet('sticker-identifier');
+    }
 }
