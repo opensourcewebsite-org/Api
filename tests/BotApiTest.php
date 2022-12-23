@@ -240,6 +240,6 @@ class BotApiTest extends TestCase
                ])
                ->willReturn(true);
 
-        $botapi->addStickerToSet(256,'stickerSetName', 'emojis');
+        $botapi->addStickerToSet(256, 'stickerSetName', 'emojis');
     }
 }
