@@ -865,6 +865,17 @@ class BotApi
     }
 
     /**
+     * Use this method to set the thumbnail of a sticker set. Animated thumbnails can be set for animated sticker sets only. Video thumbnails can be set only for video sticker sets only. Returns True on success.
+     * @param string $name Sticker set name
+     * @param integer $userId User identifier of the sticker set owner
+     * @param \CURLFile|string $thumb A PNG image with the thumbnail or a TGS animation or a WEBM video
+     */
+    public function setStickerSetThumb($name, $userId, $thumb = null)
+    {
+        return $this->call('setStickerSetThumb', ['name' => $name, 'user_id' => $userId, 'thumb' => $thumb]);
+    }
+
+    /**
      * Use this method to send video files,
      * Telegram clients support mp4 videos (other formats may be sent as Document).
      * On success, the sent Message is returned.

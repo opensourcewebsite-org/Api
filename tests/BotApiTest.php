@@ -277,4 +277,20 @@ class BotApiTest extends TestCase
 
         $botapi->deleteStickerFromSet('sticker-identifier');
     }
+
+    public function testSetStickerSetThumb()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('setStickerSetThumb', ['name' => 'thumbName', 'user_id' => 256, 'thumb' => null])
+               ->willReturn(true);
+
+        $botapi->setStickerSetThumb('thumbName', 256);
+    }
 }
