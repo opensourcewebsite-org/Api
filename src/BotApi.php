@@ -820,7 +820,7 @@ class BotApi
      * @param \CURLFile|string $pngSticker PNG image with the sticker
      * @param \CURLFile $tgsSticker TGS animation with the sticker
      * @param \CURLFILE $webmSticker WEBM video with the sticker
-     * @param \MaskPosition $maskPosition A JSON-Serialized object for position where the mask should be placed on faces
+     * @param MaskPosition $maskPosition A JSON-Serialized object for position where the mask should be placed on faces
      */
     public function addStickerToSet(
         $userId,
@@ -840,6 +840,18 @@ class BotApi
             'webm_sticker' => $webmSticker,
             'mask_position' => $maskPosition,
         ]);
+    }
+
+    /**
+     * Use this method to move a sticker in a set created by the bot to a specific position. Returns True on success
+     * @param string $sticker File identifier of the sticker
+     * @param integer $position New sticker position in the set, zero-based
+     */
+    public function setStickerPositionInSet(
+        $sticker,
+        $position
+    ) {
+        return $this->call('setStickerPositionInSet', ['sticker' => $sticker, 'position' => $position]);
     }
 
     /**
