@@ -127,4 +127,27 @@ class BotApiTest extends TestCase
             $this->assertEquals($expectedResult[$key], $item);
         }
     }
+
+    public function testGetStickerSet()
+    {
+        $botapi = $this->getMockBuilder('\TelegramBot\Api\BotApi')
+            ->setMethods(['call'])
+            ->enableOriginalConstructor()
+            ->setConstructorArgs(['testToken'])
+            ->getMock();
+
+        $botapi->expects($this->once())
+            ->method('call')
+            ->with('getStickerSet', ['name' => 'stickerSetName'])
+            ->willReturn([
+                'name' => 'sticker-set-name',
+                'title' => 'sticker-set-title',
+                'sticker_type' => 'sticker-set-type',
+                'is_animated' => false,
+                'is_video' => false,
+                'stickers' => [],
+            ]);
+
+        $botapi->getStickerSet('stickerSetName');
+    }
 }

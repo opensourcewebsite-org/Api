@@ -18,6 +18,7 @@ use TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
 use TelegramBot\Api\Types\InputMedia\InputMedia;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Poll;
+use TelegramBot\Api\Types\StickerSet;
 use TelegramBot\Api\Types\Update;
 use TelegramBot\Api\Types\User;
 use TelegramBot\Api\Types\UserProfilePhotos;
@@ -743,6 +744,16 @@ class BotApi
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
         ]));
+    }
+
+    /**
+     * Use this method to get a sticker set
+     *
+     * @param string $name Name of the sticker set
+     */
+    public function getStickerSet($name)
+    {
+        return StickerSet::fromResponse($this->call('getStickerSet', ['name' => $name]));
     }
 
     /**
