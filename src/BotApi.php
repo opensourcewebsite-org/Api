@@ -757,6 +757,15 @@ class BotApi
     }
 
     /**
+     * Use this method to get information about custom emoji stickers by their identifiers. Returns an array of Stickers objects
+     * @param array $customEmojiIds List of custom emoji identifiers. At most 200 custom emoji identifiers can be specified
+     */
+    public function getCustomEmojiStickers($customEmojiIds)
+    {
+        return ArrayOfSticker::fromResponse($this->call('getCustomEmojiStickers', ['custom_emoji_ids' => $customEmojiIds]));
+    }
+
+    /**
      * Use this method to send video files,
      * Telegram clients support mp4 videos (other formats may be sent as Document).
      * On success, the sent Message is returned.

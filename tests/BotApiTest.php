@@ -150,4 +150,29 @@ class BotApiTest extends TestCase
 
         $botapi->getStickerSet('stickerSetName');
     }
+
+    public function testGetCustomEmojiStickers()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+            ->setMethods(['call'])
+            ->enableOriginalConstructor()
+            ->setConstructorArgs(['testToken'])
+            ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('getCustomEmojiStickers', ['custom_emoji_ids' => ['emojiid1', 'emojiid2']])
+               ->willReturn([[
+                   'file_id' => 'file_id',
+                   'file_unique_id' => 'unique_id',
+                   'type' => 'sticker_type',
+                   'width' => 512,
+                   'height' => 512,
+                   'is_animated' => false,
+                   'is_video' => false,
+               ]]);
+
+        $result = $botapi->getCustomEmojiStickers(['emojiid1', 'emojiid2']);
+        $this->assertIsArray($result);
+    }
 }
