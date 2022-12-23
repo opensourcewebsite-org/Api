@@ -175,4 +175,20 @@ class BotApiTest extends TestCase
         $result = $botapi->getCustomEmojiStickers(['emojiid1', 'emojiid2']);
         $this->assertIsArray($result);
     }
+
+    public function testUploadStickerFile()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('uploadStickerFile', ['user_id' => 564, 'png_sticker' => 'CURLFile'])
+               ->willReturn(['file_id' => 'file_id', 'file_size' => 256, 'file_path' => 'path']);
+
+        $result = $botapi->uploadStickerFile(564, 'CURLFile');
+    }
 }

@@ -766,6 +766,16 @@ class BotApi
     }
 
     /**
+     * Use this method to upload a .PNG file with a sticker for later use in createNewStickerSet and addStickerToSet methods (can be used multiple times). Returns the uploadede File on success
+     * @param integer $userId User identifier of sticker file owner
+     * @param \CURLFile $pngSticker PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height mush be exactly 512 px.
+     */
+    public function uploadStickerFile($userId, $pngSticker)
+    {
+        return File::fromResponse($this->call('uploadStickerFile', ['user_id' => $userId, 'png_sticker' => $pngSticker]));
+    }
+
+    /**
      * Use this method to send video files,
      * Telegram clients support mp4 videos (other formats may be sent as Document).
      * On success, the sent Message is returned.
