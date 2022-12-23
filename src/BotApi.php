@@ -785,7 +785,7 @@ class BotApi
      * @param \CURLFile $webmSticker WEBM video with the sticker
      * @param string $stickerType Type of stickers in the set, pass 'regular' or 'mask'. Custom emoji sticker sets can't be created via the Bot API at the moment. By default a regular sticker set is created
      * @param string $emojis One or more emoji corresponding to the sticker
-     * @param \MaskPosition A JSON-Serialized object for position where the mask should be placed on faces
+     * @param \MaskPosition $maskPosition A JSON-Serialized object for position where the mask should be placed on faces
      */
     public function createNewStickerSet(
         $userId,
