@@ -176,7 +176,7 @@ class BotApiTest extends TestCase
         $result = $botapi->getCustomEmojiStickers(['emojiid1', 'emojiid2']);
         $this->assertIsArray($result);
 
-        foreach($result as $key => $item) {
+        foreach ($result as $key => $item) {
             $this->assertInstanceOf('\TelegramBot\Api\Types\Sticker', $item);
         }
     }
@@ -413,7 +413,7 @@ class BotApiTest extends TestCase
                ->with('unpinAllForumTopicMessages', ['chat_id' => 512, 'message_thread_id' => 256])
                ->willReturn(true);
 
-        $result = $botapi->unpinAllForumTopicMessages(512,256);
+        $result = $botapi->unpinAllForumTopicMessages(512, 256);
         $this->assertEquals($result, true);
     }
 
@@ -441,7 +441,7 @@ class BotApiTest extends TestCase
         $result = $botapi->getForumTopicIconStickers();
         $this->assertIsArray($result);
 
-        foreach($result as $key => $item) {
+        foreach ($result as $key => $item) {
             $this->assertInstanceOf('\TelegramBot\Api\Types\Sticker', $item);
         }
     }
