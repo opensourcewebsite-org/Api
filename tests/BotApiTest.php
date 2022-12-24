@@ -318,4 +318,25 @@ class BotApiTest extends TestCase
 
         $botapi->createForumTopic(256, 'Topic Name', 16766590);
     }
+
+    public function testEditForumTopic()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('editForumTopic', [
+                   'chat_id' => 256,
+                   'message_thread_id' => 512,
+                   'name' => 'Topic Name',
+                   'icon_custom_emoji_id' => 'icon_emoji_id',
+               ])
+               ->willReturn(true);
+
+        $botapi->editForumTopic(256, 512, 'Topic Name', 'icon_emoji_id');
+    }
 }
