@@ -16,8 +16,10 @@ use TelegramBot\Api\Types\ForumTopic;
 use TelegramBot\Api\Types\Inline\QueryResult\AbstractInlineQueryResult;
 use TelegramBot\Api\Types\InputMedia\ArrayOfInputMedia;
 use TelegramBot\Api\Types\InputMedia\InputMedia;
+use TelegramBot\Api\Types\MaskPosition;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Poll;
+use TelegramBot\Api\Types\StickerSet;
 use TelegramBot\Api\Types\Update;
 use TelegramBot\Api\Types\User;
 use TelegramBot\Api\Types\UserProfilePhotos;
@@ -743,6 +745,134 @@ class BotApi
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
         ]));
+    }
+
+    /**
+     * Use this method to get a sticker set
+     *
+     * @param string $name Name of the sticker set
+     */
+    public function getStickerSet($name)
+    {
+        return StickerSet::fromResponse($this->call('getStickerSet', ['name' => $name]));
+    }
+
+    /**
+     * Use this method to get information about custom emoji stickers by their identifiers. Returns an array of Stickers objects
+     * @param array $customEmojiIds List of custom emoji identifiers. At most 200 custom emoji identifiers can be specified
+     */
+    public function getCustomEmojiStickers($customEmojiIds)
+    {
+        return ArrayOfSticker::fromResponse($this->call('getCustomEmojiStickers', ['custom_emoji_ids' => $customEmojiIds]));
+    }
+
+    /**
+     * Use this method to upload a .PNG file with a sticker for later use in createNewStickerSet and addStickerToSet methods (can be used multiple times). Returns the uploadede File on success
+     * @param integer $userId User identifier of sticker file owner
+     * @param \CURLFile $pngSticker PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height mush be exactly 512 px.
+     */
+    public function uploadStickerFile($userId, $pngSticker)
+    {
+        return File::fromResponse($this->call('uploadStickerFile', ['user_id' => $userId, 'png_sticker' => $pngSticker]));
+    }
+
+    /**
+     * Use this method to create a new sticker set owned by a user. The bot will be able to edit a sticker set thus created. You must use exactly one of the fields png_sticker, tgs_sticker or webm_sticker. Returns True on success
+     * @param integer $userId User identifier of created sticker set owner
+     * @param string $name Short name og sticker set
+     * @param string $title Sticker set title, 1-64 characters
+     * @param \CURLFile|string $pngSticker PNG image with the sticker
+     * @param \CURLFile $tgsSticker TGS animation with the sticker
+     * @param \CURLFile $webmSticker WEBM video with the sticker
+     * @param string $stickerType Type of stickers in the set, pass 'regular' or 'mask'. Custom emoji sticker sets can't be created via the Bot API at the moment. By default a regular sticker set is created
+     * @param string $emojis One or more emoji corresponding to the sticker
+     * @param MaskPosition $maskPosition A JSON-Serialized object for position where the mask should be placed on faces
+     */
+    public function createNewStickerSet(
+        $userId,
+        $name,
+        $title,
+        $emojis,
+        $pngSticker = null,
+        $tgsSticker = null,
+        $webmSticker = null,
+        $stickerType = null,
+        $maskPosition = null
+    ) {
+        return $this->call('createNewStickerSet', [
+            'user_id' => $userId,
+            'name' => $name,
+            'title' => $title,
+            'emojis' => $emojis,
+            'png_sticker' => $pngSticker,
+            'tgs_sticker' => $tgsSticker,
+            'webm_sticker' => $webmSticker,
+            'sticker_type' => $stickerType,
+            'mask_position' => $maskPosition,
+        ]);
+    }
+
+    /**
+     * Use this method to add a new sticker to a set created by the bot. You must exactly use one of the fields png_sticker, tgs_sticker, or webm_sticker. Animated stickers can be added to animated sticker sets and only to them. Returns True on success
+     * @param integer $userId User identifier of sticker set owner
+     * @param string $name Sticker set name
+     * @param string $emojis One or more emoji corresponding to the sticker
+     * @param \CURLFile|string $pngSticker PNG image with the sticker
+     * @param \CURLFile $tgsSticker TGS animation with the sticker
+     * @param \CURLFILE $webmSticker WEBM video with the sticker
+     * @param MaskPosition $maskPosition A JSON-Serialized object for position where the mask should be placed on faces
+     */
+    public function addStickerToSet(
+        $userId,
+        $name,
+        $emojis,
+        $pngSticker = null,
+        $tgsSticker = null,
+        $webmSticker = null,
+        $maskPosition = null
+    ) {
+        return $this->call('addStickerToSet', [
+            'user_id' => $userId,
+            'name' => $name,
+            'emojis' => $emojis,
+            'png_sticker' => $pngSticker,
+            'tgs_sticker' => $tgsSticker,
+            'webm_sticker' => $webmSticker,
+            'mask_position' => $maskPosition,
+        ]);
+    }
+
+    /**
+     * Use this method to move a sticker in a set created by the bot to a specific position. Returns True on success
+     * @param string $sticker File identifier of the sticker
+     * @param integer $position New sticker position in the set, zero-based
+     */
+    public function setStickerPositionInSet(
+        $sticker,
+        $position
+    ) {
+        return $this->call('setStickerPositionInSet', ['sticker' => $sticker, 'position' => $position]);
+    }
+
+    /**
+     * Use this method to delet a sticker from set created by the bot. Returns True on success
+     *
+     * @param string $sticker File identifier of the sticker
+     */
+    public function deleteStickerFromSet($sticker)
+    {
+        return $this->call('deleteStickerFromSet', ['sticker' => $sticker]);
+    }
+
+    /**
+     * Use this method to set the thumbnail of a sticker set. Animated thumbnails can be set for animated sticker sets only. Video thumbnails can be set only for video sticker sets only. Returns True on success.
+     * @param string $name Sticker set name
+     * @param integer $userId User identifier of the sticker set owner
+     * @param \CURLFile|string $thumb A PNG image with the thumbnail or a TGS animation or a WEBM video
+     */
+    public function setStickerSetThumb($name, $userId, $thumb = null)
+    {
+        return $this->call('setStickerSetThumb', ['name' => $name, 'user_id' => $userId, 'thumb' => $thumb]);
     }
 
     /**
