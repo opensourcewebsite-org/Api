@@ -339,4 +339,21 @@ class BotApiTest extends TestCase
 
         $botapi->editForumTopic(256, 512, 'Topic Name', 'icon_emoji_id');
     }
+
+    public function testCloseForumTopic()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('closeForumTopic', ['chat_id' => 512, 'message_thread_id' => 256])
+               ->willReturn(true);
+
+        $result = $botapi->closeForumTopic(512, 256);
+        $this->assertEquals(true, $result);
+    }
 }
