@@ -356,4 +356,21 @@ class BotApiTest extends TestCase
         $result = $botapi->closeForumTopic(512, 256);
         $this->assertEquals(true, $result);
     }
+
+    public function testReopenForumTopic()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('reopenForumTopic', ['chat_id' => 512, 'message_thread_id' => 256])
+               ->willReturn(true);
+
+        $result = $botapi->reopenForumTopic(512, 256);
+        $this->assertEquals($result, true);
+    }
 }
