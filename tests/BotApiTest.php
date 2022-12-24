@@ -293,4 +293,29 @@ class BotApiTest extends TestCase
 
         $botapi->setStickerSetThumb('thumbName', 256);
     }
+
+    public function testCreateForumTopic()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('createForumTopic', [
+                   'chat_id' => 256,
+                   'name' => 'Topic Name',
+                   'icon_color' => 16766590,
+                   'icon_custom_emoji_id' => null,
+               ])
+               ->willReturn([
+                   'message_thread_id' => 256,
+                   'name' => 'Topic Name',
+                   'icon_color' => 16766590,
+               ]);
+
+        $botapi->createForumTopic(256, 'Topic Name', 16766590);
+    }
 }
