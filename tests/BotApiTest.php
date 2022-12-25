@@ -148,7 +148,8 @@ class BotApiTest extends TestCase
                 'stickers' => [],
             ]);
 
-        $botapi->getStickerSet('stickerSetName');
+        $result = $botapi->getStickerSet('stickerSetName');
+        $this->assertInstanceOf('\TelegramBot\Api\Types\StickerSet', $result);
     }
 
     public function testGetCustomEmojiStickers()
@@ -174,6 +175,10 @@ class BotApiTest extends TestCase
 
         $result = $botapi->getCustomEmojiStickers(['emojiid1', 'emojiid2']);
         $this->assertIsArray($result);
+
+        foreach ($result as $key => $item) {
+            $this->assertInstanceOf('\TelegramBot\Api\Types\Sticker', $item);
+        }
     }
 
     public function testUploadStickerFile()
@@ -190,6 +195,7 @@ class BotApiTest extends TestCase
                ->willReturn(['file_id' => 'file_id', 'file_size' => 256, 'file_path' => 'path']);
 
         $result = $botapi->uploadStickerFile(564, 'CURLFile');
+        $this->assertInstanceOf('\TelegramBot\Api\Types\File', $result);
     }
 
     public function testCreateNewStickerSet()
@@ -217,6 +223,7 @@ class BotApiTest extends TestCase
 
 
         $result = $botapi->createNewStickerSet(256, 'stickerSetName', 'stickerSetTitle', 'emoji');
+        $this->assertEquals($result, true);
     }
 
     public function testAddStickerToSet()
@@ -240,7 +247,8 @@ class BotApiTest extends TestCase
                ])
                ->willReturn(true);
 
-        $botapi->addStickerToSet(256, 'stickerSetName', 'emojis');
+        $result = $botapi->addStickerToSet(256, 'stickerSetName', 'emojis');
+        $this->assertEquals($result, true);
     }
 
     public function testSetStickerPositionInSet()
@@ -292,5 +300,149 @@ class BotApiTest extends TestCase
                ->willReturn(true);
 
         $botapi->setStickerSetThumb('thumbName', 256);
+    }
+
+    public function testCreateForumTopic()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('createForumTopic', [
+                   'chat_id' => 256,
+                   'name' => 'Topic Name',
+                   'icon_color' => 16766590,
+                   'icon_custom_emoji_id' => null,
+               ])
+               ->willReturn([
+                   'message_thread_id' => 256,
+                   'name' => 'Topic Name',
+                   'icon_color' => 16766590,
+               ]);
+
+        $result = $botapi->createForumTopic(256, 'Topic Name', 16766590);
+        $this->assertInstanceOf('\TelegramBot\Api\Types\ForumTopic', $result);
+    }
+
+    public function testEditForumTopic()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('editForumTopic', [
+                   'chat_id' => 256,
+                   'message_thread_id' => 512,
+                   'name' => 'Topic Name',
+                   'icon_custom_emoji_id' => 'icon_emoji_id',
+               ])
+               ->willReturn(true);
+
+        $botapi->editForumTopic(256, 512, 'Topic Name', 'icon_emoji_id');
+    }
+
+    public function testCloseForumTopic()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('closeForumTopic', ['chat_id' => 512, 'message_thread_id' => 256])
+               ->willReturn(true);
+
+        $result = $botapi->closeForumTopic(512, 256);
+        $this->assertEquals(true, $result);
+    }
+
+    public function testReopenForumTopic()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('reopenForumTopic', ['chat_id' => 512, 'message_thread_id' => 256])
+               ->willReturn(true);
+
+        $result = $botapi->reopenForumTopic(512, 256);
+        $this->assertEquals($result, true);
+    }
+
+    public function testDeleteForumTopic()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('deleteForumTopic', ['chat_id' => 512, 'message_thread_id' => 256])
+               ->willReturn(true);
+
+        $result = $botapi->deleteForumTopic(512, 256);
+        $this->assertEquals($result, true);
+    }
+
+    public function testUnpinAllForumTopicMessages()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('unpinAllForumTopicMessages', ['chat_id' => 512, 'message_thread_id' => 256])
+               ->willReturn(true);
+
+        $result = $botapi->unpinAllForumTopicMessages(512, 256);
+        $this->assertEquals($result, true);
+    }
+
+    public function testGetForumTopicIconStickers()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['TestToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('getForumTopicIconStickers')
+               ->willReturn([[
+                   'file_id' => 'sticker_file_id',
+                   'file_unique_id' => 'sticker_file_unique_id',
+                   'type' => 'regular',
+                   'width' => 512,
+                   'height' => 256,
+                   'is_animated' => false,
+                   'is_video' => false,
+               ]]);
+
+        $result = $botapi->getForumTopicIconStickers();
+        $this->assertIsArray($result);
+
+        foreach ($result as $key => $item) {
+            $this->assertInstanceOf('\TelegramBot\Api\Types\Sticker', $item);
+        }
     }
 }

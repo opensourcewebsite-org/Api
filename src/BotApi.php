@@ -1998,7 +1998,7 @@ class BotApi
             'chat_id' => $chatId,
             'name' => $name,
             'message_thread_id' => $messageThreadId,
-            'icon_custom_custom_emoji_id' => $iconCustomEmojiId,
+            'icon_custom_emoji_id' => $iconCustomEmojiId,
         ]);
     }
 
