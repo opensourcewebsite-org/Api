@@ -24,6 +24,7 @@ class MessageEntity extends BaseType implements TypeInterface
     public const TYPE_ITALIC = 'italic';
     public const TYPE_UNDERLINE = 'underline';
     public const TYPE_STRIKETHROUGH = 'strikethrough';
+    public const TYPE_SPOILER = 'spoiler';
     public const TYPE_CODE = 'code';
     public const TYPE_PRE = 'pre';
     public const TYPE_TEXT_LINK = 'text_link';
