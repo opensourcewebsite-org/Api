@@ -341,12 +341,12 @@ class BotApiTest extends TestCase
                ->with('editForumTopic', [
                    'chat_id' => 256,
                    'message_thread_id' => 512,
-                   'name' => 'Topic Name',
-                   'icon_custom_emoji_id' => 'icon_emoji_id',
+                   'name' => null,
+                   'icon_custom_emoji_id' => null,
                ])
                ->willReturn(true);
 
-        $botapi->editForumTopic(256, 512, 'Topic Name', 'icon_emoji_id');
+        $botapi->editForumTopic(256, 512);
     }
 
     public function testCloseForumTopic()

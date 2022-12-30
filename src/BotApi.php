@@ -1999,7 +1999,7 @@ class BotApi
      *
      * @return bool
      */
-    public function editForumTopic($chatId, $messageThreadId, $name, $iconCustomEmojiId)
+    public function editForumTopic($chatId, $messageThreadId, $name = null, $iconCustomEmojiId = null)
     {
         return $this->call('editForumTopic', [
             'chat_id' => $chatId,
