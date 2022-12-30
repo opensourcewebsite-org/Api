@@ -78,6 +78,7 @@ class Message extends BaseType implements TypeInterface
         'successful_payment' => SuccessfulPayment::class,
         'connected_website' => true,
         'forum_topic_created' => ForumTopicCreated::class,
+        'forum_topic_edited' => ForumTopicEdited::class,
         'forum_topic_closed' => ForumTopicClosed::class,
         'forum_topic_reopened' => ForumTopicReopened::class,
         'video_chat_scheduled' => VideoChatScheduled::class,
@@ -473,6 +474,13 @@ class Message extends BaseType implements TypeInterface
      * @var ForumTopicCreated
      */
     protected $forumTopicCreated;
+
+    /**
+     * Optional. Service message: forum topic edited.
+     *
+     * @var ForumTopicEdited
+     */
+    protected $forumTopicEdited;
 
     /**
      * Optional. Service message: forum topic closed.
@@ -1413,6 +1421,22 @@ class Message extends BaseType implements TypeInterface
     public function setForumTopicCreated($forumTopicCreated)
     {
         $this->forumTopicCreated = $forumTopicCreated;
+    }
+
+    /**
+     * @return ForumTopicEdited
+     */
+    public function getForumTopicEdited()
+    {
+        return $this->forumTopicEdited;
+    }
+
+    /**
+     * @param ForumTopicEdited $forumTopicEdited
+     */
+    public function setForumTopicEdited($forumTopicEdited)
+    {
+        $this->forumTopicEdited = $forumTopicEdited;
     }
 
     /**

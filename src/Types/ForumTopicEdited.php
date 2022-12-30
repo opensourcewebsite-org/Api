@@ -48,7 +48,7 @@ class ForumTopicEdited
     /**
      * @param string $name
      */
-    public setName($nam)
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -64,7 +64,7 @@ class ForumTopicEdited
     /**
      * @param string $iconCustomEmojiId
      */
-    public function setIconCustomEmojiId($iconCustomjEmojiId)
+    public function setIconCustomEmojiId($iconCustomEmojiId)
     {
         $this->iconCustomEmojiId = $iconCustomEmojiId;
     }
