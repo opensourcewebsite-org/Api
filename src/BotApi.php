@@ -906,7 +906,8 @@ class BotApi
         $replyMarkup = null,
         $disableNotification = false,
         $supportsStreaming = false,
-        $parseMode = null
+        $parseMode = null,
+        $hasSpoiler = false
     ) {
         return Message::fromResponse($this->call('sendVideo', [
             'chat_id' => $chatId,
@@ -919,6 +920,7 @@ class BotApi
             'disable_notification' => (bool)$disableNotification,
             'supports_streaming' => (bool)$supportsStreaming,
             'parse_mode' => $parseMode,
+            'has_spoiler' => $hasSpoiler,
         ]));
     }
 
@@ -951,7 +953,8 @@ class BotApi
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false,
-        $parseMode = null
+        $parseMode = null,
+        $hasSpoiler = false
     ) {
         return Message::fromResponse($this->call('sendAnimation', [
             'chat_id' => $chatId,
@@ -963,6 +966,7 @@ class BotApi
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
             'parse_mode' => $parseMode,
+            'has_spoiler' => $hasSpoiler,
         ]));
     }
 
@@ -1111,6 +1115,7 @@ class BotApi
      *        Types\ReplyKeyboardRemove|null $replyMarkup
      * @param bool $disableNotification
      * @param string|null $parseMode
+     * @param bool $hasSpoiler Pass true if the photo needs to be covered with a spoiler animation
      *
      * @return \TelegramBot\Api\Types\Message
      * @throws \TelegramBot\Api\InvalidArgumentException
@@ -1124,7 +1129,8 @@ class BotApi
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false,
-        $parseMode = null
+        $parseMode = null,
+        $hasSpoiler = false
     ) {
         return Message::fromResponse($this->call('sendPhoto', [
             'chat_id' => $chatId,
@@ -1135,6 +1141,7 @@ class BotApi
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
             'parse_mode' => $parseMode,
+            'has_spoiler' => $hasSpoiler,
         ]));
     }
 

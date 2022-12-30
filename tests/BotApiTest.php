@@ -445,4 +445,85 @@ class BotApiTest extends TestCase
             $this->assertInstanceOf('\TelegramBot\Api\Types\Sticker', $item);
         }
     }
+
+    public function testSendPhoto()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('sendPhoto', [
+                   'chat_id' => 256,
+                   'photo' => 'photo_id',
+                   'message_thread_id' => null,
+                   'caption' => null,
+                   'reply_to_message_id' => null,
+                   'reply_markup' => null,
+                   'disable_notification' => false,
+                   'parse_mode' => null,
+                   'has_spoiler' => false,
+               ])
+               ->willReturn(['message_id' => 266, 'date' => 512,'chat' => ['id' => 256, 'type' => 'private']]);
+
+        $result = $botapi->sendPhoto(256, 'photo_id');
+    }
+
+    public function testSendVideo()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['TestToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('sendVideo', [
+                   'chat_id' => 256,
+                   'video' => 'video_id',
+                   'message_thread_id' => null,
+                   'duration' => null,
+                   'caption' => null,
+                   'reply_to_message_id' => null,
+                   'reply_markup' => null,
+                   'disable_notification' => false,
+                   'supports_streaming' => false,
+                   'parse_mode' => null,
+                   'has_spoiler' => false,
+               ])
+               ->willReturn(['message_id' => 266, 'date' => 512, 'chat' => ['id' => 256, 'type' => 'private']]);
+
+        $result = $botapi->sendVideo(256, 'video_id');
+    }
+
+    public function testSendAnimation()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('sendAnimation', [
+                   'chat_id' => 256,
+                   'animation' => 'animation_id',
+                   'message_thread_id' => null,
+                   'duration' => null,
+                   'caption' => null,
+                   'reply_to_message_id' => null,
+                   'reply_markup' => null,
+                   'disable_notification' => false,
+                   'parse_mode' => null,
+                   'has_spoiler' => false,
+               ])
+               ->willReturn(['message_id' => 256, 'date' => 512, 'chat' => ['id' => 256, 'type' => 'private']]);
+
+        $result = $botapi->sendAnimation(256, 'animation_id');
+    }
 }
