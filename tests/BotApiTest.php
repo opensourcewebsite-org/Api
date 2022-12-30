@@ -526,4 +526,20 @@ class BotApiTest extends TestCase
 
         $result = $botapi->sendAnimation(256, 'animation_id');
     }
+
+    public function testEditGeneralForumTopic()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('editGeneralForumTopic', ['chat_id' => 'chat_id', 'name' => 'forum_name'])
+               ->willReturn(true);
+
+        $result = $botapi->editGeneralForumTopic('chat_id', 'forum_name');
+    }
 }
