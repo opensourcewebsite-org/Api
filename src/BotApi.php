@@ -2099,6 +2099,18 @@ class BotApi
     }
 
     /**
+     * Use this method to reopen a closed 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. The topic will be automatically unhidden if it was hidden. Returns True on success.
+     *
+     * @param integer $chatId
+     *
+     * @return bool
+     */
+    public function reopenGeneralForumTopic($chatId)
+    {
+        return $this->call('reopenGeneralForumTopic', ['chat_id' => $chatId]);
+    }
+
+    /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.
      *
      * @return ArrayOfSticker
