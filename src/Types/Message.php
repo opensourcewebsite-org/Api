@@ -47,6 +47,7 @@ class Message extends BaseType implements TypeInterface
         'text' => true,
         'entities' => ArrayOfMessageEntity::class,
         'caption_entities' => ArrayOfMessageEntity::class,
+        'has_media_spoiler' => true,
         'audio' => Audio::class,
         'document' => Document::class,
         'animation' => Animation::class,
@@ -253,6 +254,13 @@ class Message extends BaseType implements TypeInterface
      * @var ArrayOfMessageEntity
      */
     protected $captionEntities;
+
+    /**
+     * Optional. True if the message media is covered by a spoiler animation
+     *
+     * @var bool
+     */
+    protected $hasMediaSpoiler;
 
     /**
      * Optional. Message is an audio file, information about the file
@@ -905,6 +913,22 @@ class Message extends BaseType implements TypeInterface
     public function setCaptionEntities($captionEntities)
     {
         $this->captionEntities = $captionEntities;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasMediaSpoiler()
+    {
+        return $this->hasMediaSpoiler;
+    }
+
+    /**
+     * @param bool $hasMediaSpoiler
+     */
+    public function setHasMediaSpoiler($hasMediaSpoiler)
+    {
+        $this->hasMediaSpoiler = $hasMediaSpoiler;
     }
 
     /**

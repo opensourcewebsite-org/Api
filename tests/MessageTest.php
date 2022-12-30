@@ -1095,4 +1095,11 @@ class MessageTest extends TestCase
         $item->setForumTopicReopened($forumTopicReopened);
         $this->assertEquals($forumTopicReopened, $item->getForumTopicReopened());
     }
+
+    public function testHasMediaSpoiler()
+    {
+        $item = new Message();
+        $item->setHasMediaSpoiler(false);
+        $this->assertEquals(false, $item->hasMediaSpoiler());
+    }
 }
