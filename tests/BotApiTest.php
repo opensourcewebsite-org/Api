@@ -542,4 +542,20 @@ class BotApiTest extends TestCase
 
         $result = $botapi->editGeneralForumTopic('chat_id', 'forum_name');
     }
+
+    public function testCloseGeneralForumTopic()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('closeGeneralForumTopic', ['chat_id' => 256])
+               ->willReturn(true);
+
+        $result = $botapi->closeGeneralForumTopic(256);
+    }
 }
