@@ -348,4 +348,11 @@ class ChatTest extends TestCase
         $item->setHasHiddenMembers(true);
         $this->assertEquals(true, $item->hasHiddenMembers());
     }
+
+    public function testHasAggressiveAntiSpamEnabled()
+    {
+        $item = new Chat();
+        $item->setHasAggressiveAntiSpamEnabled(true);
+        $this->assertEquals(true, $item->hasAggressiveAntiSpamEnabled());
+    }
 }

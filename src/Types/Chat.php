@@ -198,6 +198,14 @@ class Chat extends BaseType implements TypeInterface
      */
     protected $messageAutoDeleteTime;
 
+
+    /**
+     * Optional. True, if aggressive anti-spam checks are enabled in the supergroup. The field is only available to chat administrators. Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $hasAggressiveAntiSpamEnabled;
+
     /**
      * Optional. True if non-administrators can only get the list of bots and administrators in the chat. Returned only in getChat.
      *
@@ -583,6 +591,23 @@ class Chat extends BaseType implements TypeInterface
     public function setMessageAutoDeleteTime($messageAutoDeleteTime)
     {
         $this->messageAutoDeleteTime = $messageAutoDeleteTime;
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function hasAggressiveAntiSpamEnabled()
+    {
+        return $this->hasAggressiveAntiSpamEnabled;
+    }
+
+    /**
+     * @param bool $hasAggressiveAntiSpamEnabled
+     */
+    public function setHasAggressiveAntiSpamEnabled($hasAggressiveAntiSpamEnabled)
+    {
+        $this->hasAggressiveAntiSpamEnabled = $hasAggressiveAntiSpamEnabled;
     }
 
     /**
