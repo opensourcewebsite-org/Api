@@ -42,6 +42,7 @@ class Chat extends BaseType implements TypeInterface
         'permissions' => ChatPermissions::class,
         'slow_mode_delay' => true,
         'message_auto_delete_time' => true,
+        'has_hidden_members' => true,
         'has_protected_content' => true,
         'sticker_set_name' => true,
         'can_set_sticker_set' => true,
@@ -196,6 +197,21 @@ class Chat extends BaseType implements TypeInterface
      * @var integer
      */
     protected $messageAutoDeleteTime;
+
+
+    /**
+     * Optional. True, if aggressive anti-spam checks are enabled in the supergroup. The field is only available to chat administrators. Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $hasAggressiveAntiSpamEnabled;
+
+    /**
+     * Optional. True if non-administrators can only get the list of bots and administrators in the chat. Returned only in getChat.
+     *
+     * @var bool
+     */
+    protected $hasHiddenMembers;
 
     /**
      * Optional. True, if messages from the chat can't be forwarded to other chats. Returned only in getChat.
@@ -575,6 +591,39 @@ class Chat extends BaseType implements TypeInterface
     public function setMessageAutoDeleteTime($messageAutoDeleteTime)
     {
         $this->messageAutoDeleteTime = $messageAutoDeleteTime;
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function hasAggressiveAntiSpamEnabled()
+    {
+        return $this->hasAggressiveAntiSpamEnabled;
+    }
+
+    /**
+     * @param bool $hasAggressiveAntiSpamEnabled
+     */
+    public function setHasAggressiveAntiSpamEnabled($hasAggressiveAntiSpamEnabled)
+    {
+        $this->hasAggressiveAntiSpamEnabled = $hasAggressiveAntiSpamEnabled;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasHiddenMembers()
+    {
+        return $this->hasHiddenMembers;
+    }
+
+    /**
+     * @param bool $hasHiddenMembers
+     */
+    public function setHasHiddenMembers($hasHiddenMembers)
+    {
+        $this->hasHiddenMembers = $hasHiddenMembers;
     }
 
     /**

@@ -10,6 +10,7 @@ use TelegramBot\Api\Types\Dice;
 use TelegramBot\Api\Types\Document;
 use TelegramBot\Api\Types\ForumTopicClosed;
 use TelegramBot\Api\Types\ForumTopicCreated;
+use TelegramBot\Api\Types\ForumTopicEdited;
 use TelegramBot\Api\Types\ForumTopicReopened;
 use TelegramBot\Api\Types\GroupChat;
 use TelegramBot\Api\Types\Location;
@@ -1094,5 +1095,22 @@ class MessageTest extends TestCase
         $forumTopicReopened = new ForumTopicReopened();
         $item->setForumTopicReopened($forumTopicReopened);
         $this->assertEquals($forumTopicReopened, $item->getForumTopicReopened());
+    }
+
+    public function testHasMediaSpoiler()
+    {
+        $item = new Message();
+        $item->setHasMediaSpoiler(false);
+        $this->assertEquals(false, $item->hasMediaSpoiler());
+    }
+
+    public function testForumTopicEdited()
+    {
+        $item = new Message();
+        $topicEdited = new ForumTopicEdited();
+        $topicEdited->setName('topic name');
+        $topicEdited->setIconCustomEmojiId('emoji_id');
+        $item->setForumTopicEdited($topicEdited);
+        $this->assertEquals($topicEdited, $item->getForumTopicEdited());
     }
 }

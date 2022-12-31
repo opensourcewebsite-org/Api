@@ -452,15 +452,17 @@ class BotApi
      *
      * @param int $chatId
      * @param string $action
+     * @param integer $messageThreadId
      *
      * @return bool
      * @throws \TelegramBot\Api\Exception
      */
-    public function sendChatAction($chatId, $action)
+    public function sendChatAction($chatId, $action, $messageThreadId = null)
     {
         return $this->call('sendChatAction', [
             'chat_id' => $chatId,
             'action' => $action,
+            'message_thread_id' => $messageThreadId,
         ]);
     }
 
@@ -906,7 +908,8 @@ class BotApi
         $replyMarkup = null,
         $disableNotification = false,
         $supportsStreaming = false,
-        $parseMode = null
+        $parseMode = null,
+        $hasSpoiler = false
     ) {
         return Message::fromResponse($this->call('sendVideo', [
             'chat_id' => $chatId,
@@ -919,6 +922,7 @@ class BotApi
             'disable_notification' => (bool)$disableNotification,
             'supports_streaming' => (bool)$supportsStreaming,
             'parse_mode' => $parseMode,
+            'has_spoiler' => $hasSpoiler,
         ]));
     }
 
@@ -951,7 +955,8 @@ class BotApi
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false,
-        $parseMode = null
+        $parseMode = null,
+        $hasSpoiler = false
     ) {
         return Message::fromResponse($this->call('sendAnimation', [
             'chat_id' => $chatId,
@@ -963,6 +968,7 @@ class BotApi
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
             'parse_mode' => $parseMode,
+            'has_spoiler' => $hasSpoiler,
         ]));
     }
 
@@ -1111,6 +1117,7 @@ class BotApi
      *        Types\ReplyKeyboardRemove|null $replyMarkup
      * @param bool $disableNotification
      * @param string|null $parseMode
+     * @param bool $hasSpoiler Pass true if the photo needs to be covered with a spoiler animation
      *
      * @return \TelegramBot\Api\Types\Message
      * @throws \TelegramBot\Api\InvalidArgumentException
@@ -1124,7 +1131,8 @@ class BotApi
         $replyToMessageId = null,
         $replyMarkup = null,
         $disableNotification = false,
-        $parseMode = null
+        $parseMode = null,
+        $hasSpoiler = false
     ) {
         return Message::fromResponse($this->call('sendPhoto', [
             'chat_id' => $chatId,
@@ -1135,6 +1143,7 @@ class BotApi
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
             'disable_notification' => (bool)$disableNotification,
             'parse_mode' => $parseMode,
+            'has_spoiler' => $hasSpoiler,
         ]));
     }
 
@@ -1992,7 +2001,7 @@ class BotApi
      *
      * @return bool
      */
-    public function editForumTopic($chatId, $messageThreadId, $name, $iconCustomEmojiId)
+    public function editForumTopic($chatId, $messageThreadId, $name = null, $iconCustomEmojiId = null)
     {
         return $this->call('editForumTopic', [
             'chat_id' => $chatId,
@@ -2066,6 +2075,66 @@ class BotApi
         ]);
     }
 
+    /**
+     * Use this method to edit the name of the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have can_manage_topics administrator rights. Returns True on success.
+     *
+     * @param integer $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupname )
+     * @param string $name New topic name, 1-128 characters
+     *
+     * @return bool
+     */
+    public function editGeneralForumTopic($chatId, $name)
+    {
+        return $this->call('editGeneralForumTopic', ['chat_id' => $chatId, 'name' => $name]);
+    }
+
+    /**
+     * Use this method to close an open 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns True on success.
+     *
+     * @param integer $chatId
+     *
+     * @return bool
+     */
+    public function closeGeneralForumTopic($chatId)
+    {
+        return $this->call('closeGeneralForumTopic', ['chat_id' => $chatId]);
+    }
+
+    /**
+     * Use this method to reopen a closed 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. The topic will be automatically unhidden if it was hidden. Returns True on success.
+     *
+     * @param integer $chatId
+     *
+     * @return bool
+     */
+    public function reopenGeneralForumTopic($chatId)
+    {
+        return $this->call('reopenGeneralForumTopic', ['chat_id' => $chatId]);
+    }
+
+    /**
+     * Use this method to hide the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. The topic will be automatically closed if it was open. Returns True on success.
+     *
+     * @param integer|string $chatId
+     *
+     * @return bool
+     */
+    public function hideGeneralForumTopic($chatId)
+    {
+        return $this->call('hideGeneralForumTopic', ['chat_id' => $chatId]);
+    }
+
+    /**
+     * Use this method to unhide the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns True on success.
+     *
+     * @param integer|string $chatId
+     *
+     * @return boolean
+     */
+    public function unhideGeneralForumTopic($chatId)
+    {
+        return $this->call('unhideGeneralForumTopic', ['chat_id' => $chatId]);
+    }
 
     /**
      * Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.

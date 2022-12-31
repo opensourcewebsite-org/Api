@@ -24,6 +24,7 @@ class InputMediaVideo extends InputMedia
         'height' => true,
         'duration' => true,
         'supports_streaming' => true,
+        'has_spoiler' => true,
     ];
 
     /**
@@ -55,6 +56,13 @@ class InputMediaVideo extends InputMedia
     protected $supportsStreaming;
 
     /**
+     * Optional. Pass True if the photo needs to be covered with a spoiler animation
+     *
+     * @var bool
+     */
+    protected $hasSpoiler;
+
+    /**
      * InputMediaVideo constructor.
      *
      * @param string $media
@@ -72,7 +80,8 @@ class InputMediaVideo extends InputMedia
         $width = null,
         $height = null,
         $duration = null,
-        $supportsStreaming = false
+        $supportsStreaming = false,
+        $hasSpoiler = false
     ) {
         $this->type = 'video';
         $this->media = $media;
@@ -82,6 +91,7 @@ class InputMediaVideo extends InputMedia
         $this->height = $height;
         $this->duration = $duration;
         $this->supportsStreaming = $supportsStreaming;
+        $this->hasSpoiler = $hasSpoiler;
     }
 
     /**
@@ -146,5 +156,22 @@ class InputMediaVideo extends InputMedia
     public function setSupportsStreaming($supportsStreaming)
     {
         $this->supportsStreaming = $supportsStreaming;
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function hasSpoiler()
+    {
+        return $this->hasSpoiler();
+    }
+
+    /**
+     * @param bool $hasSpoiler
+     */
+    public function setHasSpoiler($hasSpoiler)
+    {
+        $this->hasSpoiler = $hasSpoiler;
     }
 }

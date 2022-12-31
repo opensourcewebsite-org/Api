@@ -341,4 +341,18 @@ class ChatTest extends TestCase
         $item->setEmojiStatusCustomEmojiId('custom_emoji_id');
         $this->assertEquals('custom_emoji_id', $item->getEmojiStatusCustomEmojiId());
     }
+
+    public function testHasHiddenMembers()
+    {
+        $item = new Chat();
+        $item->setHasHiddenMembers(true);
+        $this->assertEquals(true, $item->hasHiddenMembers());
+    }
+
+    public function testHasAggressiveAntiSpamEnabled()
+    {
+        $item = new Chat();
+        $item->setHasAggressiveAntiSpamEnabled(true);
+        $this->assertEquals(true, $item->hasAggressiveAntiSpamEnabled());
+    }
 }

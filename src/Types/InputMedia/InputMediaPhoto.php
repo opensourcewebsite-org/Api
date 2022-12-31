@@ -17,11 +17,13 @@ class InputMediaPhoto extends InputMedia
      * @param string|null $caption
      * @param string|null $parseMode
      */
-    public function __construct($media, $caption = null, $parseMode = null)
+    public function __construct($media, $caption = null, $parseMode = null, $captionEntities = null, $hasSpoiler = false)
     {
         $this->type = 'photo';
         $this->media = $media;
         $this->caption = $caption;
         $this->parseMode = $parseMode;
+        $this->captionEntities = $captionEntities;
+        $this->hasSpoiler = $hasSpoiler;
     }
 }

@@ -26,6 +26,7 @@ class ReplyKeyboardMarkup extends BaseType
      */
     protected static $map = [
         'keyboard' => true,
+        'is_persistant' => true,
         'one_time_keyboard' => true,
         'resize_keyboard' => true,
         'selective' => true,
@@ -38,6 +39,13 @@ class ReplyKeyboardMarkup extends BaseType
      * @var array
      */
     protected $keyboard;
+
+    /**
+     * Optional. Requests clients to always show the keyboard when the regular keyboard is hidden. Defaults to false, in which case the custom keyboard can be hidden and opened with a keyboard icon.
+     *
+     * @var bool
+     */
+    protected $isPersistant;
 
     /**
      * Optional. Requests clients to resize the keyboard vertically for optimal fit
@@ -87,6 +95,22 @@ class ReplyKeyboardMarkup extends BaseType
     public function setKeyboard($keyboard)
     {
         $this->keyboard = $keyboard;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPersistant()
+    {
+        return $this->isPersistant;
+    }
+
+    /**
+     * @param boolean $isPersistant
+     */
+    public function setIsPersistant($isPersistant)
+    {
+        $this->isPersistant = $isPersistant;
     }
 
     /**
