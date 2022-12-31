@@ -452,15 +452,17 @@ class BotApi
      *
      * @param int $chatId
      * @param string $action
+     * @param integer $messageThreadId
      *
      * @return bool
      * @throws \TelegramBot\Api\Exception
      */
-    public function sendChatAction($chatId, $action)
+    public function sendChatAction($chatId, $action, $messageThreadId = null)
     {
         return $this->call('sendChatAction', [
             'chat_id' => $chatId,
             'action' => $action,
+            'message_thread_id' => $messageThreadId,
         ]);
     }
 
