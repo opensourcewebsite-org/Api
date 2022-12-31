@@ -574,4 +574,20 @@ class BotApiTest extends TestCase
 
         $result = $botapi->reopenGeneralForumTopic(256);
     }
+
+    public function testHideGeneralForumTopic()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+                       ->setMethods(['call'])
+                       ->enableOriginalConstructor()
+                       ->setConstructorArgs(['testToken'])
+                       ->getMock();
+
+        $botapi->expects($this->once())
+               ->method('call')
+               ->with('hideGeneralForumTopic', ['chat_id' => 256])
+               ->willReturn(true);
+
+        $result = $botapi->hideGeneralForumTopic(256);
+    }
 }
