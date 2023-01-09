@@ -4,7 +4,7 @@ namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
 
-class ForumTopicEdited
+class ForumTopicEdited extends BaseType
 {
     /**
      * {@inheritdoc}
