@@ -21,7 +21,12 @@ class ChatPermissions extends BaseType implements TypeInterface
      */
     protected static $map = [
         'can_send_messages' => true,
-        'can_send_media_messages' => true,
+        'can_send_audios' => true,
+        'can_send_documents' => true,
+        'can_send_photos' => true,
+        'can_send_videos' => true,
+        'can_send_video_notes' => true,
+        'can_send_voice_notes' => true,
         'can_send_polls' => true,
         'can_send_other_messages' => true,
         'can_add_web_page_previews' => true,
@@ -39,12 +44,46 @@ class ChatPermissions extends BaseType implements TypeInterface
     protected $canSendMessages;
 
     /**
-     * Optional. True, if the user is allowed to send audios, documents, photos, videos, video notes and voice notes,
-     * implies can_send_messages
+     *  Optional. True, if the user is allowed to send audios
      *
      * @var bool
      */
-    protected $canSendMediaMessages;
+    protected $canSendAudios;
+
+    /**
+     *  Optional. True, if the user is allowed to send documents
+     *
+     * @var bool
+     */
+    protected $canSendDocuments;
+
+    /**
+     *  Optional. True, if the user is allowed to send photos
+     *
+     * @var bool
+     */
+    protected $canSendPhotos;
+
+    /**
+     *  Optional. True, if the user is allowed to send videos
+     *
+     * @var bool
+     */
+    protected $canSendVideos;
+
+    /**
+     *  Optional. True, if the user is allowed to send video notes
+     *
+     * @var bool
+     */
+    protected $canSendVideoNotes;
+
+    /**
+     *  Optional. True, if the user is allowed to send voice notes
+     *
+     * @var bool
+     */
+    protected $canSendVoiceNotes;
 
     /**
      * Optional. True, if the user is allowed to send polls, implies can_send_messages
@@ -117,17 +156,97 @@ class ChatPermissions extends BaseType implements TypeInterface
     /**
      * @return bool
      */
-    public function isCanSendMediaMessages()
+    public function isCanSendAudios()
     {
-        return $this->canSendMediaMessages;
+        return $this->canSendAudios;
     }
 
     /**
-     * @param bool $canSendMediaMessages
+     * @param bool $canSendAudios
      */
-    public function setCanSendMediaMessages($canSendMediaMessages)
+    public function setCanSendAudios($canSendAudios)
     {
-        $this->canSendMediaMessages = $canSendMediaMessages;
+        $this->canSendAudios = $canSendAudios;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanSendDocuments()
+    {
+        return $this->canSendDocuments;
+    }
+
+    /**
+     * @param bool $canSendDocuments
+     */
+    public function setCanSendDocuments($canSendDocuments)
+    {
+        $this->canSendDocuments = $canSendDocuments;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanSendPhotos()
+    {
+        return $this->canSendPhotos;
+    }
+
+    /**
+     * @param bool $canSendPhotos
+     */
+    public function setCanSendPhotos($canSendPhotos)
+    {
+        $this->canSendPhotos = $canSendPhotos;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanSendVideos()
+    {
+        return $this->canSendVideos;
+    }
+
+    /**
+     * @param bool $canSendVideos
+     */
+    public function setCanSendVideos($canSendVideos)
+    {
+        $this->canSendVideos = $canSendVideos;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanSendVideoNotes()
+    {
+        return $this->canSendVideoNotes;
+    }
+
+    /**
+     * @param bool $canSendVideoNotes
+     */
+    public function setCanSendVideoNotes($canSendVideoNotes)
+    {
+        $this->canSendVideoNotes = $canSendVideoNotes;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanSendVoiceNotes()
+    {
+        return $this->canSendVoiceNotes;
+    }
+
+    /**
+     * @param bool $canSendVoiceNotes
+     */
+    public function setCanSendVoiceNotes($canSendVoiceNotes)
+    {
+        $this->canSendVoiceNotes = $canSendVoiceNotes;
     }
 
     /**

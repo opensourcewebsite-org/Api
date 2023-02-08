@@ -45,6 +45,7 @@ class ChatMemberAdministrator extends BaseType
         'can_post_messages' => true,
         'can_edit_messages' => true,
         'can_pin_messages' => true,
+        'can_manage_topics' => true,
         'custom_title' => true,
     ];
 
@@ -145,6 +146,13 @@ class ChatMemberAdministrator extends BaseType
      * @var bool
      */
     protected $canPinMessages;
+
+    /**
+     * Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only
+     *
+     * @var bool
+     */
+    protected $canManageTopics;
 
     /**
      * Optional. Custom title for this user
@@ -375,6 +383,22 @@ class ChatMemberAdministrator extends BaseType
     public function setCanPinMessages($canPinMessages)
     {
         $this->canPinMessages = $canPinMessages;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canManageTopics()
+    {
+        return $this->canManageTopics;
+    }
+
+    /**
+     * @param bool $canManageTopics
+     */
+    public function setCanManageTopics($canManageTopics)
+    {
+        $this->canManageTopics = $canManageTopics;
     }
 
     /**

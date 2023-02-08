@@ -15,14 +15,20 @@ class ChatMemberRestricted extends BaseType
         'status',
         'user',
         'is_member',
+        'can_send_messages',
+        'can_send_audios',
+        'can_send_documents',
+        'can_send_photos',
+        'can_send_videos',
+        'can_send_video_notes',
+        'can_send_voice_notes',
+        'can_send_polls',
+        'can_send_other_messages',
+        'can_add_web_page_previews',
         'can_change_info',
         'can_invite_users',
         'can_pin_messages',
-        'can_send_messages',
-        'can_send_media_messages',
-        'can_send_polls',
-        'can_send_other_messages',
-        'can_add_web_page_preview',
+        'can_manage_topics',
         'until_date',
     ];
 
@@ -35,13 +41,20 @@ class ChatMemberRestricted extends BaseType
         'status' => true,
         'user' => User::class,
         'is_member' => true,
+        'can_send_messages' => true,
+        'can_send_audios' => true,
+        'can_send_documents' => true,
+        'can_send_photos' => true,
+        'can_send_videos' => true,
+        'can_send_video_notes' => true,
+        'can_send_voice_notes' => true,
+        'can_send_polls' => true,
+        'can_send_other_messages' => true,
+        'can_add_web_page_previews' => true,
         'can_change_info' => true,
         'can_invite_users' => true,
         'can_pin_messages' => true,
-        'can_send_messages' => true,
-        'can_send_polls' => true,
-        'can_send_other_messages' => true,
-        'can_add_web_page_prview' => true,
+        'can_manage_topics' => true,
         'until_date' => true,
     ];
 
@@ -60,7 +73,7 @@ class ChatMemberRestricted extends BaseType
     protected $user;
 
     /**
-     * True, if the user is a member of the chat at the moment of the request.
+     * True, if the user is a member of the chat at the moment of the request
      *
      * @var bool
      */
@@ -88,18 +101,53 @@ class ChatMemberRestricted extends BaseType
     protected $canPinMessages;
 
     /**
-     *  True, if the user is allowed to send text messages, contacts, locations and venues
+     *  True, if the user is allowed to send text messages, contacts, invoices, locations and venues
      *
      * @var bool
      */
     protected $canSendMessages;
 
     /**
-     * True, if thu user is allowed to send audios, documents, photos, videos, video notes and voice notes
+     *  True, if the user is allowed to send audios
      *
      * @var bool
      */
-    protected $canSendMediaMessages;
+    protected $canSendAudios;
+
+    /**
+     *  True, if the user is allowed to send documents
+     *
+     * @var bool
+     */
+    protected $canSendDocuments;
+
+    /**
+     *  True, if the user is allowed to send photos
+     *
+     * @var bool
+     */
+    protected $canSendPhotos;
+
+    /**
+     *  True, if the user is allowed to send videos
+     *
+     * @var bool
+     */
+    protected $canSendVideos;
+
+    /**
+     *  True, if the user is allowed to send video notes
+     *
+     * @var bool
+     */
+    protected $canSendVideoNotes;
+
+    /**
+     *  True, if the user is allowed to send voice notes
+     *
+     * @var bool
+     */
+    protected $canSendVoiceNotes;
 
     /**
      * True, if the user is allowed to send polls
@@ -120,7 +168,14 @@ class ChatMemberRestricted extends BaseType
      *
      * @var bool
      */
-    protected $canAddWebPagePreview;
+    protected $canAddWebPagePreviews;
+
+    /**
+     * True, if the user is allowed to create forum topics
+     *
+     * @var bool
+     */
+    protected $canManageTopics;
 
     /**
      * Date when restrictions will be lifted for this user; unix time, if 0, thet the user is restricted forever
@@ -244,17 +299,97 @@ class ChatMemberRestricted extends BaseType
     /**
      * @return bool
      */
-    public function canSendMediaMessages()
+    public function canSendAudios()
     {
-        return $this->canSendMediaMessages;
+        return $this->canSendAudios;
     }
 
     /**
-     * @param bool $canSendMediaMessages
+     * @param bool $canSendAudios
      */
-    public function setCanSendMediaMessages($canSendMediaMessages)
+    public function setCanSendAudios($canSendAudios)
     {
-        $this->canSendMediaMessages = $canSendMediaMessages;
+        $this->canSendAudios = $canSendAudios;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canSendDocuments()
+    {
+        return $this->canSendDocuments;
+    }
+
+    /**
+     * @param bool $canSendDocuments
+     */
+    public function setCanSendDocuments($canSendDocuments)
+    {
+        $this->canSendDocuments = $canSendDocuments;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canSendPhotos()
+    {
+        return $this->canSendPhotos;
+    }
+
+    /**
+     * @param bool $canSendPhotos
+     */
+    public function setCanSendPhotos($canSendPhotos)
+    {
+        $this->canSendPhotos = $canSendPhotos;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canSendVideos()
+    {
+        return $this->canSendVideos;
+    }
+
+    /**
+     * @param bool $canSendVideos
+     */
+    public function setCanSendVideos($canSendVideos)
+    {
+        $this->canSendVideos = $canSendVideos;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canSendVideoNotes()
+    {
+        return $this->canSendVideoNotes;
+    }
+
+    /**
+     * @param bool $canSendVideoNotes
+     */
+    public function setCanSendVideoNotes($canSendVideoNotes)
+    {
+        $this->canSendVideoNotes = $canSendVideoNotes;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canSendVoiceNotes()
+    {
+        return $this->canSendVoiceNotes;
+    }
+
+    /**
+     * @param bool $canSendVoiceNotes
+     */
+    public function setCanSendVoiceNotes($canSendVoiceNotes)
+    {
+        $this->canSendVoiceNotes = $canSendVoiceNotes;
     }
 
     /**
@@ -292,17 +427,33 @@ class ChatMemberRestricted extends BaseType
     /**
      * @return bool
      */
-    public function canAddWebPagePreview()
+    public function canAddWebPagePreviews()
     {
-        return $this->canAddWebPagePreview;
+        return $this->canAddWebPagePreviews;
     }
 
     /**
-     * @param bool $canAddWebPagePreview
+     * @param bool $canAddWebPagePreviews
      */
-    public function setCanAddWebPagePreview($canAddWebPagePreview)
+    public function setCanAddWebPagePreviews($canAddWebPagePreviews)
     {
-        $this->canAddWebPagePreview = $canAddWebPagePreview;
+        $this->canAddWebPagePreviews = $canAddWebPagePreviews;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canManageTopics()
+    {
+        return $this->canManageTopics;
+    }
+
+    /**
+     * @param bool $canManageTopics
+     */
+    public function setCanManageTopics($canManageTopics)
+    {
+        $this->canManageTopics = $canManageTopics;
     }
 
     /**
