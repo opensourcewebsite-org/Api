@@ -5,6 +5,7 @@ namespace TelegramBot\Api\Test;
 use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\Audio;
 use TelegramBot\Api\Types\Chat;
+use TelegramBot\Api\Types\ChatShared;
 use TelegramBot\Api\Types\Contact;
 use TelegramBot\Api\Types\Dice;
 use TelegramBot\Api\Types\Document;
@@ -19,6 +20,7 @@ use TelegramBot\Api\Types\MessageAutoDeleteTimerChanged;
 use TelegramBot\Api\Types\PhotoSize;
 use TelegramBot\Api\Types\Sticker;
 use TelegramBot\Api\Types\User;
+use TelegramBot\Api\Types\UserShared;
 use TelegramBot\Api\Types\Video;
 use TelegramBot\Api\Types\VideoNote;
 use TelegramBot\Api\Types\Voice;
@@ -1112,5 +1114,25 @@ class MessageTest extends TestCase
         $topicEdited->setIconCustomEmojiId('emoji_id');
         $item->setForumTopicEdited($topicEdited);
         $this->assertEquals($topicEdited, $item->getForumTopicEdited());
+    }
+
+    public function testUserShared()
+    {
+        $item = new Message();
+        $userShared = new UserShared();
+        $userShared->setRequestId(1);
+        $userShared->setUserId(1);
+        $item->setUserShared($userShared);
+        $this->assertEquals($userShared, $item->getUserShared());
+    }
+
+    public function testChatShared()
+    {
+        $item = new Message();
+        $chatShared = new ChatShared();
+        $chatShared->setRequestId(1);
+        $chatShared->setChatId(1);
+        $item->setChatShared($chatShared);
+        $this->assertEquals($chatShared, $item->getChatShared());
     }
 }

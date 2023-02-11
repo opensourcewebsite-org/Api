@@ -76,6 +76,8 @@ class Message extends BaseType implements TypeInterface
         'pinned_message' => Message::class,
         'invoice' => Invoice::class,
         'successful_payment' => SuccessfulPayment::class,
+        'user_shared' => UserShared::class,
+        'chat_shared' => ChatShared::class,
         'connected_website' => true,
         'forum_topic_created' => ForumTopicCreated::class,
         'forum_topic_edited' => ForumTopicEdited::class,
@@ -460,6 +462,20 @@ class Message extends BaseType implements TypeInterface
      * @var SuccessfulPayment
      */
     protected $successfulPayment;
+
+    /**
+     * Optional. Service message: a user was shared with the bot
+     *
+     * @var UserShared
+     */
+    protected $userShared;
+
+    /**
+     * Optional. Service message: a chat was shared with the bot
+     *
+     * @var ChatShared
+     */
+    protected $chatShared;
 
     /**
      * Optional. The domain name of the website on which the user has logged in.
@@ -1389,6 +1405,38 @@ class Message extends BaseType implements TypeInterface
     public function setSuccessfulPayment($successfulPayment)
     {
         $this->successfulPayment = $successfulPayment;
+    }
+
+    /**
+     * @return UserShared
+     */
+    public function getUserShared()
+    {
+        return $this->userShared;
+    }
+
+    /**
+     * @param UserShared $userShared
+     */
+    public function setUserShared($userShared)
+    {
+        $this->userShared = $userShared;
+    }
+
+    /**
+     * @return ChatShared
+     */
+    public function getChatShared()
+    {
+        return $this->chatShared;
+    }
+
+    /**
+     * @param ChatShared $chatShared
+     */
+    public function setChatShared($chatShared)
+    {
+        $this->chatShared = $chatShared;
     }
 
     /**
