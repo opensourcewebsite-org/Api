@@ -19,6 +19,7 @@ class ChatJoinRequest extends BaseType
     protected static $requiredParams = [
         'chat',
         'from',
+        'user_chat_id',
         'date',
     ];
 
@@ -30,6 +31,7 @@ class ChatJoinRequest extends BaseType
     protected static $map = [
         'chat' => Chat::class,
         'from' => User::class,
+        'user_chat_id' => true,
         'date' => true,
         'bio' => true,
         'invite_link' => ChatInviteLink::class,
@@ -48,6 +50,13 @@ class ChatJoinRequest extends BaseType
      * @var User
      */
     protected $from;
+
+    /**
+     * Identifier of a private chat with the user who sent the join request. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot can use this identifier for 24 hours to send messages until the join request is processed, assuming no other administrator contacted the user.
+     *
+     * @var int
+     */
+    protected $userChatId;
 
     /**
      * Date the request was sent in Unix time
@@ -100,6 +109,22 @@ class ChatJoinRequest extends BaseType
     public function setFrom($from)
     {
         $this->from = $from;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUserChatId()
+    {
+        return $this->userChatId;
+    }
+
+    /**
+     * @param int $userChatId
+     */
+    public function setUserChatId($userChatId)
+    {
+        $this->userChatId = $userChatId;
     }
 
     /**

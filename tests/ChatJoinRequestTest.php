@@ -8,7 +8,7 @@ use TelegramBot\Api\Types\ChatInviteLink;
 use TelegramBot\Api\Types\ChatJoinRequest;
 use TelegramBot\Api\Types\User;
 
-class ChatjoinRequestTest extends TestCase
+class ChatJoinRequestTest extends TestCase
 {
     public function testGetChat()
     {
@@ -164,6 +164,13 @@ class ChatjoinRequestTest extends TestCase
         );
     }
 
+    public function testUserChatId()
+    {
+        $item = new ChatJoinRequest();
+        $item->setUserChatId(1);
+        $this->assertEquals(1, $item->getUserChatId());
+    }
+
     public function testFromResponse()
     {
         $chat = [
@@ -178,11 +185,13 @@ class ChatjoinRequestTest extends TestCase
         $actual = ChatJoinRequest::fromResponse([
             'chat' => $chat,
             'from' => $from,
+            'user_chat_id' => 1,
             'date' => 256,
         ]);
         $expected = new ChatJoinRequest();
         $expected->setChat(Chat::fromResponse($chat));
         $expected->setFrom(User::fromResponse($from));
+        $expected->setUserChatId(1);
         $expected->setDate(256);
         $this->assertEquals($actual, $expected);
     }

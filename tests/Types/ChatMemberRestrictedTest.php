@@ -68,11 +68,46 @@ class ChatMemberRestrictedTest extends TestCase
         $this->assertEquals(true, $item->canSendMessages());
     }
 
-    public function testCanSendMediaMessages()
+    public function testCanSendAudios()
     {
         $item = new ChatMemberRestricted();
-        $item->setCanSendMediaMessages(false);
-        $this->assertEquals(false, $item->canSendMediaMessages());
+        $item->setCanSendAudios(false);
+        $this->assertEquals(false, $item->canSendAudios());
+    }
+
+    public function testCanSendPhotos()
+    {
+        $item = new ChatMemberRestricted();
+        $item->setCanSendDocuments(false);
+        $this->assertEquals(false, $item->canSendDocuments());
+    }
+
+    public function testCanSendDocuments()
+    {
+        $item = new ChatMemberRestricted();
+        $item->setCanSendPhotos(false);
+        $this->assertEquals(false, $item->canSendPhotos());
+    }
+
+    public function testCanSendVideos()
+    {
+        $item = new ChatMemberRestricted();
+        $item->setCanSendVideos(false);
+        $this->assertEquals(false, $item->canSendVideos());
+    }
+
+    public function testCanSendVideoNotes()
+    {
+        $item = new ChatMemberRestricted();
+        $item->setCanSendVideoNotes(false);
+        $this->assertEquals(false, $item->canSendVideoNotes());
+    }
+
+    public function testCanSendVoiceNotes()
+    {
+        $item = new ChatMemberRestricted();
+        $item->setCanSendVoiceNotes(false);
+        $this->assertEquals(false, $item->canSendVoiceNotes());
     }
 
     public function testCanSendPolls()
@@ -92,8 +127,15 @@ class ChatMemberRestrictedTest extends TestCase
     public function testCanAddWebPagePreview()
     {
         $item = new ChatMemberRestricted();
-        $item->setCanAddWebPagePreview(true);
-        $this->assertEquals(true, $item->canAddWebPagePreview());
+        $item->setCanAddWebPagePreviews(true);
+        $this->assertEquals(true, $item->canAddWebPagePreviews());
+    }
+
+    public function testCanManageTopics()
+    {
+        $item = new ChatMemberRestricted();
+        $item->setCanManageTopics(false);
+        $this->assertEquals(false, $item->canManageTopics());
     }
 
     public function testUntilDate()
@@ -116,11 +158,17 @@ class ChatMemberRestrictedTest extends TestCase
             'can_change_info' => false,
             'can_invite_users' => false,
             'can_pin_messages' => false,
+            'can_manage_topics' => false,
             'can_send_messages' => false,
-            'can_send_media_messages' => false,
+            'can_send_photos' => false,
+            'can_send_audios' => false,
+            'can_send_documents' => false,
+            'can_send_videos' => false,
+            'can_send_video_notes' => false,
+            'can_send_voice_notes' => false,
             'can_send_polls' => false,
             'can_send_other_messages' => false,
-            'can_add_web_page_preview' => false,
+            'can_add_web_page_previews' => false,
             'until_date' => 512,
         ]);
         $expected = new ChatMemberRestricted();
@@ -135,10 +183,16 @@ class ChatMemberRestrictedTest extends TestCase
         $expected->setCanInviteUsers(false);
         $expected->setCanPinMessages(false);
         $expected->setCanSendMessages(false);
-        $expected->setCanSendMediaMessages(false);
+        $expected->setCanSendAudios(false);
+        $expected->setCanSendPhotos(false);
+        $expected->setCanSendDocuments(false);
+        $expected->setCanSendVideos(false);
+        $expected->setCanSendVideoNotes(false);
+        $expected->setCanSendVoiceNotes(false);
         $expected->setCanSendPolls(false);
         $expected->setCanSendOtherMessages(false);
-        $expected->setCanAddWebPagePreview(false);
+        $expected->setCanAddWebPagePreviews(false);
+        $expected->setCanManageTopics(false);
         $expected->setUntilDate(512);
 
         $this->assertEquals($actual, $expected);

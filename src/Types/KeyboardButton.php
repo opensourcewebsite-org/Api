@@ -20,6 +20,8 @@ class KeyboardButton extends BaseType
      */
     protected static $map = [
         'text' => true,
+        'request_user' => KeyboardButtonRequestUser::class,
+        'request_chat' => KeyboardButtonRequestChat::class,
         'request_contact' => true,
         'request_location' => true,
         'request_poll' => KeyboardButtonPollType::class,
@@ -32,6 +34,20 @@ class KeyboardButton extends BaseType
      * @var string
      */
     protected $text;
+
+    /**
+     * Optional. If specified, pressing the button will open a list of suitable users. Tapping on any user will send their identifier to the bot in a “user_shared” service message. Available in private chats only.
+     *
+     * @var KeyboardButtonRequestUser
+     */
+    protected $requestUser;
+
+    /**
+     * Optional. If specified, pressing the button will open a list of suitable chats. Tapping on a chat will send its identifier to the bot in a “chat_shared” service message. Available in private chats only.
+     *
+     * @var KeyboardButtonRequestChat
+     */
+    protected $requestChat;
 
     /**
      *  	Optional. If True, the user's phone number will be sent as a contact when the button is pressed. Available in private chats only.
@@ -75,6 +91,38 @@ class KeyboardButton extends BaseType
     public function setText($text)
     {
         $this->text = $text;
+    }
+
+    /**
+     * @return KeyboardButtonRequestUser
+     */
+    public function getRequestUser()
+    {
+        return $this->requestUser;
+    }
+
+    /**
+     * @param KeyboardButtonRequestUser $requestUser
+     */
+    public function setRequestUser($requestUser)
+    {
+        $this->requestUser = $requestUser;
+    }
+
+    /**
+     * @return KeyboardButtonRequestChat
+     */
+    public function getRequestChat()
+    {
+        return $this->requestChat;
+    }
+
+    /**
+     * @param KeyboardButtonRequestChat $requestChat
+     */
+    public function setRequestChat($requestChat)
+    {
+        $this->requestChat = $requestChat;
     }
 
     /**

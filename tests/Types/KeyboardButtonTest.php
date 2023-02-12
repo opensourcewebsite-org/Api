@@ -5,6 +5,8 @@ namespace TelegramBot\Api\Test;
 use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\Types\KeyboardButton;
 use TelegramBot\Api\Types\KeyboardButtonPollType;
+use TelegramBot\Api\Types\KeyboardButtonRequestChat;
+use TelegramBot\Api\Types\KeyboardButtonRequestUser;
 use TelegramBot\Api\Types\WebAppInfo;
 
 class KeyboardButtonTest extends TestCase
@@ -71,6 +73,55 @@ class KeyboardButtonTest extends TestCase
         $requestPoll->setType('regular');
         $item->setRequestPoll($requestPoll);
         $this->assertEquals($requestPoll, $item->getRequestPoll());
+    }
+
+    public function testGetRequestUser()
+    {
+        $item = new KeyboardButton();
+        $item->setRequestUser(KeyboardButtonRequestUser::fromResponse([
+            'request_id' => 1,
+        ]));
+        $this->assertEquals(
+            KeyboardButtonRequestUser::fromResponse([
+                'request_id' => 1,
+            ]),
+            $item->getRequestUser(),
+        );
+    }
+
+    public function testSetRequestUser()
+    {
+        $item = new KeyboardButton();
+        $requestUser = new KeyboardButtonRequestUser();
+        $requestUser->setRequestId(1);
+        $item->setRequestUser($requestUser);
+        $this->assertEquals($requestUser, $item->getRequestUser());
+    }
+
+    public function testGetRequestChat()
+    {
+        $item = new KeyboardButton();
+        $item->setRequestChat(KeyboardButtonRequestChat::fromResponse([
+            'request_id' => 1,
+            'chat_is_channel' => false,
+        ]));
+        $this->assertEquals(
+            KeyboardButtonRequestChat::fromResponse([
+                'request_id' => 1,
+                'chat_is_channel' => false,
+            ]),
+            $item->getRequestChat(),
+        );
+    }
+
+    public function testSetRequestChat()
+    {
+        $item = new KeyboardButton();
+        $requestChat = new KeyboardButtonRequestChat();
+        $requestChat->setRequestId(1);
+        $requestChat->setChatIsChannel(false);
+        $item->setRequestChat($requestChat);
+        $this->assertEquals($requestChat, $item->getRequestChat());
     }
 
     public function testGetWebApp()
