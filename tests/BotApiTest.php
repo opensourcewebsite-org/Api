@@ -6,7 +6,6 @@ use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\ChatPermissions;
-use TelegramBot\Api\Types\ChatPhoto;
 use TelegramBot\Api\Types\Update;
 
 class BotApiTest extends TestCase
