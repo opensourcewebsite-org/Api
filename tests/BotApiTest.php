@@ -5,6 +5,7 @@ namespace TelegramBot\Api\Test;
 use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Types\ArrayOfUpdates;
+use TelegramBot\Api\Types\ChatPermissions;
 use TelegramBot\Api\Types\Update;
 
 class BotApiTest extends TestCase
@@ -605,5 +606,29 @@ class BotApiTest extends TestCase
                ->willReturn(true);
 
         $result = $botapi->unhideGeneralForumTopic(256);
+    }
+
+    public function testRestrictChatMember()
+    {
+        $botapi = $this->getMockBuilder(BotApi::class)
+            ->onlyMethods(['call'])
+            ->enableOriginalConstructor()
+            ->setConstructorArgs(['TestToken'])
+            ->getMock();
+
+        $chatPermissions = new ChatPermissions();
+
+        $botapi->expects($this->once())
+            ->method('call')
+            ->with('restrictChatMember', [
+                'chat_id' => 256,
+                'user_id' => 1,
+                'permissions' => $chatPermissions,
+                'use_independent_chat_permissions' => false,
+                'until_date' => null,
+            ])
+            ->willReturn(true);
+
+        $result = $botapi->restrictChatMember(256, 1, $chatPermissions);
     }
 }

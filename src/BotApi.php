@@ -11,6 +11,7 @@ use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\Chat;
 use TelegramBot\Api\Types\ChatAdministratorRights;
 use TelegramBot\Api\Types\ChatMember;
+use TelegramBot\Api\Types\ChatPermissions;
 use TelegramBot\Api\Types\File;
 use TelegramBot\Api\Types\ForumTopic;
 use TelegramBot\Api\Types\Inline\QueryResult\AbstractInlineQueryResult;
@@ -1737,36 +1738,27 @@ class BotApi
      * @param string|int $chatId Unique identifier for the target chat or username of the target supergroup
      *                   (in the format @supergroupusername)
      * @param int $userId Unique identifier of the target user
-     * @param null|integer $untilDate Date when restrictions will be lifted for the user, unix time.
+     * @param ChatPermissions $permissions A JSON-serialized object for new user permissions
+     * @param bool $useIndependentChatPermissions Optional. Pass True if chat permissions are set independently. Otherwise, the can_send_other_messages and can_add_web_page_previews permissions will imply the can_send_messages, can_send_audios, can_send_documents, can_send_photos, can_send_videos, can_send_video_notes, and can_send_voice_notes permissions; the can_send_polls permission will imply the can_send_messages permission.
+     * @param null|integer $untilDate Optional. Date when restrictions will be lifted for the user, unix time.
      *                     If user is restricted for more than 366 days or less than 30 seconds from the current time,
      *                     they are considered to be restricted forever
-     * @param bool $canSendMessages Pass True, if the user can send text messages, contacts, locations and venues
-     * @param bool $canSendMediaMessages No Pass True, if the user can send audios, documents, photos, videos,
-     *                                   video notes and voice notes, implies can_send_messages
-     * @param bool $canSendOtherMessages Pass True, if the user can send animations, games, stickers and
-     *                                   use inline bots, implies can_send_media_messages
-     * @param bool $canAddWebPagePreviews Pass True, if the user may add web page previews to their messages,
-     *                                    implies can_send_media_messages
      *
      * @return bool
      */
     public function restrictChatMember(
         $chatId,
         $userId,
-        $untilDate = null,
-        $canSendMessages = false,
-        $canSendMediaMessages = false,
-        $canSendOtherMessages = false,
-        $canAddWebPagePreviews = false
+        $permissions,
+        $useIndependentChatPermissions = false,
+        $untilDate = null
     ) {
         return $this->call('restrictChatMember', [
             'chat_id' => $chatId,
             'user_id' => $userId,
+            'permissions' => $permissions,
+            'use_independent_chat_permissions' => $useIndependentChatPermissions,
             'until_date' => $untilDate,
-            'can_send_messages' => $canSendMessages,
-            'can_send_media_messages' => $canSendMediaMessages,
-            'can_send_other_messages' => $canSendOtherMessages,
-            'can_add_web_page_previews' => $canAddWebPagePreviews,
         ]);
     }
 
