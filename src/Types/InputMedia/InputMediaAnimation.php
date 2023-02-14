@@ -6,12 +6,12 @@ use TelegramBot\Api\Types\ArrayOfMessageEntity;
 use CURLFile;
 
 /**
- * Class InputMediaVideo
- * Represents a video to be sent.
+ * Class InputMediaAnimation
+ * Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.
  *
  * @package TelegramBot\Api
  */
-class InputMediaVideo extends InputMedia
+class InputMediaAnimation extends InputMedia
 {
     /**
      * {@inheritdoc}
@@ -28,7 +28,6 @@ class InputMediaVideo extends InputMedia
         'width' => true,
         'height' => true,
         'duration' => true,
-        'supports_streaming' => true,
         'has_spoiler' => true,
     ];
 
@@ -40,35 +39,28 @@ class InputMediaVideo extends InputMedia
     protected $thumb;
 
     /**
-     * Optional. Video width.
+     * Optional. Animation width.
      *
      * @var int
      */
     protected $width;
 
     /**
-     * Optional. Video height.
+     * Optional. Animation height.
      *
      * @var int
      */
     protected $height;
 
     /**
-     * Optional. Video duration.
+     * Optional. Animation duration in seconds.
      *
      * @var int
      */
     protected $duration;
 
     /**
-     * Optional. Pass True, if the uploaded video is suitable for streaming.
-     *
-     * @var bool
-     */
-    protected $supportsStreaming;
-
-    /**
-     * Optional. Pass True if the video needs to be covered with a spoiler animation
+     * Optional. Pass True if the animation needs to be covered with a spoiler animation
      *
      * @var bool
      */
@@ -85,7 +77,6 @@ class InputMediaVideo extends InputMedia
      * @param int|null $width
      * @param int|null $height
      * @param int|null $duration
-     * @param bool $supportsStreaming
      * @param bool $hasSpoiler
      */
     public function __construct(
@@ -97,10 +88,9 @@ class InputMediaVideo extends InputMedia
         $width = null,
         $height = null,
         $duration = null,
-        $supportsStreaming = false,
         $hasSpoiler = false
     ) {
-        $this->type = 'video';
+        $this->type = 'animation';
         $this->media = $media;
         $this->thumb = $thumb;
         $this->caption = $caption;
@@ -109,7 +99,6 @@ class InputMediaVideo extends InputMedia
         $this->width = $width;
         $this->height = $height;
         $this->duration = $duration;
-        $this->supportsStreaming = $supportsStreaming;
         $this->hasSpoiler = $hasSpoiler;
     }
 
@@ -176,23 +165,6 @@ class InputMediaVideo extends InputMedia
     {
         $this->duration = $duration;
     }
-
-    /**
-     * @return bool
-     */
-    public function getSupportsStreaming()
-    {
-        return $this->supportsStreaming;
-    }
-
-    /**
-     * @param bool $supportsStreaming
-     */
-    public function setSupportsStreaming($supportsStreaming)
-    {
-        $this->supportsStreaming = $supportsStreaming;
-    }
-
 
     /**
      * @return bool

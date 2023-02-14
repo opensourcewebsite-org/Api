@@ -13,7 +13,8 @@ class CollectionTest extends TestCase
     protected $itemsOutput = [
         [
             'type' => 'photo',
-            'media' => 'link'
+            'media' => 'link',
+            'has_spoiler'=> false,
         ]
     ];
 

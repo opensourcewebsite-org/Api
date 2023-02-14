@@ -26,7 +26,7 @@ class ReplyKeyboardMarkup extends BaseType
      */
     protected static $map = [
         'keyboard' => true,
-        'is_persistant' => true,
+        'is_persistent' => true,
         'one_time_keyboard' => true,
         'resize_keyboard' => true,
         'selective' => true,
@@ -45,7 +45,7 @@ class ReplyKeyboardMarkup extends BaseType
      *
      * @var bool
      */
-    protected $isPersistant;
+    protected $isPersistent;
 
     /**
      * Optional. Requests clients to resize the keyboard vertically for optimal fit
@@ -100,17 +100,17 @@ class ReplyKeyboardMarkup extends BaseType
     /**
      * @return boolean
      */
-    public function isPersistant()
+    public function isPersistent()
     {
-        return $this->isPersistant;
+        return $this->isPersistent;
     }
 
     /**
-     * @param boolean $isPersistant
+     * @param boolean $isPersistent
      */
-    public function setIsPersistant($isPersistant)
+    public function setIsPersistent($isPersistent)
     {
-        $this->isPersistant = $isPersistant;
+        $this->isPersistent = $isPersistent;
     }
 
     /**
