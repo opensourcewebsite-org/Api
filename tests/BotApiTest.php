@@ -462,11 +462,14 @@ class BotApiTest extends TestCase
                    'photo' => 'photo_id',
                    'message_thread_id' => null,
                    'caption' => null,
-                   'reply_to_message_id' => null,
-                   'reply_markup' => null,
-                   'disable_notification' => false,
                    'parse_mode' => null,
+                   'caption_entities' => null,
+                   'disable_notification' => false,
+                   'protect_content' => false,
                    'has_spoiler' => false,
+                   'reply_to_message_id' => null,
+                   'allow_sending_without_reply' => false,
+                   'reply_markup' => null,
                ])
                ->willReturn(['message_id' => 266, 'date' => 512,'chat' => ['id' => 256, 'type' => 'private']]);
 
@@ -488,13 +491,19 @@ class BotApiTest extends TestCase
                    'video' => 'video_id',
                    'message_thread_id' => null,
                    'duration' => null,
+                   'width' => null,
+                   'height' => null,
+                   'thumb' => null,
                    'caption' => null,
-                   'reply_to_message_id' => null,
-                   'reply_markup' => null,
-                   'disable_notification' => false,
-                   'supports_streaming' => false,
                    'parse_mode' => null,
+                   'caption_entities' => null,
                    'has_spoiler' => false,
+                   'supports_streaming' => false,
+                   'disable_notification' => false,
+                   'protect_content' => false,
+                   'reply_to_message_id' => null,
+                   'allow_sending_without_reply' => false,
+                   'reply_markup' => null,
                ])
                ->willReturn(['message_id' => 266, 'date' => 512, 'chat' => ['id' => 256, 'type' => 'private']]);
 
@@ -516,12 +525,18 @@ class BotApiTest extends TestCase
                    'animation' => 'animation_id',
                    'message_thread_id' => null,
                    'duration' => null,
+                   'width' => null,
+                   'height' => null,
+                   'thumb' => null,
                    'caption' => null,
-                   'reply_to_message_id' => null,
-                   'reply_markup' => null,
-                   'disable_notification' => false,
                    'parse_mode' => null,
+                   'caption_entities' => null,
                    'has_spoiler' => false,
+                   'disable_notification' => false,
+                   'protect_content' => false,
+                   'reply_to_message_id' => null,
+                   'allow_sending_without_reply' => false,
+                   'reply_markup' => null,
                ])
                ->willReturn(['message_id' => 256, 'date' => 512, 'chat' => ['id' => 256, 'type' => 'private']]);
 
