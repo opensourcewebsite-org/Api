@@ -1809,7 +1809,7 @@ class BotApi
         return $this->call('restrictChatMember', [
             'chat_id' => $chatId,
             'user_id' => $userId,
-            'permissions' => $permissions,
+            'permissions' => json_encode($permissions),
             'use_independent_chat_permissions' => $useIndependentChatPermissions,
             'until_date' => $untilDate,
         ]);
