@@ -1798,10 +1798,14 @@ class BotApi
     public function restrictChatMember(
         $chatId,
         $userId,
-        $permissions,
+        $permissions = null,
         $useIndependentChatPermissions = false,
         $untilDate = null
     ) {
+        if (!isset($permissions)) {
+            $permissions = new ChatPermissions();
+        }
+
         return $this->call('restrictChatMember', [
             'chat_id' => $chatId,
             'user_id' => $userId,
