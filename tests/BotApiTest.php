@@ -638,7 +638,7 @@ class BotApiTest extends TestCase
             ->with('restrictChatMember', [
                 'chat_id' => 256,
                 'user_id' => 1,
-                'permissions' => $chatPermissions,
+                'permissions' => json_encode($chatPermissions),
                 'use_independent_chat_permissions' => false,
                 'until_date' => null,
             ])
