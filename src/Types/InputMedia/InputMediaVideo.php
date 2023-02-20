@@ -2,8 +2,8 @@
 
 namespace TelegramBot\Api\Types\InputMedia;
 
-use TelegramBot\Api\Types\ArrayOfMessageEntity;
 use CURLFile;
+use TelegramBot\Api\Types\ArrayOfMessageEntity;
 
 /**
  * Class InputMediaVideo
