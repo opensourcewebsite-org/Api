@@ -57,7 +57,7 @@ class ReplyKeyboardMarkupTest extends TestCase
         $this->assertEquals(array(array('one', 'two', 'three')), $item->getKeyboard());
     }
 
-    public function testIsPersistant()
+    public function testIsPersistent()
     {
         $item = new ReplyKeyboardMarkup(array(array('one')));
         $item->setIsPersistent(false);
