@@ -14,7 +14,7 @@ class CollectionTest extends TestCase
         [
             'type' => 'photo',
             'media' => 'link',
-            'has_spoiler'=> false,
+            'has_spoiler' => false,
         ]
     ];
 
