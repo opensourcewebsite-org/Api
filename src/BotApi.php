@@ -2123,6 +2123,24 @@ class BotApi
     }
 
     /**
+     * Use this method to approve a chat join request. The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right. Returns True on success.
+     *
+     * @param integer $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param $userId
+     * @return bool
+     * @throws Exception
+     * @throws HttpException
+     * @throws InvalidJsonException
+     */
+    public function approveChatJoinRequest($chatId, $userId)
+    {
+        return $this->call('approveChatJoinRequest', [
+            'chat_id' => $chatId,
+            'user_id' => $userId,
+        ]);
+    }
+
+    /**
      * Use this method to edit the name of the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have can_manage_topics administrator rights. Returns True on success.
      *
      * @param integer $chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupname )
