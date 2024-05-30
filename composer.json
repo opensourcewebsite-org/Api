@@ -38,12 +38,13 @@
     },
     "autoload": {
         "psr-4": {
-            "TelegramBot\\Api\\": "src"
+            "TelegramBot\\Api\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "TelegramBot\\Api\\Test\\": "tests"
+            "TelegramBot\\Api\\": "src/",
+            "TelegramBot\\Api\\Test\\": "tests/"
         }
     },
     "scripts": {
