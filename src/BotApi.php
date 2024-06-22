@@ -3,6 +3,7 @@
 namespace TelegramBot\Api;
 
 use CURLFile;
+use CURLStringFile;
 use TelegramBot\Api\Types\ArrayOfBotCommand;
 use TelegramBot\Api\Types\ArrayOfChatMemberEntity;
 use TelegramBot\Api\Types\ArrayOfMessageEntity;
@@ -494,7 +495,7 @@ class BotApi
      * In case of an unsuccessful request, we will give up after a reasonable amount of attempts.
      *
      * @param string $url HTTPS url to send updates to. Use an empty string to remove webhook integration.
-     * @param CURLFile|string $certificate Upload your public key certificate so that the root certificate in use can be checked.
+     * @param CURLFile|CURLStringFile|string $certificate Upload your public key certificate so that the root certificate in use can be checked.
      * @param array $allowedUpdates A JSON-serialized list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”, “callback_query”] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member (default). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.
      *
      * @return string
@@ -725,7 +726,7 @@ class BotApi
      * Use this method to send .webp stickers. On success, the sent Message is returned.
      *
      * @param int|string $chatId chat_id or @channel_name
-     * @param CURLFile|string $sticker
+     * @param CURLFile|CURLStringFile|string $sticker
      * @param int|null $messageThreadId
      * @param int|null $replyToMessageId
      * @param Types\ReplyKeyboardMarkup|Types\ReplyKeyboardHide|Types\ForceReply|
@@ -776,7 +777,7 @@ class BotApi
     /**
      * Use this method to upload a .PNG file with a sticker for later use in createNewStickerSet and addStickerToSet methods (can be used multiple times). Returns the uploadede File on success
      * @param integer $userId User identifier of sticker file owner
-     * @param CURLFile $pngSticker PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height mush be exactly 512 px.
+     * @param CURLFile|CURLStringFile $pngSticker PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height mush be exactly 512 px.
      */
     public function uploadStickerFile($userId, $pngSticker)
     {
@@ -788,9 +789,9 @@ class BotApi
      * @param integer $userId User identifier of created sticker set owner
      * @param string $name Short name og sticker set
      * @param string $title Sticker set title, 1-64 characters
-     * @param CURLFile|string $pngSticker PNG image with the sticker
-     * @param CURLFile $tgsSticker TGS animation with the sticker
-     * @param CURLFile $webmSticker WEBM video with the sticker
+     * @param CURLFile|CURLStringFile|string $pngSticker PNG image with the sticker
+     * @param CURLFile|CURLStringFile $tgsSticker TGS animation with the sticker
+     * @param CURLFile|CURLStringFile $webmSticker WEBM video with the sticker
      * @param string $stickerType Type of stickers in the set, pass 'regular' or 'mask'. Custom emoji sticker sets can't be created via the Bot API at the moment. By default a regular sticker set is created
      * @param string $emojis One or more emoji corresponding to the sticker
      * @param MaskPosition $maskPosition A JSON-Serialized object for position where the mask should be placed on faces
@@ -824,9 +825,9 @@ class BotApi
      * @param integer $userId User identifier of sticker set owner
      * @param string $name Sticker set name
      * @param string $emojis One or more emoji corresponding to the sticker
-     * @param CURLFile|string $pngSticker PNG image with the sticker
-     * @param CURLFile $tgsSticker TGS animation with the sticker
-     * @param CURLFILE $webmSticker WEBM video with the sticker
+     * @param CURLFile|CURLStringFile|string $pngSticker PNG image with the sticker
+     * @param CURLFile|CURLStringFile $tgsSticker TGS animation with the sticker
+     * @param CURLFILE|CURLStringFile $webmSticker WEBM video with the sticker
      * @param MaskPosition $maskPosition A JSON-Serialized object for position where the mask should be placed on faces
      */
     public function addStickerToSet(
@@ -875,7 +876,7 @@ class BotApi
      * Use this method to set the thumbnail of a sticker set. Animated thumbnails can be set for animated sticker sets only. Video thumbnails can be set only for video sticker sets only. Returns True on success.
      * @param string $name Sticker set name
      * @param integer $userId User identifier of the sticker set owner
-     * @param CURLFile|string $thumb A PNG image with the thumbnail or a TGS animation or a WEBM video
+     * @param CURLFile|CURLStringFile|string $thumb A PNG image with the thumbnail or a TGS animation or a WEBM video
      */
     public function setStickerSetThumb($name, $userId, $thumb = null)
     {
@@ -889,12 +890,12 @@ class BotApi
      * Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
      *
      * @param int|string $chatId chat_id or @channel_name
-     * @param CURLFile|string $video Video to send
+     * @param CURLFile|CURLStringFile|string $video Video to send
      * @param int|null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param int|null $duration Duration of sent video in seconds
      * @param int|null $width Video width
      * @param int|null $height Video height
-     * @param CURLFile|string|null $thumb Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
+     * @param CURLFile|CURLStringFile|string|null $thumb Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files »
      * @param string|null $caption Video caption (may also be used when resending videos by file_id), 0-1024 characters after entities parsing
      * @param string|null $parseMode Mode for parsing entities in the video caption.
      * @param ArrayOfMessageEntity|null $captionEntities A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
@@ -956,12 +957,12 @@ class BotApi
      * Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
      *
      * @param int|string $chatId chat_id or @channel_name
-     * @param CURLFile|string $animation
+     * @param CURLFile|CURLStringFile|string $animation
      * @param int|null $messageThreadId
      * @param int|null $duration
      * @param int|null $width Animation width
      * @param int|null $height Animation height
-     * @param CURLFile|string|null $thumb TThumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>»
+     * @param CURLFile|CURLStringFile|string|null $thumb TThumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>»
      * @param string|null $caption Animation caption (may also be used when resending animation by file_id), 0-1024 characters after entities parsing
      * @param string|null $parseMode Mode for parsing entities in the animation caption. See formatting options for more details.
      * @param ArrayOfMessageEntity|null $captionEntities A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
@@ -1023,7 +1024,7 @@ class BotApi
      * Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      *
      * @param int|string       $chatId chat_id or @channel_name
-     * @param CURLFile|string $voice
+     * @param CURLFile|CURLStringFile|string $voice
      * @param int|null $messageThreadId
      * @param string           $caption Voice message caption, 0-1024 characters after entities parsing
      * @param int|null         $duration
@@ -1102,7 +1103,7 @@ class BotApi
      * This behavior will be phased out in the future. For sending voice messages, use the sendVoice method instead.
      *
      * @param int|string $chatId chat_id or @channel_name
-     * @param CURLFile|string $audio
+     * @param CURLFile|CURLStringFile|string $audio
      * @param int|null $messageThreadId
      * @param int|null $duration
      * @param string|null $performer
@@ -1151,7 +1152,7 @@ class BotApi
      * Use this method to send photos. On success, the sent Message is returned.
      *
      * @param int|string $chatId chat_id or @channel_name
-     * @param CURLFile|string $photo Photo to send.
+     * @param CURLFile|CURLStringFile|string $photo Photo to send.
      * @param int|null $messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @param string|null $caption Photo caption (may also be used when resending photos by file_id), 0-1024 characters after entities parsing
      * @param string|null $parseMode Mode for parsing entities in the photo caption.
@@ -1202,7 +1203,7 @@ class BotApi
      * Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
      *
      * @param int|string $chatId chat_id or @channel_name
-     * @param CURLFile|string $document
+     * @param CURLFile|CURLStringFile|string $document
      * @param int|null $messageThreadId
      * @param string|null $caption
      * @param int|null $replyToMessageId
@@ -1885,7 +1886,7 @@ class BotApi
      *
      * @param string|int $chatId Unique identifier for the target chat or username of the target channel
      *                           (in the format @channelusername)
-     * @param CURLFile|string $photo New chat photo, uploaded using multipart/form-data
+     * @param CURLFile|CURLStringFile|string $photo New chat photo, uploaded using multipart/form-data
      *
      * @return bool
      */
@@ -2280,7 +2281,7 @@ class BotApi
      * On success, the sent Message is returned.
      *
      * @param int|string $chatId chat_id or @channel_name
-     * @param CURLFile|string $videoNote
+     * @param CURLFile|CURLStringFile|string $videoNote
      * @param int|null $messageThreadId
      * @param int|null $duration
      * @param int|null $length
